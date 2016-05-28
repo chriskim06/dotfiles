@@ -1,14 +1,6 @@
 [core]
-	excludesfile = /Users/Chris/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = mvim -v
-[diff]
-	tool = mvimdiff
-    renames = copies
-[difftool]
-	prompt = false
-[difftool "mvimdiff"]
-	cmd = mvimdiff -vR "$LOCAL" "$REMOTE"
-	trustExitCode = true
 [merge]
 	tool = mvimdiff
 	conflictstyle = diff3
@@ -17,11 +9,19 @@
 [mergetool "mvimdiff"]
 	cmd = mvimdiff -v
 	trustExitCode = true
+[diff]
+	tool = mvimdiff
+    renames = copies
+[difftool]
+	prompt = false
+[difftool "mvimdiff"]
+	cmd = mvimdiff -vR "$LOCAL" "$REMOTE"
+	trustExitCode = true
 [pull]
 	rebase = true
 [user]
 	name = Chris Kim
-	email = chriskim06@gmail.com
+	email = ckim06@fastspring.com
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
@@ -35,12 +35,15 @@
 	br = branch
 	co = commit
 	ammend = commit --ammend
+    noworries = update-index --assume-unchanged
 	mt = mergetool
 	dt = difftool
 	df = diff
 	dnw = diff -w --ignore-blank-lines
 	index = diff --cached
     untracked = ls-files -o --exclude-standard
+[push]
+	default = simple
 [color]
 	ui = auto
 [color "branch"]
@@ -68,3 +71,5 @@
 	diff = diff-so-fancy | less -aiRs --tabs=4
 	show = diff-so-fancy | less -aiRs --tabs=4
 	log = less -aiRS
+[http]
+	postBuffer = 157286400

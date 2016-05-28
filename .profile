@@ -3,8 +3,10 @@
 #
 
 # Environment variables
-export PATH=$PATH:~/bin
-export JAVA_HOME=`/usr/libexec/java_home`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export M2_HOME=/usr/local/Cellar/maven/3.3.9/libexec
+export M2=M2_HOME/bin
+export PATH=$PATH:$M2:$HOME/.node/bin:$HOME/bin
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUPSTREAM='verbose git'

@@ -57,6 +57,11 @@ alias ll='ls -lAh'
 alias ssh='ssh -o ServerAliveInterval=60'
 alias fhere='find . -iname'
 alias brwe='brew'
+alias work='cd ~/workspace/fastspring-system'
+alias clean='rm -r out && rm -r */target'
+alias manager='~/scripts/go -m'
+alias weather='curl -4 http://wttr.in/santa_barbara'
+alias sslserver='http-server-basicauth-ssl ./ -p 9999 -S -C ~/.ssl/cert.pem -K ~/.ssl/key.pem -c-1 -d'
 # }}}
 
 # Git Stuff # {{{1
@@ -67,15 +72,16 @@ alias gb='git branch'
 alias gf='git fetch'
 alias gk='git checkout'
 alias gc='git commit'
-alias gm='git merge'
 alias gl='git lg'
 alias gn='git number'
 alias gs='git number'
 alias gu='git unstage'
-alias discard='git discard'
-alias delete='git delete'
 alias push='git push'
 alias pull='git pull'
+alias merge='git merge'
+alias delete='git delete'
+alias discard='git discard'
+alias feature='git feature'
 # }}}2
 
 # Functions {{{2
@@ -96,21 +102,6 @@ gstash () { # {{{3
         done
     else
         git stash $*
-    fi
-} # }}}3
-gfrom () { # {{{3
-    if [[ $# -ne 1 ]]; then
-        echo "Provide a branch to check"
-        return 0
-    fi
-    ancestor=$(diff -u <(git rev-list --first-parent $1) <(git rev-list --first-parent origin/master) | sed -ne 's/^ //p' | head -1)
-    master=$(git log -1 --pretty=oneline origin/master | sed -E "s/^([^[:space:]]+).*/\1/")
-    originmaster=$(git br -r --contains $master | grep "origin/master")
-    branchpoint=$(git br -r --contains $ancestor | grep "origin/master")
-    if ! [[ -z "$originmaster" || -z "$branchpoint" ]]; then
-        echo "$1 branched off $BOLD${COLORS[40]}origin/master$END"
-    else
-        echo "$BOLD${COLORS[9]}$1 did not branch off origin/master$END"
     fi
 } # }}}3
 ga () { # {{{3
@@ -139,7 +130,7 @@ vn () { # {{{3
 # }}}2
 
 # Completion {{{2
-if [ -f ~/bin/completion/git-custom-completion ]; then
+if [[ -f ~/bin/completion/git-custom-completion ]]; then
     source ~/bin/completion/git-custom-completion
 fi
 __git_complete g _git_completion
@@ -154,9 +145,9 @@ __git_complete gn _git_number
 __git_complete gs _git_number
 __git_complete gstash _git_stash
 __git_complete gconf _git_config
-__git_complete gfrom _git_branch
 __git_complete push _git_push
 __git_complete pull _git_pull
+__git_complete merge _git_merge
 __git_complete delete _git_delete
 # }}}2
 
@@ -167,17 +158,31 @@ alias ndmon='nodemon'
 alias npmlist='npm list -g --depth=0'
 # }}}1
 
+# Postgres {{{1
+pg () { # {{{2
+    if [ $# -ne 1 ] || [ "$1" != "commerce" ] && [ "$1" != "postgres" ]; then
+        echo "usage: pg [commerce|postgres]"
+    else
+        "/Library/PostgreSQL/9.4/bin/psql" -h localhost -p 5432 -U postgres $1
+    fi
+    return 0
+} # }}}2
+_pg () { # {{{2
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=($(compgen -W "commerce postgres" -- $cur))
+} # }}}2
+complete -F _pg pg
+# }}}1
+
 # Homebrew stuff {{{1
 
-if [ -f ~/bin/completion/brew-custom-completion ]; then
+if [[ -f ~/bin/completion/brew-custom-completion ]]; then
     source ~/bin/completion/brew-custom-completion
 fi
 brew_list () { # {{{2
     echo "$BOLD${COLORS[15]}$(brew list | wc -l | cut -c7-) formulae installed:$END"
     brew list
 } # }}}2
-
-#} # }}}2
 
 # }}}1
 
