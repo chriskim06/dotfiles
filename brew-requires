@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+#
+# brew-requires
+#
+
+_brew_requires_thread () {
+    if [[ $# -ne 2 ]]; then
+        return 0
+    fi
+    info=$(brew info $1 | sed -e '1,/==> Dependencies/ d' -e '/==> Options/,$ d')
+    if [[ ! -z $info && $info == *"$2"* ]]; then
+        IFS=$'\n'
+        deps=($info)
+        groups="$(tput bold)$(tput setaf 9)"
+        for i in "${deps[@]}"; do
+            if [[ $i == *"$2"* ]]; then
+                groups="$groups${i%%:*}, "
+            fi
+        done
+        echo "$(tput bold)$(tput setaf 15)$1$(tput sgr0) $(tput setaf 15)- ${groups%, }$(tput sgr0)"
+    fi
+}
+export -f _brew_requires_thread
+
+if [[ $# -ne 1 ]]; then
+    echo "usage: brew_info <package name>"
+    return 0
+fi
+echo "Installed formulae that depend on $(tput bold)$(tput setaf 47)$1$(tput setaf 15)...$(tput sgr0)"
+parallel --no-notice -k _brew_requires_thread ::: $(\ls $(brew --cellar)) ::: $1

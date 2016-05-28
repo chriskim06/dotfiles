@@ -1,0 +1,11 @@
+.git/
+.idea/
+build/
+out/
+target/
+node_modules/
+
+**.tmp
+**.swp
+**.class
+.DS_STORE

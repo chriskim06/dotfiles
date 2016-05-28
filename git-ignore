@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+
+#
+# git-ignore
+#
+
+gitignore_io_url="https://www.gitignore.io/api/"
+default_path="$HOME/.gi_list"
+
+update_gi_list () {
+    curl -L -s  "${gitignore_io_url}/list" > ~/.gi_list
+}
+
+print_in_alphabetical_order () {
+    for i in {a..z}; do
+        echo "$gi_list" | grep "^$i" | tr "\n" " "
+        echo
+    done
+}
+
+print_in_table_format () {
+    echo "$gi_list" | xargs -n 8 | column -t
+}
+
+search () {
+    for type in $gi_list; do
+        if [[ "$type" == *$1* ]]; then
+            echo "$type"
+        fi
+    done
+}
+
+print_last_modified_time () {
+    gi_list_date=$(stat -c "%y" "$default_path" 2> /dev/null)
+    if [ "$?" -ne 0 ]; then
+        gi_list_date=$(stat -f "%t%Sm" "$default_path" 2> /dev/null)
+        if [ "$?" -ne 0 ]; then
+            gi_list_date=$(date -r "$default_path" +%s 2> /dev/null)
+            [ "$?" -ne 0 ] && gi_list_date=0
+        fi
+    fi
+    echo "Last update time: $gi_list_date"
+}
+
+gi () {
+    curl -L -s $gitignore_io_url/"$1"
+}
+
+gi_append () {
+    gi "$1" >> .gitignore
+}
+
+show_usage () {
+    echo "Usage:"
+    echo "  git ignore-io <types>...                        Show gitignore template"
+    echo "                [ -a | --append ] <types>...      Append new .gitignore content to .gitignore under the current directory"
+    echo "                [ -l | --list-in-table ]          Print available types in table format"
+    echo "                [ -L | --list-alphabetically ]    Print available types in alphabetical order"
+    echo "                [ -s | --search ] <word>          Search word in available types"
+    echo "                [ -t | --show-update-time ]       Show the last modified time of ~/.gi_list (where the list of available types is stored)"
+    echo "                [ -u | --update-list ]            Update ~/.gi_list"
+}
+
+check_list_exist () {
+    if ! [ -f "$default_path" ]; then
+        echo "-----Initial gitignore.io list----"
+        update_gi_list &
+        echo "-----Save to $default_path-----"
+    fi
+    gi_list=$(tr "," "\n" < "$default_path" 2>/dev/null)
+}
+
+check_list_exist
+if [[ $# -eq 0 ]]; then
+    show_usage
+else
+    case $1 in
+        -a|--append)
+            opt=$1
+            shift
+            if [[ $# -eq 0 ]]; then
+                show_usage
+            else
+                gi_append "$(echo $@ | tr ' ' ',')"
+            fi
+            ;;
+        -t|--show-update-time)
+            print_last_modified_time
+            ;;
+        -u|--update-list)
+            update_gi_list
+            ;;
+        -s|--search)
+            opt=$1
+            shift
+            if [[ $# -eq 0 ]]; then
+                show_usage
+            else
+                search "$1"
+            fi
+            ;;
+        -L|--list-alphabetically)
+            print_in_alphabetical_order
+            ;;
+        -l|--list-in-table)
+            print_in_table_format
+            ;;
+        -*)
+            show_usage
+            ;;
+        *)
+            gi "$(echo $@ | tr ' ' ',')"
+            ;;
+    esac
+fi
+

@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+#
+# This is a REPL script that performs arithmetic operations
+#
+
+trap "printf \"\nExiting calculator REPL...\n\"; exit" SIGINT
+
+printf "%s\n\n" "# $(tput smul)Calculator REPL!$(tput rmul)"
+
+prev=0
+while true; do
+    read -e -r -p "> " expression
+    expression="${expression//\~/$prev}"
+    case "$expression" in
+        quit|q)
+            printf "Exiting calculator REPL...\n" && exit
+            ;;
+        help|h)
+            printf "%s\n"       "# $(tput smul)Calculator REPL!$(tput rmul)"
+            printf "%s\n%s\n"   "# Enter arithmetic expressions. Results are printed on the next line." "# The '~' symbol can be used in an expression as a variable that"
+            printf "%s\n%s\n"   "# represents the previous arithmetic expression output. This script" "# can also be used to calculate dates from millisecond timestamps."
+            printf "#\n%s\n"    "# usage:   [<expression>]  An arithmetic expression to be evaluated by the 'bc' command"
+            printf "%s\n"       "#          [date <val>]    Converts a millisecond value to a date string"
+            printf "%s\n"       "#          [help | h]      Displays the help menu"
+            printf "%s\n\n"     "#          [quit | q]      Exits the REPL loop"
+            ;;
+        date*)
+            tstamp=${expression#* }
+            [[ $tstamp =~ ^[0-9]+$ ]] && printf "$(date -r $(printf "($tstamp + 500) / 1000\n" | bc))\n\n"
+            ;;
+        *)
+            [[ $expression =~ [x|p] ]] && expression="${expression//x/\*}" && expression="${expression//p/\+}"
+            if ! [[ $expression =~ [a-zA-Z] ]]; then
+                prev=$(bc -l <<< "$expression")
+                printf "%s\n\n" "$(tput bold)$(tput setaf 48)$prev$(tput sgr0)"
+            else
+                printf "Invalid input string: $expression\n\n"
+            fi
+            ;;
+    esac
+    history -s -- "$expression"
+done
+

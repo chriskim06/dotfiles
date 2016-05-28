@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+#
+# git-delete
+#
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: git delete <file>..."
+elif [[ $# -eq 1 && "$1" == "." ]]; then
+    echo "Not allowed to delete all files at once"
+else
+    remove=""
+    unable=""
+    declare -A staged
+    for f in $(git diff --name-only --cached); do
+        staged[$f]="$f"
+    done
+    declare -A workingcopy
+    for f in $(git status --porcelain | cut -c4-); do
+        workingcopy[$f]="$f"
+    done
+    for i in "$@"; do
+        fname=$(git list $i | sed "s/"$'\E\[1;31m'"//g")
+        if [[ ${staged[$fname]} ]]; then
+            unable="$fname $unable"
+        elif [[ ${workingcopy[$fname]} ]]; then
+            remove="$fname $remove"
+        fi
+    done
+    if ! [[ -z "$unable" ]]; then
+        echo "Unable to remove the following (unstage first):"
+        echo "$unable" | tr ' ' '\n'
+        return 0
+    fi
+    if ! [[ -z "$remove" ]]; then
+        echo "Deleting $remove"
+        git number -c rm "$remove"
+    fi
+    git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
+    echo
+fi
+
