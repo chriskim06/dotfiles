@@ -11,25 +11,24 @@ for i in {0..255}; do
 done
 # }}}
 
-# Initialization {{{
+# Initialization {{{1
+
+# Bash completion {{{2
+if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
+    source $(brew --prefix)/etc/bash_completion
+fi
+# }}}2
+# Bash prompt {{{2
 bash_prompt () {
     PS1="\[$BOLD\]\[${COLORS[229]}\][\A] \[${COLORS[33]}\]\u\[${COLORS[15]}\]:\[${COLORS[33]}\]\W\[${COLORS[48]}\]\$(__git_ps1) \[${COLORS[15]}\]\$\[$END\] "
 }
 export PROMPT_COMMAND=bash_prompt
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWSTASHSTATE=1
-export GIT_PS1_SHOWUPSTREAM='verbose git'
-export GIT_PS1_STATESEPARATOR=': '
-export GIT_PS1_DESCRIBE_STYLE='branch'
-export GIT_PS1_HIDE_IF_PWD_IGNORED=1
-export CLICOLOR=1
-export LSCOLORS=GxFxExdxbxBxegedabagGxGx
-export HISTSIZE=750
-export HISTFILESIZE=750
-export HISTCONTROL=ignoredups:erasedups
-export LESS=
+# }}}2
+# Miscellaneous {{{2
 complete -d cd
-# }}}
+# }}}2
+
+# }}}1
 
 # Random functions {{{1
 color () { # {{{2

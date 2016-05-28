@@ -2,16 +2,13 @@
 # .bash_profile
 #
 
-# Add to the PATH variable
-export PATH=$PATH:~/bin
-
 # Load .profile
-if [ -f ~/.profile ]; then
-    source ~/.profile
+if [[ -f $HOME/.profile ]]; then
+    source $HOME/.profile
 fi
 
 # Load .bashrc
-if [ -f ~/.bashrc ]; then
-    source ~/.bashrc
+if [[ -f $HOME/.bashrc ]]; then
+    source $HOME/.bashrc
 fi
 
