@@ -9,6 +9,7 @@ export M2=M2_HOME/bin
 export PATH=$PATH:$M2:$HOME/.node/bin:$HOME/bin
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM='verbose git'
 export GIT_PS1_STATESEPARATOR=': '
 export GIT_PS1_DESCRIBE_STYLE='branch'
