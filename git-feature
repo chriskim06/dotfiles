@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 1 ]]; then
+    echo "Usage: git feature <branch>"
+else
+    branch=$(git br -a | grep "$1")
+    if ! [[ -z "$branch" ]]; then
+        echo "$1 has already been created"
+        return 0
+    fi
+    git checkout -b "$1" origin/master
+    git push -u origin "$1"
+fi
+
