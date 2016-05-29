@@ -71,5 +71,3 @@
 	diff = diff-so-fancy | less -aiRs --tabs=4
 	show = diff-so-fancy | less -aiRs --tabs=4
 	log = less -aiRS
-[http]
-	postBuffer = 157286400
