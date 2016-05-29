@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+git show --ignore-all-space "$(git log -n 1 --pretty=format:"%H")"
+
