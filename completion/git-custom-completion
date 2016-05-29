@@ -11,7 +11,7 @@ _git_completion () {
     COMPREPLY=()
     case "$prev" in
         g|git)
-            local gitcmds="$(__git_list_all_commands | grep -ve '--\|cvs\|[merge\|remote\|unpack\|update\|upload\|verify]-')"
+            local gitcmds="$(__git_list_all_commands | grep -ve '--\|cvs\|mail\|arch\|[merge\|remote\|unpack\|update\|upload\|verify]-')"
             COMPREPLY=($(compgen -W "$gitcmds $(__git_aliases) --help" -- ${cur}))
             ;;
         *)
