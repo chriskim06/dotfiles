@@ -51,3 +51,7 @@ _git_discard () {
     __gitcomp "$(git status --porcelain | cut -c4-)"
 }
 
+_git_sync () {
+    __gitcomp "$(git branch)"
+}
+
