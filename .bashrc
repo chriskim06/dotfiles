@@ -57,6 +57,7 @@ alias ll='ls -lAh'
 alias ssh='ssh -o ServerAliveInterval=60'
 alias fhere='find . -iname'
 alias brwe='brew'
+alias weather='curl -4 http://wttr.in/santa_barbara'
 # }}}
 
 # Git Stuff # {{{1
