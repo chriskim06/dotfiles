@@ -11,7 +11,6 @@
 	trustExitCode = true
 [merge]
 	tool = mvimdiff
-	conflictstyle = diff3
 [mergetool]
 	prompt = false
 [mergetool "mvimdiff"]
