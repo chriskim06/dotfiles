@@ -180,8 +180,11 @@ if [[ -f ~/bin/completion/brew-custom-completion ]]; then
     source ~/bin/completion/brew-custom-completion
 fi
 brew_list () { # {{{2
-    echo "$BOLD${COLORS[15]}$(brew list | wc -l | cut -c7-) formulae installed:$END"
-    brew list
+    formulae=($(brew list))
+    echo "$BOLD${COLORS[15]}${#formulae[@]} formulae installed:$END"
+    for i in "${formulae[@]}"; do
+        echo "$i"
+    done
 } # }}}2
 
 # }}}1
