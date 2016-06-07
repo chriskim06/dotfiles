@@ -34,7 +34,7 @@ complete -d cd
 color () { # {{{2
     for code in {0..255}; do
         val="$(printf '%03d' $code)"
-        echo -n "$(tput setab $code)  ${COLORS[0]}$val  $END|  ${COLORS[$code]}$val$END  |"
+        printf "%s" "$(tput setab $code)  ${COLORS[0]}$val  $END|  ${COLORS[$code]}$val$END  |"
         if [ $((($code + 1) % 8)) -eq 0 ]; then
             echo
         fi
@@ -140,7 +140,7 @@ vn () { # {{{3
 # }}}2
 
 # Completion {{{2
-if [ -f ~/bin/completion/git-custom-completion ]; then
+if [[ -f ~/bin/completion/git-custom-completion ]]; then
     source ~/bin/completion/git-custom-completion
 fi
 __git_complete g _git_completion
@@ -170,12 +170,15 @@ alias npmlist='npm list -g --depth=0'
 
 # Homebrew stuff {{{1
 
-if [ -f ~/bin/completion/brew-custom-completion ]; then
+if [[ -f ~/bin/completion/brew-custom-completion ]]; then
     source ~/bin/completion/brew-custom-completion
 fi
 brew_list () { # {{{2
-    echo "$BOLD${COLORS[15]}$(brew list | wc -l | cut -c7-) formulae installed:$END"
-    brew list
+    formulae=($(brew list))
+    echo "$BOLD${COLORS[15]}${#formulae[@]} formulae installed:$END"
+    for i in "${formulae[@]}"; do
+        echo "$i"
+    done
 } # }}}2
 
 # }}}1
