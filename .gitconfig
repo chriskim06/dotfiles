@@ -11,6 +11,7 @@
 [diff]
 	tool = mvimdiff
     renames = copies
+    compactionHeuristic = true
 [difftool]
 	prompt = false
 [difftool "mvimdiff"]

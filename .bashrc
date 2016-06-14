@@ -27,6 +27,10 @@ export PROMPT_COMMAND=bash_prompt
 # Miscellaneous {{{2
 complete -d cd
 eval $(thefuck --alias)
+shopt -s histappend
+if [[ $- =~ .*i.* ]]; then
+    bind '"\C-r": "\C-a hh \C-j"';
+fi
 # }}}2
 
 # }}}1
