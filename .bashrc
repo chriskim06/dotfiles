@@ -26,6 +26,7 @@ export PROMPT_COMMAND=bash_prompt
 # }}}2
 # Miscellaneous {{{2
 complete -d cd
+eval $(thefuck --alias)
 # }}}2
 
 # }}}1
@@ -56,7 +57,6 @@ alias copy='pbcopy'
 alias ll='ls -lAh'
 alias ssh='ssh -o ServerAliveInterval=60'
 alias fhere='find . -iname'
-alias brwe='brew'
 alias work='cd ~/workspace/fastspring-system'
 alias clean='rm -r out && rm -r */target'
 alias manager='~/scripts/go -m'
