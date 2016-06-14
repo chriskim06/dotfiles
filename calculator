@@ -6,7 +6,11 @@
 
 trap "printf \"\nExiting calculator REPL...\n\"; exit" SIGINT
 
-printf "#\n%s\n#\n\n" "# $(tput smul)Calculator REPL!$(tput rmul)"
+if ! [[ -z $(type -t cowsay) ]]; then
+    printf "$(cowsay Calculator REPL!)\n############################\n\n" 
+else
+    printf "#\n%s\n#\n\n" "# $(tput smul)Calculator REPL!$(tput rmul)"
+fi
 
 prev=0
 while true; do
