@@ -16,6 +16,7 @@ export CLICOLOR=1
 export LSCOLORS=GxFxExdxbxBxegedabagGxGx
 export HISTSIZE=1000
 export HISTFILESIZE=1000
-export HISTCONTROL=ignorespace:ignoredups:erasedups
+export HISTCONTROL=ignoreboth:erasedups
+export HH_CONFIG=hicolor
 export LESS=
 
