@@ -7,7 +7,7 @@
 trap "printf \"\nExiting calculator REPL...\n\"; exit" SIGINT
 
 if ! [[ -z "$(type -t cowsay)" ]]; then
-    printf "%s\n\n" "$(cowsay Calculator REPL!)"
+    printf "$(cowsay Calculator REPL!)\n############################\n\n"
 else
     printf "#\n%s\n#\n\n" "# $(tput smul)Calculator REPL!$(tput rmul)"
 fi
