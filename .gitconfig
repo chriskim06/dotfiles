@@ -34,7 +34,7 @@
 	ck = checkout
 	br = branch
 	co = commit
-	ammend = commit --ammend
+	amend = commit --amend
     noworries = update-index --assume-unchanged
 	mt = mergetool
 	dt = difftool
