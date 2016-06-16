@@ -64,7 +64,7 @@ alias fhere='find . -iname'
 alias work='cd ~/workspace/fastspring-system'
 alias clean='rm -r out && rm -r */target'
 alias manager='~/scripts/go -m'
-alias weather='curl -4 http://wttr.in/santa_barbara'
+alias weather='curl http://wttr.in/'
 alias sslserver='http-server-basicauth-ssl ./ -p 9999 -S -C ~/.ssl/cert.pem -K ~/.ssl/key.pem -c-1 -d'
 # }}}
 
@@ -190,6 +190,21 @@ brew_list () { # {{{2
         echo "$i"
     done
 } # }}}2
+brew_random () { # {{{2
+    local formula=$(brew search | grep -v / | gshuf | head -n 1)
+    local desc=$(brew desc "${formula}" 2>&1)
+    local name=$(echo "$desc" | cut -d: -f1)
+    local info=$(echo "$desc" | cut -d: -f2-)
+    if [[ "$name" != "Error" ]]; then
+        echo -e "${COLORS[15]}Random Homebrew formula:$END" > ~/.random_brew_cmd
+        echo -e "${COLORS[45]}$name:$END $info" >> ~/.random_brew_cmd
+        echo "" >> ~/.random_brew_cmd
+    fi
+} # }}}2
+#brew_random
+
+cat ~/.random_brew_cmd
+brew_random &
 
 # }}}1
 
