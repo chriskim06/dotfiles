@@ -184,6 +184,20 @@ brew_list () { # {{{2
         echo "$i"
     done
 } # }}}2
+brew_random () { # {{{2
+    local formula=$(brew search | grep -v / | gshuf | head -n 1)
+    local desc=$(brew desc "${formula}" 2>&1)
+    local name=$(echo "$desc" | cut -d: -f1)
+    local info=$(echo "$desc" | cut -d: -f2-)
+    if [[ "$name" != "Error" ]]; then
+        echo -e "${COLORS[15]}Random Homebrew formula:$END" > ~/.random_brew_cmd
+        echo -e "${COLORS[45]}$name:$END $info" >> ~/.random_brew_cmd
+        echo "" >> ~/.random_brew_cmd
+    fi
+} # }}}2
+
+cat ~/.random_brew_cmd
+brew_random &
 
 # }}}1
 
