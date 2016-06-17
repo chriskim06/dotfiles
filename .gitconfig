@@ -34,7 +34,7 @@
 	ck = checkout
 	br = branch
 	co = commit
-	ammend = commit --ammend
+	amend = commit --amend
 	mt = mergetool
 	dt = difftool
 	df = diff

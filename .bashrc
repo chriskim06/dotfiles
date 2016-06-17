@@ -61,7 +61,7 @@ alias copy='pbcopy'
 alias ll='ls -lAh'
 alias ssh='ssh -o ServerAliveInterval=60'
 alias fhere='find . -iname'
-alias weather='curl -4 http://wttr.in/santa_barbara'
+alias weather='curl http://wttr.in/'
 # }}}
 
 # Git Stuff # {{{1
@@ -84,7 +84,7 @@ alias pull='git pull'
 # }}}2
 
 # Functions {{{2
-gstash () { # {{{3
+stash () { # {{{3
     if [[ $# -eq 0 || $# -eq 1 && "$1" == "list" ]]; then
         list=$(git stash list)
         if [[ -z "$list" ]]; then
@@ -157,9 +157,9 @@ __git_complete gk _git_checkout
 __git_complete gu _git_unstage
 __git_complete gn _git_number
 __git_complete gs _git_number
-__git_complete gstash _git_stash
 __git_complete gconf _git_config
 __git_complete gfrom _git_branch
+__git_complete stash _git_stash
 __git_complete push _git_push
 __git_complete pull _git_pull
 __git_complete delete _git_delete
