@@ -198,8 +198,10 @@ brew_list () { # {{{2
   done
 } # }}}2
 brew_random () { # {{{2
-  local formula=$(brew search | grep -v / | gshuf | head -n 1)
-  local desc=$(brew desc "${formula}" 2>&1)
+  local formulae=($(brew search | grep -v /))
+  local range=${#formulae[@]}
+  local number=$RANDOM
+  local desc=$(brew desc "${formulae[$((number %= $range))]}" 2>&1)
   local name=$(echo "$desc" | cut -d: -f1)
   local info=$(echo "$desc" | cut -d: -f2-)
   if [[ "$name" != "Error" ]]; then
