@@ -5,62 +5,62 @@
 #
 
 _brew_custom_complete () {
-    local cur="${COMP_WORDS[COMP_CWORD]}"
-    COMPREPLY=($(compgen -W "$@ --help" -- "$cur"))
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  COMPREPLY=($(compgen -W "$@ --help" -- "$cur"))
 }
 
 _brew () {
-    local i=1 cmd
-    while [[ $i -lt $COMP_CWORD ]]; do
-        local s="${COMP_WORDS[i]}"
-        case "$s" in
-            --*)
-                cmd="$s"
-                break
-                ;;
-            -*)
-                ;;
-            *)
-                cmd="$s"
-                break
-                ;;
-        esac
-        i=$((++i))
-    done
-    if [[ $i -eq $COMP_CWORD ]]; then
-        local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W "$(brew commands --quiet --include-aliases) --help" -- "$cur"))
-        return
-    fi
-    case "$cmd" in
-        info|desc|search|home)      _brew_custom_complete "$(brew search)" ;;
-        uninstall|remove|rm|pin)    _brew_custom_complete "$(\ls $(brew --cellar))" ;;
-        requires)                   _brew_custom_complete "$(\ls $(brew --cellar))" ;;
-        link|ln|unlink|cleanup)     _brew_custom_complete "$(\ls $(brew --cellar)) --dry-run -n" ;;
-        help)                       _brew_custom_complete "$(brew commands --quiet)" ;;
-        list|ls)                    _brew_custom_complete "--pinned --unbrewed --full-name" ;;
-        upgrade)                    _brew_custom_complete "--cleanup" ;;
-        unpin)                      _brew_custom_complete "$(brew list --pinned)" ;;
-        tap|tap-info)               _brew_custom_complete "$(brew tap --list-official)" ;;
-        untap)                      _brew_custom_complete "$(brew tap)" ;;
-        deps)                       _brew_deps ;;
-        diy|configure)              _brew_diy ;;
-        fetch)                      _brew_fetch ;;
-        install|reinstall)          _brew_install ;;
-        irb)                        _brew_irb ;;
-        linkapps)                   _brew_linkapps ;;
-        log)                        _brew_log ;;
-        man)                        _brew_man ;;
-        outdated)                   _brew_outdated ;;
-        prune)                      _brew_prune ;;
-        style)                      _brew_style ;;
-        switch)                     _brew_switch ;;
-        tests)                      _brew_tests ;;
-        unpack)                     _brew_unpack ;;
-        uses)                       _brew_uses ;;
-        cat|edit|home|missing)      __brew_complete_formulae ;;
-        --cache|--cellar|--prefix)  __brew_complete_formulae ;;
-        *)                          ;;
+  local i=1 cmd
+  while [[ $i -lt $COMP_CWORD ]]; do
+    local s="${COMP_WORDS[i]}"
+    case "$s" in
+      --*)
+        cmd="$s"
+        break
+        ;;
+      -*)
+        ;;
+      *)
+        cmd="$s"
+        break
+        ;;
     esac
+    i=$((++i))
+  done
+  if [[ $i -eq $COMP_CWORD ]]; then
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    COMPREPLY=($(compgen -W "$(brew commands --quiet --include-aliases) --help" -- "$cur"))
+    return
+  fi
+  case "$cmd" in
+    info|desc|search|home)      _brew_custom_complete "$(brew search)" ;;
+    uninstall|remove|rm|pin)    _brew_custom_complete "$(\ls $(brew --cellar))" ;;
+    requires)                   _brew_custom_complete "$(\ls $(brew --cellar))" ;;
+    link|ln|unlink|cleanup)     _brew_custom_complete "$(\ls $(brew --cellar)) --dry-run -n" ;;
+    help)                       _brew_custom_complete "$(brew commands --quiet)" ;;
+    list|ls)                    _brew_custom_complete "--pinned --unbrewed --full-name" ;;
+    upgrade)                    _brew_custom_complete "--cleanup" ;;
+    unpin)                      _brew_custom_complete "$(brew list --pinned)" ;;
+    tap|tap-info)               _brew_custom_complete "$(brew tap --list-official)" ;;
+    untap)                      _brew_custom_complete "$(brew tap)" ;;
+    deps)                       _brew_deps ;;
+    diy|configure)              _brew_diy ;;
+    fetch)                      _brew_fetch ;;
+    install|reinstall)          _brew_install ;;
+    irb)                        _brew_irb ;;
+    linkapps)                   _brew_linkapps ;;
+    log)                        _brew_log ;;
+    man)                        _brew_man ;;
+    outdated)                   _brew_outdated ;;
+    prune)                      _brew_prune ;;
+    style)                      _brew_style ;;
+    switch)                     _brew_switch ;;
+    tests)                      _brew_tests ;;
+    unpack)                     _brew_unpack ;;
+    uses)                       _brew_uses ;;
+    cat|edit|home|missing)      __brew_complete_formulae ;;
+    --cache|--cellar|--prefix)  __brew_complete_formulae ;;
+    *)                          ;;
+  esac
 }
 
