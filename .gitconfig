@@ -39,7 +39,7 @@
 	dt = difftool
 	df = diff
 	dnw = diff -w --ignore-blank-lines
-	index = diff --cached
+	staged = diff --cached
     untracked = ls-files -o --exclude-standard
 [color]
 	ui = auto
