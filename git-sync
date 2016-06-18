@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 if [[ $# -ne 1 ]]; then
-    echo "Usage: git sync <branch>"
+  echo "Usage: git sync <branch>"
 else
-    git fetch origin "$1":"$1"
+  git fetch origin "$1":"$1"
 fi
 
