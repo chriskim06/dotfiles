@@ -131,6 +131,17 @@ vn () { # {{{3
         mvim -v $(git list $@ | sed "s/"$'\E\[1;31m'"//g")
     fi
 } # }}}3
+branches () { # {{{3
+    while read -r branch; do
+        clean_branch_name=${branch//\*\ /}
+        description=$(git config branch.$clean_branch_name.description)
+        if [[ "${branch::1}" == "*" ]]; then
+            printf "* ${COLORS[10]}$clean_branch_name$END ${COLORS[252]}$description$END\n"
+        else
+            printf "  $branch ${COLORS[252]}$description$END\n"
+        fi
+    done <<< "$(git branch --list)"
+} # }}}3
 # }}}2
 
 # Completion {{{2

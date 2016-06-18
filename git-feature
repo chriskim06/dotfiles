@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
 
-if [[ $# -ne 1 ]]; then
-    echo "Usage: git feature <branch>"
+if [[ $# -eq 0 ]]; then
+  echo "Usage: git feature <branch> [<username> <password>]"
 else
-    branch=$(git br -a | grep "$1")
-    if ! [[ -z "$branch" ]]; then
-        echo "$1 has already been created"
-        return 0
-    fi
+  if ! [[ -z "$(git br -a | grep $1)" ]]; then
+    echo "$1 has already been created"
+  else
     git checkout -b "$1" origin/master
     git push -u origin "$1"
+    if ! [[ -z "$2" || -z "$3" ]]; then
+      ticket=$(curl -s -u $2:$3 https://jira.fastspring.com/rest/api/2/issue/$1)
+      summary=$(echo "$ticket" | awk -F"[,:}]" '{for(i=1;i<=NF;i++){if($i~/\042'summary'\042/){print $(i+1)}}}' | tr -d '"' | sed -n 1p)
+      ! [[ -z "$summary" ]] && git config branch.$1.description "$summary"
+    fi
+  fi
 fi
 
