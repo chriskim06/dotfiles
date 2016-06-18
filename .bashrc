@@ -12,7 +12,6 @@ done
 # }}}
 
 # Initialization {{{1
-
 # Bash completion {{{2
 if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
     source $(brew --prefix)/etc/bash_completion
@@ -32,7 +31,6 @@ if [[ $- =~ .*i.* ]]; then
     bind '"\C-r": "\C-a hh \C-j"';
 fi
 # }}}2
-
 # }}}1
 
 # Random functions {{{1
@@ -56,6 +54,7 @@ alias vim='mvim -v'
 alias vv='mvim -v ~/.vim/vimrc/.vimrc'
 alias vimrc='cd ~/.vim/vimrc; pwd; ll'
 alias vbashrc='mvim -v ~/.bashrc'
+alias config='cd ~/config; pwd; ll'
 alias soba='source ~/.bashrc'
 alias copy='pbcopy'
 alias ll='ls -lAh'
@@ -65,7 +64,6 @@ alias weather='curl http://wttr.in/'
 # }}}
 
 # Git Stuff # {{{1
-
 # Aliases {{{2
 alias g='git'
 alias gb='git branch'
@@ -175,7 +173,6 @@ __git_complete push _git_push
 __git_complete pull _git_pull
 __git_complete delete _git_delete
 # }}}2
-
 # }}}1
 
 # Node Stuff {{{1
@@ -184,7 +181,6 @@ alias npmlist='npm list -g --depth=0'
 # }}}1
 
 # Homebrew stuff {{{1
-
 if [[ -f ~/bin/completion/brew-custom-completion ]]; then
     source ~/bin/completion/brew-custom-completion
 fi
@@ -205,10 +201,9 @@ brew_random () { # {{{2
         echo -e "${COLORS[45]}$name:$END $info" >> ~/.random_brew_cmd
         echo "" >> ~/.random_brew_cmd
     fi
-} # }}}2
-
+}
 cat ~/.random_brew_cmd
 brew_random &
-
+# }}}2
 # }}}1
 
