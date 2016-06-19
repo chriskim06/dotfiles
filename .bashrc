@@ -63,6 +63,7 @@ alias clean='rm -r ~/workspace/fastspring-system/out && rm -r ~/workspace/fastsp
 alias manager='~/scripts/go -m'
 alias weather='curl http://wttr.in/'
 alias sslserver='http-server-basicauth-ssl ./ -p 9999 -S -C ~/.ssl/cert.pem -K ~/.ssl/key.pem -c-1 -d'
+alias pg='/Library/PostgreSQL/9.4/bin/psql -h localhost -p 5432 -U'
 # }}}
 
 # Git Stuff # {{{1
@@ -150,21 +151,6 @@ __git_complete discard _git_discard
 # Node Stuff {{{1
 alias ndmon='nodemon'
 alias npmlist='npm list -g --depth=0'
-# }}}1
-
-# Postgres {{{1
-pg () { # {{{2
-  if [ $# -ne 1 ] || [ "$1" != "commerce" ] && [ "$1" != "postgres" ]; then
-    echo "usage: pg [commerce|postgres]"
-  else
-    "/Library/PostgreSQL/9.4/bin/psql" -h localhost -p 5432 -U postgres $1
-  fi
-} # }}}2
-_pg () { # {{{2
-  local cur=${COMP_WORDS[COMP_CWORD]}
-  COMPREPLY=($(compgen -W "commerce postgres" -- $cur))
-} # }}}2
-complete -F _pg pg
 # }}}1
 
 # Homebrew stuff {{{1
