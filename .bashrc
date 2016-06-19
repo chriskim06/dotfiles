@@ -21,7 +21,7 @@ fi
 bash_prompt () {
   PS1="\[$BOLD\]\[${COLORS[229]}\][\A] \[${COLORS[33]}\]\u\[${COLORS[15]}\]:\[${COLORS[33]}\]\W\[${COLORS[48]}\]\$(__git_ps1) \[${COLORS[15]}\]\$\[$END\] "
 }
-export PROMPT_COMMAND=bash_prompt
+export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prompt"
 # }}}2
 # Miscellaneous {{{2
 complete -d cd
