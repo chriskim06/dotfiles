@@ -47,11 +47,11 @@ calculator
 # }}}1
 
 # Aliases {{{
-alias ag='ag -p ~/.agignore'
+alias ag='ag --hidden -p ~/.agignore'
 alias vim='mvim -v'
-alias vv='mvim -v ~/.vim/vimrc/.vimrc'
+alias vv='vim ~/.vim/vimrc/.vimrc'
 alias vimrc='cd ~/.vim/vimrc; pwd; ll'
-alias vbashrc='mvim -v ~/config/.bashrc'
+alias vbashrc='vim ~/config/.bashrc'
 alias config='cd ~/config; pwd; ll'
 alias soba='source ~/.bashrc'
 alias copy='pbcopy'
@@ -81,8 +81,8 @@ alias push='git push'
 alias pull='git pull'
 alias delete='git delete'
 alias discard='git discard'
+alias staged='git staged'
 # }}}2
-
 # Functions {{{2
 stash () { # {{{3
   if [[ $# -eq 0 ]]; then
@@ -114,7 +114,7 @@ gconf () { # {{{3
   fi
 } # }}}3
 vn () { # {{{3
-    [[ $# -eq 1 ]] && mvim -v $(git list $@ | sed "s/"$'\E\[1;31m'"//g")
+    [[ $# -eq 1 ]] && vim $(git list $@ | sed "s/"$'\E\[1;31m'"//g")
 } # }}}3
 branches () { # {{{3
   while read -r branch; do
@@ -128,7 +128,6 @@ branches () { # {{{3
   done <<< "$(git branch --list)"
 } # }}}3
 # }}}2
-
 # Completion {{{2
 if [[ -f ~/bin/completion/git-custom-completion ]]; then
   source ~/bin/completion/git-custom-completion
