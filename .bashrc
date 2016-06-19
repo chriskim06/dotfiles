@@ -38,9 +38,7 @@ color () { # {{{2
   for code in {0..255}; do
     val="$(printf '%03d' $code)"
     echo -n "$(tput setab $code)  ${COLORS[0]}$val  $END|  ${COLORS[$code]}$val$END  |"
-    if [ $((($code + 1) % 8)) -eq 0 ]; then
-      echo
-    fi
+    [[ $((($code + 1) % 8)) -eq 0 ]] && echo
   done
 } # }}}2
 = () { # {{{2
@@ -61,7 +59,7 @@ alias ll='ls -lAh'
 alias ssh='ssh -o ServerAliveInterval=60'
 alias fhere='find . -iname'
 alias work='cd ~/workspace/fastspring-system'
-alias clean='rm -r out && rm -r */target'
+alias clean='rm -r ~/workspace/fastspring-system/out && rm -r ~/workspace/fastspring-system/*/target'
 alias manager='~/scripts/go -m'
 alias weather='curl http://wttr.in/'
 alias sslserver='http-server-basicauth-ssl ./ -p 9999 -S -C ~/.ssl/cert.pem -K ~/.ssl/key.pem -c-1 -d'
@@ -69,33 +67,24 @@ alias sslserver='http-server-basicauth-ssl ./ -p 9999 -S -C ~/.ssl/cert.pem -K ~
 
 # Git Stuff # {{{1
 # Aliases {{{2
-alias g='git'
 alias gb='git branch'
 alias gf='git fetch'
 alias gk='git checkout'
 alias gc='git commit'
 alias gl='git lg'
-alias gn='git number'
 alias gs='git number'
 alias gu='git unstage'
 alias push='git push'
 alias pull='git pull'
-alias merge='git fetch; git merge'
 alias delete='git delete'
 alias discard='git discard'
-alias feature='git feature'
 # }}}2
 
 # Functions {{{2
 stash () { # {{{3
-  if [[ $# -eq 0 || $# -eq 1 && "$1" == "list" ]]; then
-    list=$(git stash list)
-    if [[ -z "$list" ]]; then
-      echo "No saved stashes. To save a stash use 'gstash save <message>'"
-      return 0
-    fi
+  if [[ $# -eq 0 ]]; then
     local IFS=$'\n'
-    for stash in $list; do
+    for stash in $(git stash list); do
       num=${stash%%: *}
       branch=${stash#*: }
       branch=${branch%%: *}
@@ -112,7 +101,6 @@ ga () { # {{{3
   else
     git add $(git list $@ | sed "s/"$'\E\[1;31m'"//g")
     git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
-    echo
   fi
 } # }}}3
 gconf () { # {{{3
@@ -123,11 +111,7 @@ gconf () { # {{{3
   fi
 } # }}}3
 vn () { # {{{3
-  if [[ $# -eq 0 ]]; then
-    echo "Choose a file to edit"
-  else
-    mvim -v $(git list $@ | sed "s/"$'\E\[1;31m'"//g")
-  fi
+    [[ $# -eq 1 ]] && mvim -v $(git list $@ | sed "s/"$'\E\[1;31m'"//g")
 } # }}}3
 branches () { # {{{3
   while read -r branch; do
@@ -146,7 +130,6 @@ branches () { # {{{3
 if [[ -f ~/bin/completion/git-custom-completion ]]; then
   source ~/bin/completion/git-custom-completion
 fi
-__git_complete g _git_completion
 __git_complete git _git_completion
 __git_complete ga _git_add
 __git_complete gb _git_branch
@@ -154,14 +137,13 @@ __git_complete gf _git_fetch
 __git_complete gc _git_commit
 __git_complete gk _git_checkout
 __git_complete gu _git_unstage
-__git_complete gn _git_number
 __git_complete gs _git_number
 __git_complete gconf _git_config
 __git_complete stash _git_stash
 __git_complete push _git_push
 __git_complete pull _git_pull
-__git_complete merge _git_merge
 __git_complete delete _git_delete
+__git_complete discard _git_discard
 # }}}2
 # }}}1
 
@@ -177,7 +159,6 @@ pg () { # {{{2
   else
     "/Library/PostgreSQL/9.4/bin/psql" -h localhost -p 5432 -U postgres $1
   fi
-  return 0
 } # }}}2
 _pg () { # {{{2
   local cur=${COMP_WORDS[COMP_CWORD]}
@@ -191,24 +172,15 @@ if [[ -f ~/bin/completion/brew-custom-completion ]]; then
   source ~/bin/completion/brew-custom-completion
 fi
 brew_list () { # {{{2
-  formulae=($(brew list))
-  echo "$BOLD${COLORS[15]}${#formulae[@]} formulae installed:$END"
-  for i in "${formulae[@]}"; do
-    echo "$i"
-  done
+  echo "$BOLD${COLORS[15]}$(brew list | wc -l | sed 's/^[[:space:]]*//') formulae installed:$END"
+  brew list | col
 } # }}}2
 brew_random () { # {{{2
   local formulae=($(brew search | grep -v /))
-  local range=${#formulae[@]}
-  local number=$RANDOM
-  local desc=$(brew desc "${formulae[$((number %= $range))]}" 2>&1)
+  local desc=$(brew desc "${formulae[$((RANDOM %= ${#formulae[@]}))]}" 2>&1)
   local name=$(echo "$desc" | cut -d: -f1)
   local info=$(echo "$desc" | cut -d: -f2-)
-  if [[ "$name" != "Error" ]]; then
-    echo -e "${COLORS[15]}Random Homebrew formula:$END" > ~/.random_brew_cmd
-    echo -e "${COLORS[45]}$name:$END $info" >> ~/.random_brew_cmd
-    echo "" >> ~/.random_brew_cmd
-  fi
+  [[ "$name" != "Error" ]] && printf "${COLORS[15]}Random Homebrew formula:$END\n${COLORS[45]}$name:$END$info\n\n" > ~/.random_brew_cmd
 }
 cat ~/.random_brew_cmd
 brew_random &
