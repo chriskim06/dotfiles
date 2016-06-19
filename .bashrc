@@ -159,7 +159,7 @@ brew_random () { # {{{2
   [[ "$name" != "Error" ]] && printf "${COLORS[15]}Random Homebrew formula:$END\n${COLORS[45]}$name:$END$info\n\n" > ~/.random_brew_cmd
 }
 cat ~/.random_brew_cmd
-brew_random &
+(brew_random &)
 # }}}2
 # }}}1
 
