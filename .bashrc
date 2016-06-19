@@ -62,6 +62,8 @@ alias work='cd ~/workspace/fastspring-system'
 alias clean='rm -r ~/workspace/fastspring-system/out && rm -r ~/workspace/fastspring-system/*/target'
 alias manager='~/scripts/go -m'
 alias weather='curl http://wttr.in/'
+alias ndmon='nodemon'
+alias npmlist='npm list -g --depth=0'
 alias sslserver='http-server-basicauth-ssl ./ -p 9999 -S -C ~/.ssl/cert.pem -K ~/.ssl/key.pem -c-1 -d'
 alias pg='/Library/PostgreSQL/9.4/bin/psql -h localhost -p 5432 -U'
 # }}}
@@ -146,11 +148,6 @@ __git_complete pull _git_pull
 __git_complete delete _git_delete
 __git_complete discard _git_discard
 # }}}2
-# }}}1
-
-# Node Stuff {{{1
-alias ndmon='nodemon'
-alias npmlist='npm list -g --depth=0'
 # }}}1
 
 # Homebrew stuff {{{1
