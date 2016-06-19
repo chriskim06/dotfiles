@@ -35,7 +35,7 @@ _brew () {
   case "$cmd" in
     info|desc|search|home)      _brew_custom_complete "$(brew search)" ;;
     uninstall|remove|rm|pin)    _brew_custom_complete "$(\ls $(brew --cellar))" ;;
-    requires)                   _brew_custom_complete "$(\ls $(brew --cellar))" ;;
+    requires|rmtree)            _brew_custom_complete "$(\ls $(brew --cellar))" ;;
     link|ln|unlink|cleanup)     _brew_custom_complete "$(\ls $(brew --cellar)) --dry-run -n" ;;
     help)                       _brew_custom_complete "$(brew commands --quiet)" ;;
     list|ls)                    _brew_custom_complete "--pinned --unbrewed --full-name" ;;

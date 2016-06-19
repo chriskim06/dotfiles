@@ -24,7 +24,7 @@ _brew_requires_thread () {
 export -f _brew_requires_thread
 
 if [[ $# -ne 1 ]]; then
-  echo "usage: brew_info <package name>"
+  echo "usage: brew requires <package name>"
   return 0
 fi
 echo "Installed formulae that depend on $(tput bold)$(tput setaf 47)$1$(tput setaf 15)...$(tput sgr0)"
