@@ -17,8 +17,6 @@
 [difftool "mvimdiff"]
 	cmd = mvimdiff -vR "$LOCAL" "$REMOTE"
 	trustExitCode = true
-[pull]
-	rebase = true
 [user]
 	name = Chris Kim
 	email = ckim@fastspring.com

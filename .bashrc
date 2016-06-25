@@ -28,7 +28,7 @@ complete -d cd
 eval $(thefuck --alias)
 shopt -s histappend
 if [[ $- =~ .*i.* ]]; then
-  bind '"\C-r": "\C-a hh \C-j"';
+  bind '"\C-r": "\C-a hh \C-j"'
 fi
 # }}}2
 # }}}1
@@ -65,7 +65,9 @@ alias weather='curl http://wttr.in/'
 alias ndmon='nodemon'
 alias npmlist='npm list -g --depth=0'
 alias sslserver='http-server-basicauth-ssl ./ -p 9999 -S -C ~/.ssl/cert.pem -K ~/.ssl/key.pem -c-1 -d'
-alias pg='/Library/PostgreSQL/9.4/bin/psql -h localhost -p 5432 -U'
+if [[ -f ~/.private ]]; then
+  source ~/.private
+fi
 # }}}
 
 # Git Stuff # {{{1
@@ -147,6 +149,26 @@ __git_complete pull _git_pull
 __git_complete delete _git_delete
 __git_complete discard _git_discard
 # }}}2
+# }}}1
+
+# Postgres {{{1
+pg () { # {{{2
+    if [[ $# -ne 1 || "$1" != "commerce" && "$1" != "postgres" ]]; then
+        echo "usage: pg [commerce|postgres]"
+    else
+        if [[ "$1" == "commerce" ]]; then
+            "/Library/PostgreSQL/9.4/bin/psql" -h localhost -p 5432 -U sa $1
+        elif [[ "$1" == "postgres" ]]; then
+            "/Library/PostgreSQL/9.4/bin/psql" -h localhost -p 5432 -U postgres $1
+        fi
+    fi
+    return 0
+} # }}}2
+_pg () { # {{{2
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=($(compgen -W "commerce postgres" -- $cur))
+} # }}}2
+complete -F _pg pg
 # }}}1
 
 # Homebrew stuff {{{1
