@@ -25,6 +25,21 @@ _git_completion () {
   esac
 }
 
+_git_view () {
+  local cur prev
+  cur=${COMP_WORDS[COMP_CWORD]}
+  prev=${COMP_WORDS[COMP_CWORD - 1]}
+  COMPREPLY=()
+  case "$prev" in
+    view)
+      COMPREPLY=($(compgen -W "$(git branch -a | sed 's/remotes\///')" -- ${cur}))
+      ;;
+    *)
+      COMPREPLY=($(compgen -W "$(git ls-files | sed 's/.*\///' | sort -u)" -- ${cur}))
+      ;;
+  esac
+}
+
 _git_number () {
   __gitcomp "$(__git_list_all_commands && __git_aliases)"
 }
