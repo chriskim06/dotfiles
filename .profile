@@ -17,6 +17,7 @@ export LSCOLORS=GxFxExdxbxBxegedabagGxGx
 export HISTSIZE=1000
 export HISTFILESIZE=1000
 export HISTCONTROL=ignoredups:erasedups
-export HH_CONFIG=hicolor
+export HH_CONFIG=hicolor,regexp,rawhistory
+export HH_PROMPT="> "
 export LESS=
 

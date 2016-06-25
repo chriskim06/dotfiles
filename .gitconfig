@@ -17,8 +17,6 @@
 [mergetool "mvimdiff"]
 	cmd = mvimdiff -v
 	trustExitCode = true
-[pull]
-	rebase = true
 [user]
 	name = Chris Kim
 	email = chriskim06@gmail.com

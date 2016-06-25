@@ -28,7 +28,7 @@ complete -d cd
 eval "$(thefuck --alias)"
 shopt -s histappend
 if [[ $- =~ .*i.* ]]; then
-  bind '"\C-r": "\C-a hh \C-j"';
+  bind '"\C-r": "\C-a hh \C-j"'
 fi
 # }}}2
 # }}}1
