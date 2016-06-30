@@ -153,20 +153,20 @@ __git_complete discard _git_discard
 
 # Postgres {{{1
 pg () { # {{{2
-    if [[ $# -ne 1 || "$1" != "commerce" && "$1" != "postgres" ]]; then
-        echo "usage: pg [commerce|postgres]"
-    else
-        if [[ "$1" == "commerce" ]]; then
-            "/Library/PostgreSQL/9.4/bin/psql" -h localhost -p 5432 -U sa $1
-        elif [[ "$1" == "postgres" ]]; then
-            "/Library/PostgreSQL/9.4/bin/psql" -h localhost -p 5432 -U postgres $1
-        fi
+  if [[ $# -ne 1 || "$1" != "commerce" && "$1" != "postgres" ]]; then
+    echo "usage: pg [commerce|postgres]"
+  else
+    if [[ "$1" == "commerce" ]]; then
+      "/Library/PostgreSQL/9.4/bin/psql" -h localhost -p 5432 -U sa $1
+    elif [[ "$1" == "postgres" ]]; then
+      "/Library/PostgreSQL/9.4/bin/psql" -h localhost -p 5432 -U postgres $1
     fi
-    return 0
+  fi
+  return 0
 } # }}}2
 _pg () { # {{{2
-    local cur=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=($(compgen -W "commerce postgres" -- $cur))
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=($(compgen -W "commerce postgres" -- $cur))
 } # }}}2
 complete -F _pg pg
 # }}}1
