@@ -12,12 +12,8 @@ done
 # }}}
 
 # Initialization {{{1
-# Bash completion {{{2
-if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
-  source $(brew --prefix)/etc/bash_completion
-fi
-# }}}2
-# Bash prompt {{{2
+# Bash {{{2
+[[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
 bash_prompt () {
   PS1="\[$BOLD\]\[${COLORS[229]}\][\A] \[${COLORS[33]}\]\u\[${COLORS[15]}\]:\[${COLORS[33]}\]\W\[${COLORS[48]}\]\$(__git_ps1) \[${COLORS[15]}\]\$\[$END\] "
 }
@@ -124,9 +120,7 @@ branches () { # {{{3
 } # }}}3
 # }}}2
 # Completion {{{2
-if [[ -f ~/bin/completion/git-custom-completion ]]; then
-  source ~/bin/completion/git-custom-completion
-fi
+[[ -f ~/bin/completion/git-custom-completion ]] && source ~/bin/completion/git-custom-completion
 __git_complete git _git_completion
 __git_complete ga _git_add
 __git_complete gb _git_branch
@@ -144,9 +138,7 @@ __git_complete delete _git_delete
 # }}}1
 
 # Homebrew stuff {{{1
-if [[ -f ~/bin/completion/brew-custom-completion ]]; then
-  source ~/bin/completion/brew-custom-completion
-fi
+[[ -f ~/bin/completion/brew-custom-completion ]] && source ~/bin/completion/brew-custom-completion
 brew_list () { # {{{2
   echo "$BOLD${COLORS[15]}$(brew list | wc -l | sed 's/^[[:space:]]*//') formulae installed:$END"
   brew list | col
@@ -160,6 +152,17 @@ brew_random () { # {{{2
 }
 cat ~/.random_brew_cmd
 (brew_random &)
+# }}}2
+# }}}1
+
+# fzf stuff {{{1
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+# Functions {{{2
+fd () { # {{{2
+  local current=$(pwd)
+  cd "$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m)"
+  [[ "$(pwd)" != "$current" ]] && pwd
+} # }}}2
 # }}}2
 # }}}1
 
