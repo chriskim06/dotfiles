@@ -1,68 +1,68 @@
 [core]
-	excludesfile = /Users/Chris/.gitignore_global
-	editor = mvim -v
+    excludesfile = /Users/Chris/.gitignore_global
+    editor = mvim -v
 [diff]
-	tool = mvimdiff
+    tool = mvimdiff
     renames = copies
     compactionHeuristic = true
 [difftool]
-	prompt = false
+    prompt = false
 [difftool "mvimdiff"]
-	cmd = mvimdiff -vR "$LOCAL" "$REMOTE"
-	trustExitCode = true
+    cmd = mvimdiff -vR "$LOCAL" "$REMOTE"
+    trustExitCode = true
 [merge]
-	tool = mvimdiff
+    tool = mvimdiff
 [mergetool]
-	prompt = false
+    prompt = false
 [mergetool "mvimdiff"]
-	cmd = mvimdiff -v
-	trustExitCode = true
+    cmd = mvimdiff -v
+    trustExitCode = true
 [user]
-	name = Chris Kim
-	email = chriskim06@gmail.com
+    name = Chris Kim
+    email = chriskim06@gmail.com
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
 [alias]
-	lg = log --graph --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)' --all
-	st = status
-	ck = checkout
-	br = branch
-	co = commit
-	amend = commit --amend
-	mt = mergetool
-	dt = difftool
-	df = diff
-	dnw = diff -w --ignore-blank-lines
-	staged = diff --cached
+    lg = log --graph --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)' --all
+    st = status
+    ck = checkout
+    br = branch
+    co = commit
+    amend = commit --amend
+    mt = mergetool
+    dt = difftool
+    df = diff
+    dnw = diff -w --ignore-blank-lines
+    staged = diff --cached
     untracked = ls-files -o --exclude-standard
 [color]
-	ui = auto
+    ui = auto
 [color "branch"]
-	current = green bold
+    current = green bold
     local = white
     remote = yellow
 [color "diff"]
-	meta = "190 bold"
-	commit = green
-	frag = "165 bold"
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+    meta = "190 bold"
+    commit = green
+    frag = "165 bold"
+    old = red bold
+    new = green bold
+    whitespace = red reverse
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = "red bold 238"
-	newNormal = green bold
-	newHighlight = "green bold 238"
+    oldNormal = red bold
+    oldHighlight = "red bold 238"
+    newNormal = green bold
+    newHighlight = "green bold 238"
 [color "status"]
-	added = "10 bold"
-	changed = "45 bold"
-	untracked = red bold
-	unmerged = white red bold
+    added = "10 bold"
+    changed = "45 bold"
+    untracked = red bold
+    unmerged = white red bold
 [pager]
-	diff = diff-so-fancy | less -aiRs --tabs=4
-	show = diff-so-fancy | less -aiRsS --tabs=4
-	log = less -aiRS
+    diff = diff-so-fancy | less -aiRs --tabs=4
+    show = diff-so-fancy | less -aiRsS --tabs=4
+    log = less -aiRS
