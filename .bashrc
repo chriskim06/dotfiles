@@ -13,9 +13,7 @@ done
 
 # Initialization {{{1
 # Bash completion {{{2
-if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
-  source $(brew --prefix)/etc/bash_completion
-fi
+[[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
 # }}}2
 # Bash prompt {{{2
 bash_prompt () {
@@ -27,9 +25,6 @@ export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prom
 complete -d cd
 eval $(thefuck --alias)
 shopt -s histappend
-if [[ $- =~ .*i.* ]]; then
-  bind '"\C-r": "\C-a hh \C-j"'
-fi
 # }}}2
 # }}}1
 
@@ -42,7 +37,7 @@ color () { # {{{2
   done
 } # }}}2
 = () { # {{{2
-calculator
+  calculator
 } # }}}2
 # }}}1
 
@@ -65,9 +60,7 @@ alias weather='curl http://wttr.in/'
 alias ndmon='nodemon'
 alias npmlist='npm list -g --depth=0'
 alias sslserver='http-server-basicauth-ssl ./ -p 9999 -S -C ~/.ssl/cert.pem -K ~/.ssl/key.pem -c-1 -d'
-if [[ -f ~/.private ]]; then
-  source ~/.private
-fi
+[[ -f ~/.private ]] && source ~/.private
 # }}}
 
 # Git Stuff # {{{1
@@ -131,9 +124,7 @@ branches () { # {{{3
 } # }}}3
 # }}}2
 # Completion {{{2
-if [[ -f ~/bin/completion/git-custom-completion ]]; then
-  source ~/bin/completion/git-custom-completion
-fi
+[[ -f ~/bin/completion/git-custom-completion ]] && source ~/bin/completion/git-custom-completion
 __git_complete git _git_completion
 __git_complete ga _git_add
 __git_complete gb _git_branch
@@ -172,9 +163,7 @@ complete -F _pg pg
 # }}}1
 
 # Homebrew stuff {{{1
-if [[ -f ~/bin/completion/brew-custom-completion ]]; then
-  source ~/bin/completion/brew-custom-completion
-fi
+[[ -f ~/bin/completion/brew-custom-completion ]] && source ~/bin/completion/brew-custom-completion
 brew_list () { # {{{2
   echo "$BOLD${COLORS[15]}$(brew list | wc -l | sed 's/^[[:space:]]*//') formulae installed:$END"
   brew list | col
@@ -188,6 +177,27 @@ brew_random () { # {{{2
 }
 cat ~/.random_brew_cmd
 (brew_random &)
+# }}}2
+# }}}1
+
+# fzf stuff {{{1
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+[[ $- =~ .*i.* ]] && bind '"\\\\\C-M": "\C-r"'
+# Functions {{{2
+fd () { # {{{2
+  local current=$(pwd)
+  cd "$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m)"
+  [[ "$(pwd)" != "$current" ]] && pwd
+} # }}}2
+fshow () { # {{{2
+  git log --graph --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)' --all |
+  fzf --ansi --no-sort --tiebreak=index \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show %') << 'FZF-EOF'
+                {}
+FZF-EOF"
+} # }}}2
 # }}}2
 # }}}1
 
