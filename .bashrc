@@ -182,7 +182,7 @@ cat ~/.random_brew_cmd
 
 # fzf stuff {{{1
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
-[[ $- =~ .*i.* ]] && bind '"\\\\\C-M": "\C-r"'
+[[ $- =~ .*i.* ]] && bind '"\e[Z": "\C-r"'
 # Functions {{{2
 fd () { # {{{2
   local current=$(pwd)
