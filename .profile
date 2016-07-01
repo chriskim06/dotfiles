@@ -17,8 +17,6 @@ export LSCOLORS=GxFxExdxbxBxegedabagGxGx
 export HISTSIZE=1000
 export HISTFILESIZE=1000
 export HISTCONTROL=ignoredups:erasedups
-export HH_CONFIG=hicolor,regexp,rawhistory
-export HH_PROMPT='> '
-export FZF_DEFAULT_OPTS='--margin=0,0,5%,0 --color=hl:33,hl+:33'
+export FZF_DEFAULT_OPTS='--reverse --color=hl:33,hl+:33,bg+:240 --sync --bind=tab:down,btab:up'
 export LESS=
 

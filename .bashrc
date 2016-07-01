@@ -23,9 +23,6 @@ export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prom
 complete -d cd
 eval "$(thefuck --alias)"
 shopt -s histappend
-if [[ $- =~ .*i.* ]]; then
-  bind '"\C-r": "\C-a hh \C-j"'
-fi
 # }}}2
 # }}}1
 
@@ -157,11 +154,21 @@ cat ~/.random_brew_cmd
 
 # fzf stuff {{{1
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+[[ $- =~ .*i.* ]] && bind '"\\\\\C-M": "\C-r"'
 # Functions {{{2
 fd () { # {{{2
   local current=$(pwd)
   cd "$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m)"
   [[ "$(pwd)" != "$current" ]] && pwd
+} # }}}2
+fshow () { # {{{2
+  git log --graph --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)' --all |
+  fzf --ansi --no-sort --tiebreak=index \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show %') << 'FZF-EOF'
+                {}
+FZF-EOF"
 } # }}}2
 # }}}2
 # }}}1
