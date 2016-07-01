@@ -42,7 +42,7 @@ color () { # {{{2
   done
 } # }}}2
 = () { # {{{2
-calculator
+  calculator
 } # }}}2
 # }}}1
 
