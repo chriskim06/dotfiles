@@ -148,9 +148,9 @@ pg () { # {{{2
     echo "usage: pg [commerce|postgres]"
   else
     if [[ "$1" == "commerce" ]]; then
-      "/Library/PostgreSQL/9.4/bin/psql" -h localhost -p 5432 -U sa $1
+      pgcli -h localhost -p 5432 -U sa $1
     elif [[ "$1" == "postgres" ]]; then
-      "/Library/PostgreSQL/9.4/bin/psql" -h localhost -p 5432 -U postgres $1
+      pgcli -h localhost -p 5432 -U postgres $1
     fi
   fi
   return 0
