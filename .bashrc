@@ -2,22 +2,13 @@
 # .bashrc
 #
 
-# Color variables {{{
-BOLD="$(tput bold)"
-END="$(tput sgr0)"
-COLORS=()
-for i in {0..255}; do
-  COLORS+=("$(tput setaf $i)")
-done
-# }}}
-
 # Initialization {{{1
 # Bash completion {{{2
 [[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
 # }}}2
 # Bash prompt {{{2
 bash_prompt () {
-  PS1="\[$BOLD\]\[${COLORS[229]}\][\A] \[${COLORS[33]}\]\u\[${COLORS[15]}\]:\[${COLORS[33]}\]\W\[${COLORS[48]}\]\$(__git_ps1) \[${COLORS[15]}\]\$\[$END\] "
+  PS1="\[$(tput bold)\]\[$(tput setaf 229)\][\A] \[$(tput setaf 33)\]\u\[$(tput setaf 15)\]:\[$(tput setaf 33)\]\W\[$(tput setaf 48)\]\$(__git_ps1) \[$(tput setaf 15)\]\$\[$(tput sgr0)\] "
 }
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prompt"
 # }}}2
@@ -32,7 +23,7 @@ shopt -s histappend
 color () { # {{{2
   for code in {0..255}; do
     val="$(printf '%03d' $code)"
-    echo -n "$(tput setab $code)  ${COLORS[0]}$val  $END|  ${COLORS[$code]}$val$END  |"
+    echo -n "$(tput setab $code)  $(tput setaf 0)$val  $(tput sgr0)|  $(tput setaf $code)$val$(tput sgr0)  |"
     [[ $((($code + 1) % 8)) -eq 0 ]] && echo
   done
 } # }}}2
@@ -98,7 +89,7 @@ stash () { # {{{3
       branch=${stash#*: }
       branch=${branch%%: *}
       msg=${stash##*: }
-      echo "$BOLD${COLORS[227]}$num: ${COLORS[14]}$branch: ${COLORS[15]}$msg$END"
+      echo "$(tput bold)$(tput setaf 227)$num: $(tput setaf 14)$branch: $(tput setaf 15)$msg$(tput sgr0)"
     done
   else
     git stash $*
@@ -127,9 +118,9 @@ branches () { # {{{3
     clean_branch_name=${branch//\*\ /}
     description=$(git config branch.$clean_branch_name.description)
     if [[ "${branch::1}" == "*" ]]; then
-      printf "* ${COLORS[10]}$clean_branch_name$END ${COLORS[252]}$description$END\n"
+      printf "* $(tput setaf 10)$clean_branch_name$(tput sgr0) $(tput setaf 252)$description$(tput sgr0)\n"
     else
-      printf "  $branch ${COLORS[252]}$description$END\n"
+      printf "  $branch $(tput setaf 252)$description$(tput sgr0)\n"
     fi
   done <<< "$(git branch --list)"
 } # }}}3
@@ -176,7 +167,7 @@ complete -F _pg pg
 # Homebrew stuff {{{1
 [[ -f ~/bin/completion/brew-custom-completion ]] && source ~/bin/completion/brew-custom-completion
 brew_list () { # {{{2
-  echo "$BOLD${COLORS[15]}$(brew list | wc -l | sed 's/^[[:space:]]*//') formulae installed:$END"
+  echo "$(tput bold)$(tput setaf 15)$(brew list | wc -l | sed 's/^[[:space:]]*//') formulae installed:$(tput sgr0)"
   brew list | col
 } # }}}2
 # }}}1
