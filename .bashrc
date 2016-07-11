@@ -179,16 +179,6 @@ brew_list () { # {{{2
   echo "$BOLD${COLORS[15]}$(brew list | wc -l | sed 's/^[[:space:]]*//') formulae installed:$END"
   brew list | col
 } # }}}2
-brew_random () { # {{{2
-  local formulae=($(brew search | grep -v /))
-  local desc=$(brew desc "${formulae[$((RANDOM %= ${#formulae[@]}))]}" 2>&1)
-  local name=$(echo "$desc" | cut -d: -f1)
-  local info=$(echo "$desc" | cut -d: -f2-)
-  [[ "$name" != "Error" ]] && printf "${COLORS[15]}Random Homebrew formula:$END\n${COLORS[45]}$name:$END$info\n\n" > ~/.random_brew_cmd
-}
-cat ~/.random_brew_cmd
-(brew_random &)
-# }}}2
 # }}}1
 
 # fzf stuff {{{1
