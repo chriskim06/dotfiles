@@ -146,6 +146,16 @@ brew_list () { # {{{2
   printf "\e[1m\e[38;5;15m$(brew list | wc -l | sed 's/^[[:space:]]*//') formulae installed:\e[0m\n"
   brew list | col
 } # }}}2
+brew_random () { # {{{2
+  local formulae=($(brew search | grep -v /))
+  local desc=$(brew desc "${formulae[$((RANDOM %= ${#formulae[@]}))]}" 2>&1)
+  local name=$(echo "$desc" | cut -d: -f1)
+  local info=$(echo "$desc" | cut -d: -f2-)
+  [[ "$name" != "Error" ]] && printf "Random Homebrew formula\n$name:$info\n" > ~/.random_brew_cmd
+}
+cat ~/.random_brew_cmd
+(brew_random &)
+# }}}2
 # }}}1
 
 # fzf stuff {{{1
