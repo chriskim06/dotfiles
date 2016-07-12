@@ -8,7 +8,7 @@
 # }}}2
 # Bash prompt {{{2
 bash_prompt () {
-  PS1="\[$(tput bold)\]\[$(tput setaf 229)\][\A] \[$(tput setaf 33)\]\u\[$(tput setaf 15)\]:\[$(tput setaf 33)\]\W\[$(tput setaf 48)\]\$(__git_ps1) \[$(tput setaf 15)\]\$\[$(tput sgr0)\] "
+  PS1="\[\e[1m\]\[\e[38;5;229m\][\A] \[\e[38;5;33m\]\u\[\e[38;5;15m\]:\[\e[38;5;33m\]\W\[\e[38;5;48m\]\$(__git_ps1) \[\e[38;5;15m\]\$\[\e[0m\] "
 }
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prompt"
 # }}}2
@@ -23,9 +23,12 @@ shopt -s histappend
 color () { # {{{2
   for code in {0..255}; do
     val="$(printf '%03d' $code)"
-    echo -n "$(tput setab $code)  $(tput setaf 0)$val  $(tput sgr0)|  $(tput setaf $code)$val$(tput sgr0)  |"
+    printf "\e[48;5;${code}m  \e[38;5;0m$val  \e[0m|  \e[38;5;${code}m$val\e[0m  |"
     [[ $((($code + 1) % 8)) -eq 0 ]] && echo
   done
+  printf "%s\n" '\e[38;5;COLOR_CODEm is a foreground color'
+  printf "%s\n" '\e[48;5;COLOR_CODEm is a background color'
+  printf "%s\n" '\e[1m is bold and \e[0m ends a sequence'
 } # }}}2
 = () { # {{{2
   calculator
@@ -89,7 +92,7 @@ stash () { # {{{3
       branch=${stash#*: }
       branch=${branch%%: *}
       msg=${stash##*: }
-      echo "$(tput bold)$(tput setaf 227)$num: $(tput setaf 14)$branch: $(tput setaf 15)$msg$(tput sgr0)"
+      printf "\e[1m\e[38;5;227m$num: \e[38;5;14m$branch: \e[38;5;15m$msg\e[0m\n"
     done
   else
     git stash $*
@@ -118,9 +121,9 @@ branches () { # {{{3
     clean_branch_name=${branch//\*\ /}
     description=$(git config branch.$clean_branch_name.description)
     if [[ "${branch::1}" == "*" ]]; then
-      printf "* $(tput setaf 10)$clean_branch_name$(tput sgr0) $(tput setaf 252)$description$(tput sgr0)\n"
+      printf "* \e[38;5;10m$clean_branch_name\e[0m \e[38;5;252m$description\e[0m\n"
     else
-      printf "  $branch $(tput setaf 252)$description$(tput sgr0)\n"
+      printf "  $branch \e[38;5;252m$description\e[0m\n"
     fi
   done <<< "$(git branch --list)"
 } # }}}3
@@ -167,7 +170,7 @@ complete -F _pg pg
 # Homebrew stuff {{{1
 [[ -f ~/bin/completion/brew-custom-completion ]] && source ~/bin/completion/brew-custom-completion
 brew_list () { # {{{2
-  echo "$(tput bold)$(tput setaf 15)$(brew list | wc -l | sed 's/^[[:space:]]*//') formulae installed:$(tput sgr0)"
+  printf "\e[1m\e[38;5;15m$(brew list | wc -l | sed 's/^[[:space:]]*//') formulae installed:\e[0m\n"
   brew list | col
 } # }}}2
 # }}}1
@@ -176,12 +179,12 @@ brew_list () { # {{{2
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 [[ $- =~ .*i.* ]] && bind '"\e[Z": "\C-r"'
 # Functions {{{2
-fd () { # {{{2
+fd () {
   local current=$(pwd)
   cd "$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m)"
   [[ "$(pwd)" != "$current" ]] && pwd
-} # }}}2
-fshow () { # {{{2
+}
+fshow () {
   git log --graph --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)' --all |
   fzf --ansi --no-sort --tiebreak=index \
       --bind "ctrl-m:execute:
@@ -189,7 +192,6 @@ fshow () { # {{{2
                 xargs -I % sh -c 'git show %') << 'FZF-EOF'
                 {}
 FZF-EOF"
-} # }}}2
-# }}}2
+}
 # }}}1
 
