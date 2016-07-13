@@ -3,7 +3,7 @@
 #
 
 # Environment variables
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export JAVA_HOME=`/usr/libexec/java_home`
 export M2_HOME=/usr/local/Cellar/maven/3.3.9/libexec
 export M2=M2_HOME/bin
 export PATH=$PATH:$M2:$HOME/.node/bin:$HOME/bin
