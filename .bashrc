@@ -32,15 +32,14 @@ color () { # {{{2
   calculator
 } # }}}2
 man () { # {{{2
-  env \
-  LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-  LESS_TERMCAP_md=$(printf "\e[1;31m") \
-  LESS_TERMCAP_me=$(printf "\e[0m") \
-  LESS_TERMCAP_se=$(printf "\e[0m") \
-  LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-  LESS_TERMCAP_ue=$(printf "\e[0m") \
-  LESS_TERMCAP_us=$(printf "\e[1;32m") \
-    man "$@"
+  command man -P "less +Gg" "$@"
+} # }}}2
+bro () { # {{{2
+  if [[ $# -eq 1 && ! "$1" =~ ^help|-h|--help$ ]]; then
+    command bro $1 | less -~ +Gg
+  else
+    command bro -h
+  fi
 } # }}}2
 # }}}1
 
@@ -69,7 +68,7 @@ alias gf='git fetch'
 alias gk='git checkout'
 alias gc='git commit'
 alias gl='git lg'
-alias gs='git number'
+alias gs='git number -uall | sed "/^$/d"'
 alias gu='git unstage'
 alias discard='git discard'
 alias delete='git delete'
@@ -80,14 +79,9 @@ alias staged='git staged'
 # Functions {{{2
 stash () { # {{{3
   if [[ $# -eq 0 ]]; then
-    local IFS=$'\n'
-    for stash in $(git stash list); do
-      num=${stash%%: *}
-      branch=${stash#*: }
-      branch=${branch%%: *}
-      msg=${stash##*: }
-      printf "\e[1m\e[38;5;227m$num: \e[38;5;14m$branch: \e[38;5;15m$msg\e[0m\n"
-    done
+    git stash list --pretty="%C(bold 227)%gd %C(bold 14)<%ar> %C(bold 15)%gs" | cat
+  elif [[ $# -eq 1 && "$1" == "list" ]]; then
+    fstash
   else
     git stash $*
   fi
@@ -162,20 +156,32 @@ cat ~/.random_brew_cmd
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 [[ $- =~ .*i.* ]] && bind '"\e[Z": "\C-r"'
 # Functions {{{2
-fd () {
-  local current=$(pwd)
-  cd "$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m)"
-  [[ "$(pwd)" != "$current" ]] && pwd
-}
-fshow () {
+fshow () { # {{{3
   git log --graph --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)' --all |
   fzf --ansi --no-sort --tiebreak=index \
-      --bind "ctrl-m:execute:
-                (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show %') << 'FZF-EOF'
-                {}
-FZF-EOF"
-}
+    --bind "ctrl-m:execute:
+  (grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show %') << 'FZF-EOF'
+  {}
+  FZF-EOF"
+} # }}}3
+fstash() { # {{{3
+  local out q k sha
+  while out=$(git stash list --pretty="%C(bold 227)%gd %C(bold 14)<%ar> %C(bold 15)%gs" | fzf --ansi --no-sort --print-query --expect=ctrl-d,ctrl-p); do
+    mapfile -t out <<< "$out"
+    k="${out[1]}"
+    stash_id="${out[-1]}"
+    stash_id="${stash_id%% *}"
+    [[ -z "$stash_id" ]] && continue
+    if [[ "$k" == 'ctrl-d' ]]; then
+      git stash drop $stash_id
+    elif [[ "$k" == 'ctrl-p' ]]; then
+      git stash pop $stash_id
+      break;
+    else
+      git stash show -p $stash_id
+    fi
+  done
+} # }}}3
 # }}}2
 # }}}1
 
