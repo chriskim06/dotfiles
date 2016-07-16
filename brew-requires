@@ -8,24 +8,22 @@ _brew_requires_thread () {
   if [[ $# -ne 2 ]]; then
     return 0
   fi
-  info=$(brew info $1 | sed -e '1,/==> Dependencies/ d' -e '/==> Options/,$ d')
-  if [[ ! -z $info && $info == *"$2"* ]]; then
+  info=$(brew info $1 | sed -e '1,/==> Dependencies/ d' -e '/==> Options/,$ d' -e '/==> Caveats/,$ d' | grep "$2")
+  if [[ ! -z $info ]]; then
     IFS=$'\n'
     deps=($info)
-    groups="$(tput bold)$(tput setaf 9)"
+    groups="\e[1;38;5;9m"
     for i in "${deps[@]}"; do
-      if [[ $i == *"$2"* ]]; then
-        groups="$groups${i%%:*}, "
-      fi
+      groups="$groups${i%%:*}, "
     done
-    echo "$(tput bold)$(tput setaf 15)$1$(tput sgr0) $(tput setaf 15)- ${groups%, }$(tput sgr0)"
+    printf "\e[1;38;5;15m$1\e[0m \e[1;38;5;15m- ${groups%, }\e[0m\n"
   fi
 }
 export -f _brew_requires_thread
 
 if [[ $# -ne 1 ]]; then
-  echo "usage: brew requires <formula>"
+  printf "usage: brew requires <package name>\n"
   return 0
 fi
-echo "Installed formulae that depend on $(tput bold)$(tput setaf 47)$1$(tput setaf 15)...$(tput sgr0)"
+printf "Installed formulae that depend on \e[1;38;5;47m$1\e[0m...\n"
 parallel --no-notice -k _brew_requires_thread ::: $(\ls $(brew --cellar)) ::: $1

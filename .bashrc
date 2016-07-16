@@ -10,7 +10,9 @@ down=$(printf "\xe2\x86\x93\x0a")
 check=$(printf "\xe2\x9c\x94\x0a")
 bash_prompt () {
   gp=$(__git_ps1 " [%s]")
-  if [[ "$gp" =~ ^.*\+[0-9]*\]$ ]]; then
+  if [[ "$gp" =~ ^.*\|(MERGING|REBASE).*$ ]]; then
+    color="\e[38;5;15m"
+  elif [[ "$gp" =~ ^.*\+[0-9]*\]$ ]]; then
     color="\e[38;5;51m"
   elif [[ "$gp" =~ ^.*-[0-9]*\]$ ]]; then
     color="\e[38;5;196m"
@@ -21,6 +23,8 @@ bash_prompt () {
   fi
   if [[ -z "$gp" ]]; then
     prompt=""
+  elif [[ $gp == *"|REBASE"* ]]; then
+    prompt=$gp
   elif [[ $gp == *"u=]" ]]; then
     prompt=$(printf "%s" "$gp" | sed "s/\(.*\)u=]/\1u "$check"]/g")
   else
@@ -44,7 +48,7 @@ color () { # {{{2
   for code in {0..255}; do
     val="$(printf '%03d' $code)"
     printf "\e[48;5;${code}m  \e[38;5;0m$val  \e[0m|  \e[38;5;${code}m$val\e[0m  |"
-    [[ $((($code + 1) % 8)) -eq 0 ]] && echo
+    [[ $((($code + 1) % 8)) -eq 0 ]] && printf "\n"
   done
   printf "%s\n" '\e[38;5;COLOR_CODEm is a foreground color'
   printf "%s\n" '\e[48;5;COLOR_CODEm is a background color'

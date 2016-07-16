@@ -5,17 +5,16 @@
 #
 
 if [[ $# -eq 0 ]]; then
-  echo "Usage: git discard <file>..."
+  printf "Usage: git discard <file>...\n"
 else
   files=""
   for i in "$@"; do
     files=$(git list $i | sed "s/"$'\E\[1;31m'"//g")" $files"
   done
   if ! [[ -z "$files" ]]; then
-    echo "Discarding changes to: $files"
+    printf "Discarding changes to: $files\n"
     git checkout -- $files
   fi
   git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
-  echo
 fi
 
