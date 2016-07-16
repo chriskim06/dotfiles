@@ -5,38 +5,45 @@
 #
 
 if [[ $# -eq 0 ]]; then
-  echo "Usage: git delete <file>..."
+  printf "Usage: git delete <file>...\n"
 elif [[ $# -eq 1 && "$1" == "." ]]; then
-  echo "Not allowed to delete all files at once"
+  printf "Not allowed to delete all files at once\n"
 else
-  remove=""
-  unable=""
-  declare -A staged
+  root="$(git rev-parse --show-toplevel)"
+  declare -A staged workingcopy
   for f in $(git diff --name-only --cached); do
-    staged[$f]="$f"
+    staged[$root/$f]="$root/$f"
   done
-  declare -A workingcopy
-  for f in $(git status --porcelain | cut -c4-); do
-    workingcopy[$f]="$f"
+  for f in $(git status -uall --porcelain | cut -c4-); do
+    workingcopy[$root/$f]="$root/$f"
   done
+  files=()
   for i in "$@"; do
-    fname=$(git list $i | sed "s/"$'\E\[1;31m'"//g")
-    if [[ ${staged[$fname]} ]]; then
-      unable="$fname $unable"
-    elif [[ ${workingcopy[$fname]} ]]; then
-      remove="$fname $remove"
+    if [[ $i == *"-"* ]]; then
+      IFS='-' read -ra range <<< "$i"
+      re='^[0-9]+$'
+      if [[ ${#range[@]} -eq 2 && ${range[0]} =~ $re && ${range[1]} =~ $re ]]; then
+        for j in $(seq ${range[0]} ${range[1]}); do
+          fname=$(git list $j | sed "s/"$'\E\[1;31m'"//g")
+          files+=("$(printf "$(cd "$(dirname "$fname")"; pwd)/$(basename "$fname")")")
+        done
+        continue
+      fi
     fi
+    fname=$(git list $i | sed "s/"$'\E\[1;31m'"//g")
+    files+=("$(printf "$(cd "$(dirname "$fname")"; pwd)/$(basename "$fname")")")
   done
-  if ! [[ -z "$unable" ]]; then
-    echo "Unable to remove the following (unstage first):"
-    echo "$unable" | tr ' ' '\n'
-    return 0
+  printf "Confirm deleting:\n$(printf "${files[*]}" | tr ' ' '\n' | sed 's/^/  /g')\n"
+  read -e -r -p "  [y/n]: " choice && printf "\n"
+  if [[ "$choice" == "y" ]]; then
+    for i in "${files[@]}"; do
+      if [[ ${staged[$i]} ]]; then
+        git reset HEAD "$i" > /dev/null
+        git number -c rm "$i" > /dev/null
+      elif [[ ${workingcopy[$i]} ]]; then
+        git number -c rm "$i" > /dev/null
+      fi
+    done
   fi
-  if ! [[ -z "$remove" ]]; then
-    echo "Deleting $remove"
-    git number -c rm "$remove"
-  fi
-  git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
-  echo
+  git number -uall | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
 fi
-

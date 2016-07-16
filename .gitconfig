@@ -66,6 +66,6 @@
 	untracked = red bold
 	unmerged = white red bold
 [pager]
-	diff = diff-so-fancy | less -aiRs --tabs=4
-	show = diff-so-fancy | less -aiRsS --tabs=4
+	diff = diff-so-fancy | less +Gg
+	show = diff-so-fancy | less +Gg
 	log = less -aiRS
