@@ -44,7 +44,7 @@ color () { # {{{2
   for code in {0..255}; do
     val="$(printf '%03d' $code)"
     printf "\e[48;5;${code}m  \e[38;5;0m$val  \e[0m|  \e[38;5;${code}m$val\e[0m  |"
-    [[ $((($code + 1) % 8)) -eq 0 ]] && echo
+    [[ $((($code + 1) % 8)) -eq 0 ]] && printf "\n"
   done
   printf "%s\n" '\e[38;5;COLOR_CODEm is a foreground color'
   printf "%s\n" '\e[48;5;COLOR_CODEm is a background color'
@@ -110,7 +110,7 @@ stash () { # {{{3
 } # }}}3
 ga () { # {{{3
   if [[ $# -eq 0 ]]; then
-    echo "Choose files to stage for commit"
+    printf "Choose files to stage for commit\n"
   else
     git add $(git list $@ | sed "s/"$'\E\[1;31m'"//g")
     git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
@@ -165,8 +165,8 @@ brew_list () { # {{{2
 brew_random () { # {{{2
   local formulae=($(brew search | grep -v /))
   local desc=$(brew desc "${formulae[$((RANDOM %= ${#formulae[@]}))]}" 2>&1)
-  local name=$(echo "$desc" | cut -d: -f1)
-  local info=$(echo "$desc" | cut -d: -f2-)
+  local name=$(printf "$desc" | cut -d: -f1)
+  local info=$(printf "$desc" | cut -d: -f2-)
   [[ "$name" != "Error" ]] && printf "Random Homebrew formula\n$name:$info\n" > ~/.random_brew_cmd
 }
 cat ~/.random_brew_cmd

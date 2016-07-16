@@ -15,7 +15,7 @@ _git_completion () {
       COMPREPLY=($(compgen -W "$gitcmds $(__git_aliases) --help" -- ${cur}))
       ;;
     *)
-      local cmd="$(echo "_git_${COMP_WORDS[1]}" | tr '-' '_')"
+      local cmd="$(printf "_git_${COMP_WORDS[1]}" | tr '-' '_')"
       if [[ "$(type -t $cmd)" == "function" ]]; then
         $cmd
       else

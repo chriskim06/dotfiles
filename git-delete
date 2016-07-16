@@ -25,13 +25,13 @@ else
       if [[ ${#range[@]} -eq 2 && ${range[0]} =~ $re && ${range[1]} =~ $re ]]; then
         for j in $(seq ${range[0]} ${range[1]}); do
           fname=$(git list $j | sed "s/"$'\E\[1;31m'"//g")
-          files+=("$(echo "$(cd "$(dirname "$fname")"; pwd)/$(basename "$fname")")")
+          files+=("$(printf "$(cd "$(dirname "$fname")"; pwd)/$(basename "$fname")")")
         done
         continue
       fi
     fi
     fname=$(git list $i | sed "s/"$'\E\[1;31m'"//g")
-    files+=("$(echo "$(cd "$(dirname "$fname")"; pwd)/$(basename "$fname")")")
+    files+=("$(printf "$(cd "$(dirname "$fname")"; pwd)/$(basename "$fname")")")
   done
   printf "Confirm deleting:\n$(printf "${files[*]}" | tr ' ' '\n' | sed 's/^/  /g')\n"
   read -e -r -p "  [y/n]: " choice && printf "\n"
