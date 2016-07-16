@@ -68,4 +68,3 @@
 [pager]
 	diff = diff-so-fancy | less +Gg
 	show = diff-so-fancy | less +Gg
-	log = less -aiRS
