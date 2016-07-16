@@ -5,7 +5,7 @@
 #
 
 if [[ $# -eq 0 ]]; then
-  echo "Usage: git unstage <file>..."
+  printf "Usage: git unstage <file>...\n"
 else
   if ! [[ -z "$(git show-ref --head)" ]]; then
     git reset HEAD $(git list $@ | sed "s/"$'\E\[1;31m'"//g") > /dev/null
@@ -13,6 +13,5 @@ else
     git rm -r --cached  $(git list $@ | sed "s/"$'\E\[1;31m'"//g") > /dev/null
   fi
   git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
-  echo
 fi
 
