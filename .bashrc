@@ -18,7 +18,7 @@ bash_prompt () {
   else
     color="\e[38;5;48m"
   fi
-  PS1="\[\e[1m\]\[\e[38;5;229m\]\A \[\e[38;5;33m\]\u\[\e[38;5;15m\]:\[\e[38;5;33m\]\W\[$color\]$prompt \[\e[38;5;15m\]\$\[\e[0m\] "
+  PS1="\n# \[\e[1m\]\[\e[38;5;129m\]\A \[\e[38;5;229m\]- \[\e[38;5;67m\]\w\[$color\]$prompt \[\e[0m\]\n# \[\e[38;5;33m\]\u \[\e[38;5;229m\]\$ \[\e[0m\]"
 }
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prompt"
 # }}}2
