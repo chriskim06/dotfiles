@@ -8,7 +8,7 @@
 right=$(printf "\xee\x82\xb0\x0a")
 fgr="\e[38;5;"
 bgr="\e[48;5;"
-branch=$(printf "\xe2\x8e\x87\x0a")
+branch=$(printf "\xee\x82\xa0\x0a")
 bash_prompt () {
   prompt="$branch $(__git_ps1 " %s")"
   if [[ "$prompt" =~ ^.*\|(MERGING|REBASE).*$ ]]; then
