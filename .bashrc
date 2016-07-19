@@ -23,7 +23,7 @@ bash_prompt () {
     else
       color=";5;42m"
     fi
-    last="\[\e[48$color\]\[\e[38;5;23m\]$right\[\e[48$color\]\[\e[38;5;15m\]  $branch $prompt \[\e[0m\]\[\e[38$color\]$right\[\e[0m\]"
+    last="\[\e[48$color\]\[\e[38;5;23m\]$right\[\e[48$color\]\[\e[38;5;15m\]  $branch$prompt \[\e[0m\]\[\e[38$color\]$right\[\e[0m\]"
   fi
   PS1="\n\[\e[1m\]\[\e[48;5;30m\]\[\e[38;5;15m\]  \u@\h \[\e[48;5;23m\]\[\e[38;5;30m\]$right\[\e[48;5;23m\]\[\e[38;5;15m\]  \w $last\n\[\e[48;5;32m\]\[\e[38;5;15m\]  \A \[\]\e[0m\[\e[38;5;32m\]$right \[\e[0m\]"
 }
