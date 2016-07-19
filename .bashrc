@@ -5,20 +5,32 @@
 # Initialization {{{1
 # Bash {{{2
 [[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
+right=$(printf "\xee\x82\xb0\x0a")
+fgr="\e[38;5;"
+bgr="\e[48;5;"
+branch=$(printf "\xe2\x8e\x87\x0a")
 bash_prompt () {
-  prompt=$(__git_ps1 " [%s]")
+  prompt="$branch $(__git_ps1 " %s")"
   if [[ "$prompt" =~ ^.*\|(MERGING|REBASE).*$ ]]; then
-    color="\e[38;5;15m"
-  elif [[ "$prompt" =~ ^.*-[0-9]*\]$ ]]; then
-    color="\e[38;5;196m"
-  elif [[ "$prompt" =~ ^.*\+[0-9]*\]$ ]]; then
-    color="\e[38;5;51m"
-  elif [[ "$prompt" =~ ^.*(%|\*).*\]$ ]]; then
-    color="\e[38;5;11m"
+    # color="\e[38;5;15m"
+    color="15m"
+  elif [[ "$prompt" =~ ^.*-[0-9]*$ ]]; then
+    # color="\e[38;5;196m"
+    color="196m"
+  elif [[ "$prompt" =~ ^.*\+[0-9]*$ ]]; then
+    # color="\e[38;5;51m"
+    color="34m"
+  elif [[ "$prompt" =~ ^.*(%|\*).*$ ]]; then
+    # color="\e[38;5;11m"
+    color="184m"
   else
-    color="\e[38;5;48m"
+    # color="\e[38;5;48m"
+    color="42m"
   fi
-  PS1="\n# \[\e[1m\]\[\e[38;5;129m\]\A \[\e[38;5;229m\]- \[\e[38;5;67m\]\w\[$color\]$prompt \[\e[0m\]\n# \[\e[38;5;33m\]\u \[\e[38;5;229m\]\$ \[\e[0m\]"
+  PS1="\n\[\e[1m\]\[\e[48;5;30m\]\[\e[38;5;15m\]  \u@\h \[\e[48;5;23m\]\[\e[38;5;30m\]$right\[\e[48;5;23m\]\[\e[38;5;15m\]  \w \[$bgr$color\]\[\e[38;5;23m\]$right\[$bgr$color\]\[\e[38;5;15m\]  $prompt \[\e[0m\]\[$fgr$color\]$right\[\e[0m\]\n\[\e[48;5;32m\]\[\e[38;5;15m\]  \A \[\]\e[0m\[\e[38;5;32m\]$right \[\e[0m\]"
+  # c=$(printf "\xe2\x9a\xa1\x0a")
+  # b=$(pmset -g batt | egrep "([0-9]+\%).*" -o | cut -f1 -d';')
+  # PS1="\n# \[\e[38;5;229m\][$b $c] \[\e[1m\]\[\e[38;5;129m\]\u\[\e[38;5;15m\]:\[\e[38;5;67m\]\w\[$color\]$prompt \[\e[0m\]\n# \[\e[38;5;33m\]\A \[\e[38;5;229m\]\$ \[\e[0m\]"
 }
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prompt"
 # }}}2
