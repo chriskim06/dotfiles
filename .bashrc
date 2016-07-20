@@ -5,30 +5,20 @@
 # Initialization {{{1
 # Bash {{{2
 [[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
-up=$(printf "\xe2\x86\x91\x0a")
-down=$(printf "\xe2\x86\x93\x0a")
-check=$(printf "\xe2\x9c\x94\x0a")
 bash_prompt () {
-  gp=$(__git_ps1 " [%s]")
-  if [[ "$gp" =~ ^.*\+[0-9]*\]$ ]]; then
-    color="\e[38;5;51m"
-  elif [[ "$gp" =~ ^.*-[0-9]*\]$ ]]; then
+  prompt=$(__git_ps1 " [%s]")
+  if [[ "$prompt" =~ ^.*\|(MERGING|REBASE).*$ ]]; then
+    color="\e[38;5;15m"
+  elif [[ "$prompt" =~ ^.*-[0-9]*\]$ ]]; then
     color="\e[38;5;196m"
-  elif [[ "$gp" =~ ^.*(%|\*).*\]$ ]]; then
+  elif [[ "$prompt" =~ ^.*\+[0-9]*\]$ ]]; then
+    color="\e[38;5;51m"
+  elif [[ "$prompt" =~ ^.*(%|\*).*\]$ ]]; then
     color="\e[38;5;11m"
   else
     color="\e[38;5;48m"
   fi
-  if [[ -z "$gp" ]]; then
-    prompt=""
-  elif [[ $gp == *"u=]" ]]; then
-    prompt=$(printf "%s" "$gp" | sed "s/\(.*\)u=]/\1u "$check"]/g")
-  else
-    prompt=$(printf "%s" "$gp" | sed "s/\(.*\)\+\(.*\)/\1"$up"\2/g; s/\(.*\)-\(.*\)/\1"$down"\2/g")
-  fi
   PS1="\[\e[1m\]\[\e[38;5;229m\]\A \[\e[38;5;33m\]\u\[\e[38;5;15m\]:\[\e[38;5;33m\]\W\[$color\]$prompt \[\e[38;5;15m\]\$\[\e[0m\] "
-  # PS1="\[\e[1m\]\[\e[38;5;229m\][\A] \[\e[38;5;33m\]\u\[\e[38;5;15m\]:\[\e[38;5;33m\]\W\[\e[38;5;48m\]\$(__git_ps1) \[\e[38;5;15m\]\$\[\e[0m\] "
-  # PS1="\[\e[1m\]\[\e[38;5;229m\]\A \[\e[38;5;33m\]\u\[\e[38;5;15m\]:\[\e[38;5;33m\]\W\[\e[38;5;48m\]\$(__git_ps1 " [%s]") \[\e[38;5;15m\]\$\[\e[0m\] "
 }
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prompt"
 # }}}2
@@ -182,9 +172,9 @@ fshow () { # {{{3
   git log --graph --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)' --all |
   fzf --ansi --no-sort --tiebreak=index \
     --bind "ctrl-m:execute:
-  (grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show %') << 'FZF-EOF'
-  {}
-  FZF-EOF"
+            (grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show %') << 'FZF-EOF'
+            {}
+FZF-EOF"
 } # }}}3
 fstash() { # {{{3
   local out q k sha
