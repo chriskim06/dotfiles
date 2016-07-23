@@ -17,6 +17,10 @@ if [[ $# -gt 0 ]]; then
     branch_local=''
     branch_origin=''
     read -er -a choices -p "    > " && printf "\n"
+    printf "\n# Are you sure you want to delete the following branches?\n"
+    printf "\t%s\n" "${choices[@]}"
+    read -erp "  Confirm [y/n]: " confirm && printf "\n"
+    [[ ! "$confirm" =~ ^y|Y ]] && printf "Not deleting branches\n" && exit 0
     for i in "${choices[@]}"; do
       if [[ "$i" =~ \!$ ]]; then
         index="${i::-1}"
