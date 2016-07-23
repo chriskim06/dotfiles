@@ -101,6 +101,7 @@ alias pull='git pull'
 alias delete='git delete'
 alias discard='git discard'
 alias staged='git staged'
+alias branches='git branches'
 # }}}2
 # Functions {{{2
 stash () { # {{{3
@@ -129,17 +130,6 @@ gconf () { # {{{3
 } # }}}3
 vn () { # {{{3
   [[ $# -eq 1 ]] && vim $(git list "$@" | sed "s/"$'\E\[1;31m'"//g")
-} # }}}3
-branches () { # {{{3
-  while read -r branch; do
-    clean_branch_name="${branch//\*\ /}"
-    description=$(git config branch.$clean_branch_name.description)
-    if [[ "${branch::1}" == "*" ]]; then
-      printf "* \e[38;5;10m$clean_branch_name\e[0m \e[38;5;252m$description\e[0m\n"
-    else
-      printf "  $branch \e[38;5;252m$description\e[0m\n"
-    fi
-  done <<< "$(git branch --list)"
 } # }}}3
 # }}}2
 # Completion {{{2

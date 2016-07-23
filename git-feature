@@ -7,14 +7,18 @@
 _get_jira_ticket_for_description () {
   name=$2
   pass=$3
+  jira_url=$4
   if [[ -z "$2" && -z "$3" ]]; then
     if ! [[ -z ${USERNAME+x} || -z ${PASSWORD+x} ]]; then
       name=$USERNAME
       pass=$PASSWORD
     fi
   fi
+  if [[ -z "$4" && ! -z ${JIRA+x} ]]; then
+    jira_url=$JIRA_URL
+  fi
   if ! [[ -z "$name" || -z "$pass" ]]; then
-    ticket=$(curl -s -u $name:$pass https://jira.fastspring.com/rest/api/2/issue/$1)
+    ticket=$(curl -s -u $name:$pass $jira_url$1)
     summary=$(printf "%s" "$ticket" | jq -M -r '.fields.summary')
     [[ ! -z "$summary" ]] && git config branch.$1.description "$summary"
   fi
@@ -39,15 +43,6 @@ else
     git push -u origin "$1"
     _get_jira_ticket_for_description "$@"
   fi
-  while read -r branch; do
-    clean_branch_name="${branch//\*\ /}"
-    description=$(git config branch.$clean_branch_name.description)
-    if [[ "${branch::1}" == "*" ]]; then
-      printf "* \e[38;5;10m$clean_branch_name\e[0m \e[38;5;252m$description\e[0m\n"
-    else
-      printf "  $branch \e[38;5;252m$description\e[0m\n"
-    fi
-  done <<< "$(git branch --list)"
-  printf "\n"
+  [[ ! -z "$(__git_list_all_commands | grep 'branches')" ]] && git branches
 fi
 
