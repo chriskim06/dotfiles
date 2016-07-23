@@ -4,28 +4,31 @@
 
 # Initialization {{{1
 # Bash {{{2
-[[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
+[[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
 right=$(printf "\xee\x82\xb0\x0a")
 symbol=$(printf "\xee\x82\xa0\x0a")
+f='\e[38;5;'
+b='\e[48;5;'
+e='\e[0m'
 bash_prompt () {
   prompt=$(__git_ps1 " %s")
   if [[ -z "$prompt" ]]; then
-    last="\[\e[0m\]\[\e[38;5;23m\]$right\[\e[0m\]"
+    last="\[$e\]\[${f}23m\]$right\[$e\]"
   else
     if [[ "$prompt" =~ ^.*\|(MERGING|REBASE).*$ ]]; then
-      color=";5;15m"
+      color="15m"
     elif [[ "$prompt" =~ ^.*-[0-9]*$ ]]; then
-      color=";5;196m"
+      color="196m"
     elif [[ "$prompt" =~ ^.*\+[0-9]*$ ]]; then
-      color=";5;34m"
+      color="34m"
     elif [[ "$prompt" =~ ^.*(%|\*).*$ ]]; then
-      color=";5;184m"
+      color="184m"
     else
-      color=";5;42m"
+      color="42m"
     fi
-    last="\[\e[48$color\]\[\e[38;5;23m\]$right\[\e[48$color\]\[\e[38;5;15m\]  $symbol$prompt \[\e[0m\]\[\e[38$color\]$right\[\e[0m\]"
+    last="\[${b}$color\]\[${f}23m\]$right\[${b}$color\]\[${f}15m\]  $symbol$prompt \[$e\]\[${f}$color\]$right\[$e\]"
   fi
-  PS1="\n\[\e[1m\]\[\e[48;5;30m\]\[\e[38;5;15m\]  \u@\h \[\e[48;5;23m\]\[\e[38;5;30m\]$right\[\e[48;5;23m\]\[\e[38;5;15m\]  \w $last\n\[\e[48;5;32m\]\[\e[38;5;15m\]  \A \[\e[0m\]\[\e[38;5;32m\]$right \[\e[0m\]"
+  PS1="\n\[\e[1m\]\[${b}30m\]\[${f}15m\]  \u@\h \[${b}23m\]\[${f}30m\]$right\[${b}23m\]\[${f}15m\]  \w $last\n\[${b}32m\]\[${f}15m\]  \A \[$e\]\[${f}32m\]$right \[$e\]"
 }
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prompt"
 # }}}2
@@ -38,14 +41,14 @@ shopt -s histappend
 
 # Random functions {{{1
 color () { # {{{2
+  printf "%s\n" '\e[38;5;COLOR_CODEm is a foreground color'
+  printf "%s\n" '\e[48;5;COLOR_CODEm is a background color'
+  printf "%s\n" '\e[1m is bold and \e[0m ends a sequence'
   for code in {0..255}; do
     val="$(printf '%03d' $code)"
     printf "\e[48;5;${code}m  \e[38;5;0m$val  \e[0m|  \e[38;5;${code}m$val\e[0m  |"
     [[ $((($code + 1) % 8)) -eq 0 ]] && printf "\n"
   done
-  printf "%s\n" '\e[38;5;COLOR_CODEm is a foreground color'
-  printf "%s\n" '\e[48;5;COLOR_CODEm is a background color'
-  printf "%s\n" '\e[1m is bold and \e[0m ends a sequence'
 } # }}}2
 = () { # {{{2
   calculator
@@ -55,7 +58,7 @@ man () { # {{{2
 } # }}}2
 bro () { # {{{2
   if [[ $# -eq 1 && ! "$1" =~ ^help|-h|--help$ ]]; then
-    command bro $1 | less -~ +Gg
+    command bro "$1" | less -~ +Gg
   else
     command bro -h
   fi
@@ -109,7 +112,7 @@ ga () { # {{{3
   if [[ $# -eq 0 ]]; then
     printf "Choose files to stage for commit\n"
   else
-    git add $(git list $@ | sed "s/"$'\E\[1;31m'"//g")
+    git add $(git list "$@" | sed "s/"$'\E\[1;31m'"//g")
     git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
   fi
 } # }}}3
@@ -121,11 +124,11 @@ gconf () { # {{{3
   fi
 } # }}}3
 vn () { # {{{3
-  [[ $# -eq 1 ]] && vim $(git list $@ | sed "s/"$'\E\[1;31m'"//g")
+  [[ $# -eq 1 ]] && vim $(git list "$@" | sed "s/"$'\E\[1;31m'"//g")
 } # }}}3
 branches () { # {{{3
   while read -r branch; do
-    clean_branch_name=${branch//\*\ /}
+    clean_branch_name="${branch//\*\ /}"
     description=$(git config branch.$clean_branch_name.description)
     if [[ "${branch::1}" == "*" ]]; then
       printf "* \e[38;5;10m$clean_branch_name\e[0m \e[38;5;252m$description\e[0m\n"
@@ -173,17 +176,15 @@ cat ~/.random_brew_cmd
 
 # fzf stuff {{{1
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
-[[ $- =~ .*i.* ]] && bind '"\e[Z": "\C-r"'
-# Functions {{{2
-fshow () { # {{{3
+fshow () { # {{{2
   git log --graph --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)' --all |
   fzf --ansi --no-sort --tiebreak=index \
     --bind "ctrl-m:execute:
             (grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show %') << 'FZF-EOF'
             {}
 FZF-EOF"
-} # }}}3
-fstash() { # {{{3
+} # }}}2
+fstash() { # {{{2
   local out q k sha
   while out=$(git stash list --pretty="%C(bold 227)%gd %C(bold 14)<%ar> %C(bold 15)%gs" | fzf --ansi --no-sort --print-query --expect=ctrl-d,ctrl-p); do
     mapfile -t out <<< "$out"
@@ -200,7 +201,6 @@ fstash() { # {{{3
       git stash show -p $stash_id
     fi
   done
-} # }}}3
-# }}}2
+} # }}}2
 # }}}1
 
