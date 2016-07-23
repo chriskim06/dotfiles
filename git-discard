@@ -12,7 +12,7 @@ else
     files=$(git list $i | sed "s/"$'\E\[1;31m'"//g")" $files"
   done
   if ! [[ -z "$files" ]]; then
-    printf "Discarding changes to: $files\n"
+    printf "Discarding changes to: $(printf "\n$files" | tr ' ' '\n')\n"
     git checkout -- $files
   fi
   git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d

@@ -28,8 +28,8 @@ else
   if [[ ! -z "$(git branch --all | grep $1)" ]]; then
     if [[ -z "$(git config branch.$1.description)" ]]; then
       read -e -r -p "$1 already exists but has no description. Try to get its JIRA summary? [y/n]: " choice && printf "\n"
-      if [[ "$choice" == "y" ]]; then
-        _get_jira_ticket_for_description $1 $2 $3
+      if [[ "$choice" =~ ^y|Y ]]; then
+        _get_jira_ticket_for_description "$@"
       fi
     else
       printf "$1 has already been created and has a description.\n"
@@ -37,10 +37,10 @@ else
   else
     git checkout -b "$1" origin/master
     git push -u origin "$1"
-    _get_jira_ticket_for_description $1 $2 $3
+    _get_jira_ticket_for_description "$@"
   fi
   while read -r branch; do
-    clean_branch_name=${branch//\*\ /}
+    clean_branch_name="${branch//\*\ /}"
     description=$(git config branch.$clean_branch_name.description)
     if [[ "${branch::1}" == "*" ]]; then
       printf "* \e[38;5;10m$clean_branch_name\e[0m \e[38;5;252m$description\e[0m\n"
