@@ -9,6 +9,7 @@ if [[ $# -gt 0 ]]; then
     branch_array=($(git branch --list | grep -v '*' | sed 's/^  //'))
     count=0
     for i in "${branch_array[@]}"; do
+      [[ "$i" == "master" ]] && continue
       printf "$count $(printf ' %.0s' $(seq 1 $((4 - ${#count})))) $i \e[38;5;255m$(git config branch.$i.description)\e[0m\n"
       count=$((count + 1))
     done
