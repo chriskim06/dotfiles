@@ -27,10 +27,10 @@ export LESS_TERMCAP_se=$(printf "\e[0m")
 export LESS_TERMCAP_so=$(printf "\e[1;48;5;128m")
 export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[1;38;5;11m")
-export LESS='-KQRSgis -#4 -P [?f%f:stdin.] ?lt?lbLines %lt-%lb..?L (%L).'
+export LESS='-KRSgis -#4 -P [?f%f:stdin.] ?lt?lbLines %lt-%lb..?L (%L).'
 
 # Load .bashrc
 if [[ -f $HOME/.bashrc ]]; then
-    source $HOME/.bashrc
+  source $HOME/.bashrc
 fi
 
