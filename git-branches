@@ -6,7 +6,7 @@
 
 if [[ $# -gt 0 ]]; then
   if [[ "$1" =~ ^-?(d|D) ]]; then
-    branch_array=($(git branch --list | grep -v '*' | sed 's/^  //'))
+    branch_array=($(git branch --list | grep -v "\*\|^..\(master\|develop\)$" | sed 's/^..//'))
     count=0
     for i in "${branch_array[@]}"; do
       [[ "$i" == "master" ]] && continue
