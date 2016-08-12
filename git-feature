@@ -5,27 +5,15 @@
 #
 
 _get_jira_ticket_for_description () {
-  name=$2
-  pass=$3
-  jira_url=$4
-  if [[ -z "$2" && -z "$3" ]]; then
-    if ! [[ -z ${USERNAME+x} || -z ${PASSWORD+x} ]]; then
-      name=$USERNAME
-      pass=$PASSWORD
-    fi
-  fi
-  if [[ -z "$4" && ! -z ${JIRA+x} ]]; then
-    jira_url=$JIRA_URL
-  fi
-  if ! [[ -z "$name" || -z "$pass" ]]; then
-    ticket=$(curl -s -u $name:$pass $jira_url$1)
+  if [[ -z "$USERNAME" || -z "$PASSWORD" || -z "$JIRA_URL" ]]; then
+    ticket=$(curl -s -u $USERNAME:$PASSWORD $JIRA_URL$1)
     summary=$(printf "%s" "$ticket" | jq -M -r '.fields.summary')
     [[ ! -z "$summary" ]] && git config branch.$1.description "$summary"
   fi
 }
 
 if [[ $# -eq 0 ]]; then
-  printf "Usage: git feature <branch> [<username> <password>]\n"
+  printf "Usage:  git feature <ticket_id>\n\tYou should export \$USERNAME, \$PASSWORD, and \$JIRA_URL environment variables for this script\n"
 elif [[ -z "$(type -t jq)" ]]; then
   printf "This script requires jq to be installed in order to parse the JSON response from JIRA.\n"
 else
@@ -43,6 +31,6 @@ else
     git push -u origin "$1"
     _get_jira_ticket_for_description "$@"
   fi
-  [[ ! -z "$(__git_list_all_commands | grep 'branches')" ]] && git branches
+  git branches
 fi
 
