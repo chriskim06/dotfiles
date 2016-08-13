@@ -1,18 +1,35 @@
 #!/usr/bin/env bash
 
-if [[ $# -eq 0 ]]; then
-  printf "Usage: git feature <branch> [<username> <password>]\n"
+#
+# git-feature
+#
+
+_get_jira_ticket_for_description () {
+  ticket=$(curl -s -u $USERNAME:$PASSWORD $JIRA_URL$1)
+  summary=$(printf "%s" "$ticket" | jq -M -r '.fields.summary')
+  [[ ! -z "$summary" ]] && git config branch.$1.description "$summary"
+}
+
+if [[ $# -ne 1 ]]; then
+  printf "Usage:  git feature <ticket_id>\n\tThis script uses \$USERNAME, \$PASSWORD, and \$JIRA_URL environment variables\n"
+elif [[ -z "$(type -t jq)" ]]; then
+  printf "This script requires jq to be installed in order to parse the JSON response from JIRA.\n"
+elif [[ -z "$USERNAME" || -z "$PASSWORD" || -z "$JIRA_URL" ]]; then
+  printf "Must export \$USERNAME, \$PASSWORD, and \$JIRA_URL environment variables.\n"
 else
-  if ! [[ -z "$(git br -a | grep $1)" ]]; then
-    printf "$1 has already been created\n"
+  if [[ ! -z "$(git branch --all | grep $1)" ]]; then
+    if [[ -z "$(git config branch.$1.description)" ]]; then
+      read -e -r -p "$1 already exists but has no description. Try to get its JIRA summary? [y/n]: " choice && printf "\n"
+      if [[ "$choice" =~ ^y|Y ]]; then
+        _get_jira_ticket_for_description "$1"
+      fi
+    else
+      printf "$1 has already been created and has a description.\n"
+    fi
   else
     git checkout -b "$1" origin/master
     git push -u origin "$1"
-    if ! [[ -z "$2" || -z "$3" ]]; then
-      ticket=$(curl -s -u $2:$3 https://jira.fastspring.com/rest/api/2/issue/$1)
-      summary=$(printf "$ticket" | awk -F"[,:}]" '{for(i=1;i<=NF;i++){if($i~/\042'summary'\042/){print $(i+1)}}}' | tr -d '"' | sed -n 1p)
-      ! [[ -z "$summary" ]] && git config branch.$1.description "$summary"
-    fi
+    _get_jira_ticket_for_description "$1"
   fi
+  [[ ! -z "$(type -p 'git-branches')" ]] && git branches
 fi
-
