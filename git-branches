@@ -35,8 +35,8 @@ if [[ $# -gt 0 ]]; then
         [[ "$?" -ne 0 ]] && branch_local=$branch_local"\n$br"
       fi
     done
-    [[ ! -z "$branch_local" ]] && printf "Failed to delete the following branches locally:$branch_local\n"
-    [[ ! -z "$branch_origin" ]] && printf "Failed to delete the following branches from origin:$branch_origin\n"
+    [[ -n "$branch_local" ]] && printf "Failed to delete the following branches locally:$branch_local\n"
+    [[ -n "$branch_origin" ]] && printf "Failed to delete the following branches from origin:$branch_origin\n"
   else
     printf "# This command lists your branches and their descriptions next to them.\n"
     printf "# usage: git branches [-d|-h]\n# \t[-d]: Interactively delete your branches\n# \t[-h]: Print help text\n"

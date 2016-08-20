@@ -5,9 +5,11 @@
 #
 
 _get_jira_ticket_for_description () {
-  ticket=$(curl -s -u $USERNAME:$PASSWORD $JIRA_URL$1)
-  summary=$(printf "%s" "$ticket" | jq -M -r '.fields.summary')
-  [[ ! -z "$summary" ]] && git config branch.$1.description "$summary"
+  if [[ -n "$USERNAME" || -n "$PASSWORD" || -n "$JIRA_URL" ]]; then
+    ticket=$(curl -s -u $USERNAME:$PASSWORD $JIRA_URL$1)
+    summary=$(printf "%s" "$ticket" | jq -M -r '.fields.summary')
+    [[ -n "$summary" ]] && git config branch.$1.description "$summary"
+  fi
 }
 
 if [[ $# -ne 1 ]]; then
@@ -17,7 +19,7 @@ elif [[ -z "$(type -t jq)" ]]; then
 elif [[ -z "$USERNAME" || -z "$PASSWORD" || -z "$JIRA_URL" ]]; then
   printf "Must export \$USERNAME, \$PASSWORD, and \$JIRA_URL environment variables.\n"
 else
-  if [[ ! -z "$(git branch --all | grep $1)" ]]; then
+  if [[ -n "$(git branch --all | grep $1)" ]]; then
     if [[ -z "$(git config branch.$1.description)" ]]; then
       read -e -r -p "$1 already exists but has no description. Try to get its JIRA summary? [y/n]: " choice && printf "\n"
       if [[ "$choice" =~ ^y|Y ]]; then
@@ -31,5 +33,5 @@ else
     git push -u origin "$1"
     _get_jira_ticket_for_description "$1"
   fi
-  [[ ! -z "$(type -p 'git-branches')" ]] && git branches
+  [[ -n "$(type -p 'git-branches')" ]] && git branches
 fi

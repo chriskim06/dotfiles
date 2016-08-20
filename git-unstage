@@ -7,7 +7,7 @@
 if [[ $# -eq 0 ]]; then
   printf "Usage: git unstage <file>...\n"
 else
-  if ! [[ -z "$(git show-ref --head)" ]]; then
+  if [[ -n "$(git show-ref --head)" ]]; then
     git reset HEAD $(git list $@ | sed "s/"$'\E\[1;31m'"//g") > /dev/null
   else
     git rm -r --cached  $(git list $@ | sed "s/"$'\E\[1;31m'"//g") > /dev/null

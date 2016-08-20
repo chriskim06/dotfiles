@@ -11,7 +11,7 @@ else
   for i in "$@"; do
     files=$(git list $i | sed "s/"$'\E\[1;31m'"//g")" $files"
   done
-  if ! [[ -z "$files" ]]; then
+  if [[ -n "$files" ]]; then
     printf "Discarding changes to: $files\n"
     git checkout -- $files
   fi

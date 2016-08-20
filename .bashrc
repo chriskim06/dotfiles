@@ -16,7 +16,7 @@ bash_prompt () {
     last="\[$e\]\[${f}23m\]$right\[$e\]"
   else
     if [[ "$prompt" =~ ^.*\|(MERGING|REBASE).*$ ]]; then
-      color="15m"
+      color="165m"
     elif [[ "$prompt" =~ ^.*-[0-9]*$ ]]; then
       color="196m"
     elif [[ "$prompt" =~ ^.*\+[0-9]*$ ]]; then
