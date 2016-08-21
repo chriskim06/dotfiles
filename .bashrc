@@ -166,6 +166,7 @@ cat ~/.random_brew_cmd
 
 # fzf stuff {{{1
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+[[ $- =~ .*i.* ]] && bind '"\e[Z": " \C-e\C-u$(__fzf_history__)\e\C-e\e^"'
 fshow () { # {{{2
   git log --graph --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)' --all |
   fzf --ansi --no-sort --tiebreak=index \
