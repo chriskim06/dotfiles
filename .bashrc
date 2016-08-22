@@ -5,8 +5,8 @@
 # Initialization {{{1
 # Bash {{{2
 [[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
-right=$(printf "\xee\x82\xb0\x0a")
-symbol=$(printf "\xee\x82\xa0\x0a")
+right=$(printf "\ue0b0")
+symbol=$(printf "\ue0a0")
 f='\e[38;5;'
 b='\e[48;5;'
 e='\e[0m'
@@ -49,6 +49,9 @@ color () { # {{{2
     printf "\e[48;5;${code}m  \e[38;5;0m$val  \e[0m|  \e[38;5;${code}m$val\e[0m  |"
     [[ $((($code + 1) % 8)) -eq 0 ]] && printf "\n"
   done
+} # }}}2
+unicode () { # {{{2
+  printf '%x' "'$1"
 } # }}}2
 = () { # {{{2
   calculator
@@ -181,7 +184,7 @@ brew_list () { # {{{2
 
 # fzf stuff {{{1
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
-[[ $- =~ .*i.* ]] && bind '"\e[Z": "\C-r"'
+[[ $- =~ .*i.* ]] && bind '"\e[Z": " \C-e\C-u$(__fzf_history__)\e\C-e\e^"'
 fshow () { # {{{2
   git log --graph --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)' --all |
   fzf --ansi --no-sort --tiebreak=index \
