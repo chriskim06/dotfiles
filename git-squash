@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+#
+# git-squash
+#
+
+if [[ $# -eq 1 ]]; then
+  if [[ "$1" =~ ^[A-Za-z0-9]{7,}$ ]]; then
+    git reset --soft $1 && git commit
+    exit 0
+  elif [[ $1 -gt 1 && $1 -lt 10 ]] 2>/dev/null; then
+    git reset --soft HEAD~$1 && git commit
+    exit 0
+  fi
+fi
+printf "\nUsage: git squash [amount|commit]\n"
+printf "\tamount - number of commits to squash starting from HEAD (between 2 and 10)\n"
+printf "\tcommit - hash before commits to be squashed (hash length must be at least 7)\n"
+
