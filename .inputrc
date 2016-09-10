@@ -1,0 +1,13 @@
+#
+# .inputrc
+#
+
+# Make Tab autocomplete regardless of filename case
+set completion-ignore-case on
+
+# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files off
+
+# Use text that has already been typed as prefix for searching through commands
+"\e[B": history-search-forward
+"\e[A": history-search-backward
