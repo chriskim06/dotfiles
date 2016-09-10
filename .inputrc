@@ -5,9 +5,19 @@
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
 
+# List all matches in case multiple possible completions are possible
+set show-all-if-ambiguous on
+
 # Do not autocomplete hidden files unless the pattern explicitly begins with a dot
 set match-hidden-files off
+
+# Display possible completions using LS_COLORS
+set colored-stats on
 
 # Use text that has already been typed as prefix for searching through commands
 "\e[B": history-search-forward
 "\e[A": history-search-backward
+
+# Shift up/down to menu complete forward/backward
+"\e[1;2B": menu-complete-backward
+"\e[1;2A": menu-complete
