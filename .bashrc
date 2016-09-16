@@ -63,6 +63,11 @@ bro () { # {{{2
     command bro -h
   fi
 } # }}}2
+updateall () { # {{{2
+  brew update && brew upgrade
+  npm update -g
+  gem update
+} # }}}2
 # }}}1
 
 # Aliases {{{
