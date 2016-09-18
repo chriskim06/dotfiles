@@ -40,5 +40,6 @@
 - ruby
 - the_silver_searcher
 - thefuck
+- tmux
 - xz
 

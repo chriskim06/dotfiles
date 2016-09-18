@@ -3,6 +3,15 @@
 #
 
 # Initialization {{{1
+# Tmux {{{2
+if [[ -z "$TMUX" ]]; then
+  if tmux has -t main; then
+    tmux attach -t main
+  else
+    tmux new -s main
+  fi
+fi
+# }}}2
 # Bash {{{2
 [[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
 right=$(printf "\xee\x82\xb0\x0a")
