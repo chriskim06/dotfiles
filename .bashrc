@@ -198,5 +198,6 @@ fstash() { # {{{2
     fi
   done
 } # }}}2
+complete -F _fzf_path_completion -o default -o bashdefault vim
 # }}}1
 
