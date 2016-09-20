@@ -4,13 +4,8 @@
 
 # Initialization {{{1
 # Tmux {{{2
-if [[ -z "$TMUX" ]]; then
-  if tmux has -t main; then
-    tmux attach -t main
-  else
-    tmux new -s main
-  fi
-fi
+[[ $- != *i* ]] && return
+[[ -z "$TMUX" ]] && exec tmux
 # }}}2
 # Bash {{{2
 [[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
@@ -87,6 +82,7 @@ alias vimrc='cd ~/.vim/vimrc; pwd; ll'
 alias vbashrc='vim ~/config/.bashrc'
 alias config='cd ~/config; pwd; ll'
 alias soba='source ~/.bashrc'
+alias tmux='TERM=xterm-256color tmux'
 alias copy='pbcopy'
 alias ll='ls -lAh'
 alias ssh='ssh -o ServerAliveInterval=60'
