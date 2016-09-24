@@ -3,10 +3,6 @@
 #
 
 # Initialization {{{1
-# Tmux {{{2
-[[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux
-# }}}2
 # Bash {{{2
 [[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
 right=$(printf "\xee\x82\xb0\x0a")
