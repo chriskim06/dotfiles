@@ -36,6 +36,7 @@
 - postgresql
 - python3
 - readline
+- reattach-to-user-namespace
 - redis
 - ruby
 - the_silver_searcher

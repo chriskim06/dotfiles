@@ -65,6 +65,7 @@ bro () { # {{{2
 } # }}}2
 updateall () { # {{{2
   brew update && brew upgrade
+  brew cleanup
   npm update -g
   gem update
 } # }}}2
