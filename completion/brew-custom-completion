@@ -64,3 +64,5 @@ _brew () {
   esac
 }
 
+complete -F _brew brwe
+
