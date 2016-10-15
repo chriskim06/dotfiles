@@ -1,6 +1,13 @@
 [core]
   excludesfile = /Users/Chris/.gitignore_global
   editor = mvim -v
+[merge]
+  tool = mvimdiff
+[mergetool]
+  prompt = false
+[mergetool "mvimdiff"]
+  cmd = mvimdiff -v
+  trustExitCode = true
 [diff]
   tool = mvimdiff
   renames = copies
@@ -9,13 +16,6 @@
   prompt = false
 [difftool "mvimdiff"]
   cmd = mvimdiff -vR "$LOCAL" "$REMOTE"
-  trustExitCode = true
-[merge]
-  tool = mvimdiff
-[mergetool]
-  prompt = false
-[mergetool "mvimdiff"]
-  cmd = mvimdiff -v
   trustExitCode = true
 [user]
   name = Chris Kim
@@ -33,12 +33,15 @@
   br = branch
   co = commit
   amend = commit --amend
+  noworries = update-index --assume-unchanged
   mt = mergetool
   dt = difftool
   df = diff
   dnw = diff -w --ignore-blank-lines
   staged = diff --cached
   untracked = ls-files -o --exclude-standard
+[push]
+  default = simple
 [color]
   ui = auto
 [color "branch"]
