@@ -7,32 +7,53 @@
 if [[ $# -gt 0 ]]; then
   if [[ "$1" =~ ^-?(d|D) ]]; then
     branch_array=($(git branch --list | grep -v "\*\|^..\(master\|develop\)$" | sed 's/^..//'))
+    branch_list=''
     count=0
     for i in "${branch_array[@]}"; do
-      printf "$count $(printf ' %.0s' $(seq 1 $((4 - ${#count})))) $i \e[38;5;255m$(git config branch.$i.description)\e[0m\n"
+      branch_list+="$count $(printf ' %.0s' $(seq 1 $((4 - ${#count})))) $i \e[38;5;255m$(git config branch.$i.description)\e[0m\n"
       count=$((count + 1))
     done
+    count=$((count - 1))
+    printf "$branch_list"
     printf "\n# Enter the numbers of branches you want to delete separated by spaces. You may also add an"
     printf "\n# exclamation mark after a number if you want to delete it at origin too (e.g., 0 3! 6 7 9!).\n\n"
-    branch_local=''
-    branch_origin=''
     read -er -a choices -p "    > " && printf "\n"
     [[ "${choices[@]}" =~ [:alpha:] ]] && printf "Letters are not allowed\n" && exit 0
+    invalid=''
+    choice_names=()
+    for i in "${choices[@]}"; do
+      if [[ "$i" =~ ^[0-9]+\!$ ]]; then
+        index="${i::-1}"
+        [[ $index -gt $count ]] && invalid+="$i " && continue
+        choice_names+=("$(printf "$branch_list" | grep "^$index ") [!]")
+      elif [[ "$i" =~ ^[0-9]+$ ]]; then
+        [[ $i -gt $count ]] && invalid+="$i " && continue
+        choice_names+=("$(printf "$branch_list" | grep "^$i ")")
+      else
+        invalid+="$i "
+      fi
+    done
+    [[ -z "${choice_names[@]}" ]] && printf "Invalid branch choices\n" && exit 0
+    [[ -n "$invalid" ]] && printf "# Skipping invalid branch choices: $invalid"
     printf "\n# Are you sure you want to delete the following branches?\n"
-    printf "\t%s\n" "${choices[@]}"
+    printf "\t%s\n" "${choice_names[@]}"
     read -erp "  Confirm [y/n]: " confirm && printf "\n"
     [[ ! "$confirm" =~ ^y|Y ]] && printf "Not deleting branches\n" && exit 0
+    branch_local=''
+    branch_origin=''
     for i in "${choices[@]}"; do
-      if [[ "$i" =~ \!$ ]]; then
+      if [[ "$i" =~ ^[0-9]+\!$ ]]; then
         index="${i::-1}"
+        [[ $index -gt $count ]] && continue
         br="${branch_array[$index]}"
         git branch -d "$br"
-        [[ "$?" -ne 0 ]] && branch_local=$branch_local"\n$br"
+        [[ "$?" -ne 0 ]] && branch_local+="\n$br"
         git push origin --delete "$br"
-        [[ "$?" -ne 0 ]] && branch_origin=$branch_origin"\n$br"
-      else
+        [[ "$?" -ne 0 ]] && branch_origin+="\n$br"
+      elif [[ "$i" =~ ^[0-9]+$ ]]; then
+        [[ $i -gt $count ]] && continue
         git branch -d "${branch_array[$i]}"
-        [[ "$?" -ne 0 ]] && branch_local=$branch_local"\n$br"
+        [[ "$?" -ne 0 ]] && branch_local+="\n$br"
       fi
     done
     [[ -n "$branch_local" ]] && printf "Failed to delete the following branches locally:$branch_local\n"
@@ -40,7 +61,6 @@ if [[ $# -gt 0 ]]; then
   else
     printf "# This command lists your branches and their descriptions next to them.\n"
     printf "# usage: git branches [-d|-h]\n# \t[-d]: Interactively delete your branches\n# \t[-h]: Print help text\n"
-    exit 0
   fi
 else
   while read -r branch; do
