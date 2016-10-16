@@ -1,0 +1,6 @@
+#command
+` shell git show
+L undo-hilite
+
+#line-edit
+\t abort
