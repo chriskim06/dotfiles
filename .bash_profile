@@ -3,11 +3,12 @@
 #
 
 # Environment variables
-export JAVA_HOME=`/usr/libexec/java_home`
-export PATH=$PATH:$HOME/bin
-[[ -d /usr/local/Cellar/maven/3.3.9 ]] && export M2_HOME=/usr/local/Cellar/maven/3.3.9/libexec
-[[ -d /usr/local/Cellar/maven/3.3.9 ]] && export M2=$M2_HOME/bin
-[[ -d /usr/local/Cellar/maven/3.3.9 ]] && export PATH=$PATH:$M2
+export JAVA_HOME="`/usr/libexec/java_home`"
+export PATH="$PATH:$HOME/bin"
+[[ -d ~/.yarn/bin ]] && export PATH="$PATH:$HOME/.yarn/bin"
+[[ -d /usr/local/Cellar/maven/3.3.9 ]] && export M2_HOME="/usr/local/Cellar/maven/3.3.9/libexec"
+[[ -d /usr/local/Cellar/maven/3.3.9 ]] && export M2="$M2_HOME/bin"
+[[ -d /usr/local/Cellar/maven/3.3.9 ]] && export PATH="$PATH:$M2"
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1

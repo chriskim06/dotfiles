@@ -70,7 +70,7 @@ updateall () { # {{{2
   brew update && brew upgrade
   brew cleanup -s
   npm update -g
-  gem update
+  [[ -d ./node_modules ]] && npm update
 } # }}}2
 # }}}1
 
@@ -92,13 +92,14 @@ alias weather='curl http://wttr.in/'
 alias ndmon='nodemon'
 alias npmlist='npm list -g --depth=0'
 alias sslserver='http-server-basicauth-ssl ./ -p 9999 -S -C ~/.ssl/cert.pem -K ~/.ssl/key.pem -c-1 -d'
+[[ -d ~/practice ]] && alias practice='cd ~/practice && ll'
 [[ -d ~/workspace/fastspring-system ]] && alias work='cd ~/workspace/fastspring-system'
 [[ -d ~/workspace/fastspring-system ]] && alias clean='rm -r ~/workspace/fastspring-system/out && rm -r ~/workspace/fastspring-system/*/target'
 [[ -f ~/scripts/go ]] && alias manager='~/scripts/go -m'
 [[ -f ~/.private ]] && source ~/.private
 # }}}
 
-# Git Stuff # {{{1
+# Git stuff {{{1
 # Aliases {{{2
 alias gb='git branch'
 alias gf='git fetch'
@@ -163,6 +164,10 @@ __git_complete pull _git_pull
 __git_complete delete _git_delete
 __git_complete discard _git_discard
 # }}}2
+# }}}1
+
+# JavaScript stuff {{{1
+[[ -f ~/bin/completion/yarn-custom-completion ]] && source ~/bin/completion/yarn-custom-completion
 # }}}1
 
 # Postgres {{{1

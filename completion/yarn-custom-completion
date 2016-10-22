@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+#
+# Custom yarn completion values
+#
+
+_jq_keys () {
+  [[ -n "$(type -t jq)" && -f "package.json" ]] && echo "$(cat package.json | jq $@ | jq -r keys[] 2> /dev/null)"
+}
+
+_yarn () {
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  local cmd="${COMP_WORDS[COMP_CWORD - 1]}"
+  local cmds="add bin cache check clean config generate-lock-entry global info init install licenses link login \
+    logout ls outdated owner pack publish remove run self-update tag team unlink upgrade version why"
+  [[ $cmd == "yarn" ]] && COMPREPLY=($(compgen -W "$cmds help" -- "$cur")) && return
+  [[ $cmd != "help" && $cmds != *"$cmd"* ]] && return
+  case "$cmd" in
+    add)    COMPREPLY=($(compgen -W "--dev -h" -- "$cur")) ;;
+    config) COMPREPLY=($(compgen -W "get set delete list -h" -- "$cur")) ;;
+    global) COMPREPLY=($(compgen -W "add bin ls remove -h" -- "$cur")) ;;
+    help)   COMPREPLY=($(compgen -W "$cmds" -- "$cur")) ;;
+    remove) COMPREPLY=($(compgen -W "$(_jq_keys '.dependencies,.devDependencies') -h" -- "$cur")) ;;
+    run)    COMPREPLY=($(compgen -W "$(_jq_keys '.scripts') -h" -- "$cur")) ;;
+    *)      ;;
+  esac
+}
+complete -F _yarn yarn
+
