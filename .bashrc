@@ -186,11 +186,7 @@ _pg () { # {{{2
   local cur=${COMP_WORDS[COMP_CWORD]}
   COMPREPLY=($(compgen -W "commerce postgres" -- $cur))
 } # }}}2
-if [[ "$(type -t pgcli)" != "function" ]]; then
-  unset -f pg _pg
-else
-  complete -F _pg pg
-fi
+complete -F _pg pg
 # }}}1
 
 # Homebrew stuff {{{1
