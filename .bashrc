@@ -186,7 +186,11 @@ _pg () { # {{{2
   local cur=${COMP_WORDS[COMP_CWORD]}
   COMPREPLY=($(compgen -W "commerce postgres" -- $cur))
 } # }}}2
-complete -F _pg pg
+if [[ -z "$(type -t pgcli)" ]]; then
+  unset -f pg _pg
+else
+  complete -F _pg pg
+fi
 # }}}1
 
 # Homebrew stuff {{{1
@@ -196,14 +200,14 @@ brew_list () { # {{{2
   brew list
 } # }}}2
 brew_random () { # {{{2
-  local formulae=($(brew search | grep -v /))
-  local desc=$(brew desc "${formulae[$((RANDOM %= ${#formulae[@]}))]}" 2>&1)
-  local name=$(printf "$desc" | cut -d: -f1)
-  local info=$(printf "$desc" | cut -d: -f2-)
-  [[ "$name" != "Error" ]] && printf "Random Homebrew formula\n$name:$info\n" > ~/.random_brew_cmd
+  if [[ -n "$(type -t cowsay)" ]]; then
+    cat ~/.random_brew_cmd 2>/dev/null
+    local formulae=($(brew search | grep -v /))
+    local desc=$(brew desc "${formulae[$((RANDOM % ${#formulae[@]}))]}" 2>/dev/null)
+    [[ $? -eq 0 ]] && cowsay "$desc" > ~/.random_brew_cmd
+  fi
 }
-cat ~/.random_brew_cmd
-(brew_random &)
+[[ -n "$TMUX" ]] && (brew_random &)
 # }}}2
 # }}}1
 
