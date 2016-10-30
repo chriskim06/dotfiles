@@ -215,7 +215,8 @@ brew_random () { # {{{2
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 [[ $- =~ .*i.* ]] && bind '"\e[Z": " \C-e\C-u$(__fzf_history__)\e\C-e\e^"'
 fshow () { # {{{2
-  git lg | fzf --ansi --no-sort --tiebreak=index --bind "enter:execute:(echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show %')"
+  local d="$(date -v-1y +%F)"
+  git lg --since=\{"$d"\} | fzf --ansi --no-sort --tiebreak=index --bind "enter:execute:(echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show %')"
 } # }}}2
 fstash() { # {{{2
   local out q k sha

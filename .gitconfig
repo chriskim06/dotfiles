@@ -27,7 +27,7 @@
 [credential]
   helper = osxkeychain
 [alias]
-  lg = log --graph --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)' --all
+  lg = log --graph --color=always --pretty=format:'%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)'
   st = status
   ck = checkout
   br = branch
