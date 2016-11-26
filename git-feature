@@ -5,7 +5,9 @@
 #
 
 _get_jira_ticket_for_description () {
-  local summary=$(curl -s -u $USERNAME:$PASSWORD $JIRA_URL$1 | jq -M -r '.fields.summary')
+  local endpoint="$1"
+  [[ "$JIRA_URL" =~ /$ ]] && endpoint="$JIRA_URL$endpoint" || endpoint="$JIRA_URL/$endpoint"
+  local summary=$(curl -s -u $USERNAME:$PASSWORD $endpoint | jq -M -r '.fields.summary')
   if [[ -n "$summary" ]]; then
     git config branch.$1.description "$summary"
     [[ -n "$(type -p 'git-branches')" ]] && git branches
