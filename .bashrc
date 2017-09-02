@@ -6,6 +6,7 @@
 # Bash {{{2
 [[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
 bash_prompt () {
+  # Remember to install powerline fonts
   local e='\e[0m'
   local b='\e[48;5;'
   local f='\e[38;5;'
@@ -207,7 +208,7 @@ brew_random () { # {{{2
     [[ $? -eq 0 ]] && cowsay "$desc" > ~/.random_brew_cmd
   fi
 }
-[[ -n "$TMUX" ]] && (brew_random &)
+(brew_random &)
 # }}}2
 # }}}1
 
