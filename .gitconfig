@@ -1,21 +1,21 @@
 [core]
   excludesfile = ~/.gitignore_global
-  editor = mvim -v
+  editor = nvim
 [merge]
-  tool = mvimdiff
+  tool = vimdiff
 [mergetool]
   prompt = false
-[mergetool "mvimdiff"]
-  cmd = mvimdiff -v
+[mergetool "vimdiff"]
+  cmd = vimdiff
   trustExitCode = true
 [diff]
-  tool = mvimdiff
+  tool = vimdiff
   renames = copies
   compactionHeuristic = true
 [difftool]
   prompt = false
-[difftool "mvimdiff"]
-  cmd = mvimdiff -vR "$LOCAL" "$REMOTE"
+[difftool "vimdiff"]
+  cmd = vimdiff "$LOCAL" "$REMOTE"
   trustExitCode = true
 [user]
   name = Chris Kim

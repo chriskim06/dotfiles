@@ -77,7 +77,7 @@ updateall () { # {{{2
 
 # Aliases {{{
 alias ag='ag --hidden -p ~/.agignore'
-alias vim='mvim -v'
+alias vim='nvim'
 alias vv='vim ~/.vim/vimrc/.vimrc'
 alias vimrc='cd ~/.vim/vimrc; pwd; ll'
 alias vbashrc='vim ~/config/.bashrc'
