@@ -94,8 +94,6 @@ alias weather='curl http://wttr.in/'
 alias ndmon='nodemon'
 alias npmlist='npm list -g --depth=0'
 alias sslserver='http-server-basicauth-ssl ./ -p 9999 -S -C ~/.ssl/cert.pem -K ~/.ssl/key.pem -c-1 -d'
-[[ -d ~/practice ]] && alias practice='cd ~/practice && ll'
-[[ -f ~/scripts/go ]] && alias manager='~/scripts/go -m'
 [[ -f ~/.private ]] && source ~/.private
 # }}}
 
