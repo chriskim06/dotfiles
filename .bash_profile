@@ -4,7 +4,8 @@
 
 # Environment variables
 export JAVA_HOME="`/usr/libexec/java_home`"
-export PATH="$PATH:$HOME/bin"
+export GOPATH="~/go"
+export PATH="$PATH:$HOME/bin:${GOPATH//://bin:}/bin"
 [[ -d ~/.yarn/bin ]] && export PATH="$PATH:$HOME/.yarn/bin"
 [[ -d /usr/local/Cellar/maven/3.3.9 ]] && export M2_HOME="/usr/local/Cellar/maven/3.3.9/libexec"
 [[ -d /usr/local/Cellar/maven/3.3.9 ]] && export M2="$M2_HOME/bin"
