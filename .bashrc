@@ -78,8 +78,8 @@ updateall () { # {{{2
 # Aliases {{{
 alias ag='ag --hidden -p ~/.agignore'
 alias vim='nvim'
-alias vv='vim ~/.vim/vimrc/.vimrc'
-alias vimrc='cd ~/.vim/vimrc; pwd; ll'
+alias vv='vim ~/src/vimrc/.vimrc'
+alias vimrc='cd ~/src/vimrc; pwd; ll'
 alias vbashrc='vim ~/src/config/.bashrc'
 alias config='cd ~/src/config; pwd; ll'
 alias soba='source ~/.bashrc'
