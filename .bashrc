@@ -2,6 +2,9 @@
 # .bashrc
 #
 
+# tmux
+tmux new-session -A -s main 2>/dev/null
+
 # Initialization {{{1
 # Bash {{{2
 [[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
@@ -211,7 +214,6 @@ brew_random () { # {{{2
 
 # fzf stuff {{{1
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
-[[ $- =~ .*i.* ]] && bind '"\e[Z": " \C-e\C-u$(__fzf_history__)\e\C-e\e^"'
 fshow () { # {{{2
   local d="$(date -v-1y +%F)"
   git lg --since=\{"$d"\} | fzf --ansi --no-sort --tiebreak=index --bind "enter:execute:(echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show %')"
