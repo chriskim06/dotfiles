@@ -4,7 +4,7 @@
 
 # Environment variables
 export JAVA_HOME="`/usr/libexec/java_home`"
-export GOPATH="~/go"
+export GOPATH="$HOME/go"
 export PATH="$PATH:$HOME/bin:${GOPATH//://bin:}/bin"
 [[ -d ~/.yarn/bin ]] && export PATH="$PATH:$HOME/.yarn/bin"
 export GIT_PS1_SHOWDIRTYSTATE=1
