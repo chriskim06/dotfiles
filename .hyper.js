@@ -131,6 +131,15 @@ module.exports = {
   // to load it and avoid it being `npm install`ed
   localPlugins: [],
 
-  keymaps: {}
+  keymaps: {
+    "editor:moveBeginningLine": [
+      "alt+up",
+      "command+left"
+    ],
+    "editor:moveEndLine": [
+      "alt+down",
+      "command+right"
+    ]
+  }
 };
 
