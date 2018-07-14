@@ -87,16 +87,6 @@ module.exports = {
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
     // if left empty, your system's login shell will be used by default
-    //
-    // Windows
-    // - Make sure to use a full path if the binary name doesn't work
-    // - Remove `--login` in shellArgs
-    //
-    // Bash on Windows
-    // - Example: `C:\\Windows\\System32\\bash.exe`
-    //
-    // PowerShell on Windows
-    // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
     shell: '',
 
     // for setting shell arguments (i.e. for using interactive shellArgs: `['-i']`)
@@ -115,7 +105,13 @@ module.exports = {
     // if `true` (without backticks and without quotes), hyper will be set as the default protocol client for SSH
     defaultSSHApp: true,
 
-    modifierKeys: {altIsMeta: true}
+    modifierKeys: {
+      altIsMeta: true
+    },
+
+    materialBox: {
+      scheme: 'gruvbox-dark-hard'
+    }
   },
 
   // a list of plugins to fetch and install from npm
@@ -124,7 +120,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ['hyper-oceanic-next'],
+  plugins: ['hyper-material-box'],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
