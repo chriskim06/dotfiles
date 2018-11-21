@@ -8,6 +8,6 @@
 req="$(brew uses --installed --skip-recommended "$1" | sort)"
 build="$(comm -1 -3 <(printf "$req\n") <(brew uses --installed --include-build --skip-recommended "$1" | sort))"
 [[ -z "$req" && -z "$build" ]] && printf "\e[1;38;5;9m$1\e[0m is not required by any installed formulae.\n" && exit
-[[ -n "$req" ]] && printf "\e[1;38;5;9mRequired:\e[0m\n$req\n"
+[[ -n "$req" ]] && printf "\e[1;38;5;9mRequired by:\e[0m\n$req\n"
 [[ -n "$build" ]] && printf "\e[1;38;5;9mBuild:\e[0m\n$build\n"
 

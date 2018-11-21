@@ -39,6 +39,14 @@ export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prom
 complete -d cd
 eval "$(thefuck --alias)"
 shopt -s histappend
+
+if command -v bat >/dev/null; then
+  BAT_PATH=$(which bat)
+  function bat() {
+    $BAT_PATH --color always --theme=TwoDark --paging never "$@" | less
+  }
+fi
+complete -o default -F _fzf_path_completion bat
 # }}}2
 # }}}1
 
@@ -88,6 +96,7 @@ alias config='cd ~/src/dotfiles; pwd; ll'
 alias soba='source ~/.bashrc'
 alias dk='docker'
 alias dkc='docker-compose'
+alias dkcnc='docker-compose build --pull --no-cache'
 alias brwe='brew'
 alias copy='pbcopy'
 alias ll='ls -lAh'
@@ -99,6 +108,8 @@ alias weather='curl http://wttr.in/'
 alias ndmon='nodemon'
 alias npmlist='npm list -g --depth=0'
 alias sslserver='http-server-basicauth-ssl ./ -p 9999 -S -C ~/.ssl/cert.pem -K ~/.ssl/key.pem -c-1 -d'
+alias prune='docker system prune -f'
+alias pipup='pip3 list --outdated --format=freeze | grep -v "^\-e" | cut -d = -f 1 | xargs -n1 pip install -U'
 [[ -f ~/.private ]] && source ~/.private
 # }}}
 

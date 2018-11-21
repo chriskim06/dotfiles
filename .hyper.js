@@ -46,10 +46,10 @@ module.exports = {
     borderColor: '#333',
 
     // custom CSS to embed in the main window
-    css: '',
+    css: '.terms_terms { margin-top: 15px; }',
 
     // custom CSS to embed in the terminal window
-    termCSS: '',
+    termCSS: '.terms_terms { margin-top: 15px; }',
 
     // if you're using a Linux setup which show native menus, set to false
     // default: `true` on Linux, `true` on Windows, ignored on macOS
@@ -61,7 +61,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (CSS format, i.e.: `top right bottom left`)
-    padding: '0 5px 0 5px',
+    padding: '0 5px 1px 5px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
