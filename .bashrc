@@ -48,6 +48,19 @@ if command -v bat >/dev/null; then
   }
 fi
 complete -o default -F _fzf_path_completion bat
+
+color () { # {{{2
+  printf "%s\n" '\e[38;5;COLOR_CODEm is a foreground color'
+  printf "%s\n" '\e[48;5;COLOR_CODEm is a background color'
+  printf "%s\n" '\e[1m is bold and \e[0m ends a sequence'
+  local val
+  for code in {0..255}; do
+    val="$(printf '%03d' $code)"
+    printf "\e[48;5;${code}m  \e[38;5;0m$val  \e[0m|  \e[38;5;${code}m$val\e[0m  |"
+    [[ $((($code + 1) % 8)) -eq 0 ]] && printf "\n"
+  done
+} # }}}2
+
 bind '"\e[1;3C": forward-word'
 bind '"\e[1;3D": backward-word'
 bind '"\e[1;3A": beginning-of-line'
