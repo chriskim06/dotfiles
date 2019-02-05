@@ -68,3 +68,5 @@
 [pager]
   diff = diff-so-fancy | less +Gg
   show = diff-so-fancy | less +Gg
+[http]
+  sslverify = false

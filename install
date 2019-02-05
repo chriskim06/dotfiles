@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+#
+# install everything on Ubuntu
+#
+
+# symlink stuff
+CWD=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+ln -s $CWD/.bashrc ~
+ln -s $CWD/.bash_profile ~
+ln -s $CWD/.gitconfig ~
+ln -s $CWD/.agignore ~
+ln -s $CWD/.inputrc ~
+ln -s $CWD/.tmux.conf ~
+
+mkdir -p ~/bin/completion
+ln -s $CWD/git-* ~/bin
+ln -s $CWD/completion/* ~/bin/completion
+
+# install docker
+sudo apt update
+sudo apt install \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  gnupg-agent \
+  software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) \
+  stable"
+sudo apt install docker-ce
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+# install linuxbrew and stuff
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+brew install $(cat brew-formulae.txt)
+
