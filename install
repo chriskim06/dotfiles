@@ -39,3 +39,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 brew install $(cat brew-formulae.txt)
 
+# symlink vim stuff
+cd $CWD/vim
+[[ -f install ]] && ./install
+

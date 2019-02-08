@@ -1,0 +1,24 @@
+#
+# javascript snippets
+#
+
+snippet rp "return new Promise(...)" b
+return new Promise((resolve, reject) => {
+	${1}
+})
+endsnippet
+
+snippet ar "() => {...}"
+(${1}) => {
+	${2}
+}
+endsnippet
+
+snippet class "class name {...}"
+class ${1:name} {
+
+	constructor(${2}) {}
+	${3}
+}
+endsnippet
+
