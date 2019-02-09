@@ -190,14 +190,14 @@ complete -F _fzf_path_completion -o default -o bashdefault vim
 # }}}1
 
 # linuxbrew {{{1
-brew_random () {
-  if [[ -n "$(type -t cowsay)" ]]; then
-    cat ~/.random_brew_cmd 2>/dev/null
-    local formulae=($(brew search | grep -v /))
-    local desc=$(brew desc "${formulae[$((RANDOM % ${#formulae[@]}))]}" 2>/dev/null)
-    [[ $? -eq 0 ]] && cowsay "$desc" > ~/.random_brew_cmd
-  fi
-}
-(brew_random &)
+# brew_random () {
+#   if [[ -n "$(type -t cowsay)" ]]; then
+#     cat ~/.random_brew_cmd 2>/dev/null
+#     local formulae=($(brew search | grep -v /))
+#     local desc=$(brew desc "${formulae[$((RANDOM % ${#formulae[@]}))]}" 2>/dev/null)
+#     [[ $? -eq 0 ]] && cowsay "$desc" > ~/.random_brew_cmd
+#   fi
+# }
+# (brew_random &)
 # }}}1
 

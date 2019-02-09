@@ -20,7 +20,7 @@ ln -s $CWD/completion/* ~/bin/completion
 
 # install docker
 sudo apt update
-sudo apt install \
+sudo apt install -y \
   apt-transport-https \
   ca-certificates \
   curl \
@@ -31,13 +31,17 @@ sudo add-apt-repository \
   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) \
   stable"
-sudo apt install docker-ce
+sudo apt install -y docker-ce
 sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
 # install linuxbrew and stuff
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-brew install $(cat brew-formulae.txt)
+/home/linuxbrew/.linuxbrew/bin/brew install $(cat brew-formulae.txt | tr '\n' ' ')
+$(/home/linuxbrew/.linuxbrew/bin/brew --prefix)/opt/fzf/install
+
+# install tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # symlink vim stuff
 cd $CWD/vim

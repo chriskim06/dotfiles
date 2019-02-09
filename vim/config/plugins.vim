@@ -10,8 +10,13 @@ let g:airline_extensions = ['branch', 'hunks', 'ale']
 let g:airline_section_z = '%l/%L : %c'
 " }}}
 
+" deoplete " {{{
+let g:deoplete#enable_at_startup = 1
+" }}}
+
 " Auto-Pairs " {{{
 au FileType html,vim let g:AutoPairs['<'] = '>'
+let g:AutoPairsMapBS = 0
 " }}}
 
 " UltiSnips {{{

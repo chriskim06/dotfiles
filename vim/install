@@ -5,6 +5,7 @@
 [[ ! -d ~/.vim/bundle ]] && mkdir -p ~/.vim/bundle
 [[ ! -d ~/.vim/UltiSnips ]] && mkdir -p ~/.vim/UltiSnips
 [[ ! -d ~/.vim/after/ftplugin ]] && mkdir -p ~/.vim/after/ftplugin
+[[ ! -d ~/.vim/autoload ]] && mkdir -p ~/.vim/autoload
 [[ ! -d ~/.config/nvim ]] && mkdir -p ~/.config/nvim
 
 # Symlink files into proper places
@@ -14,4 +15,10 @@ ln -sf $CWD/config/* ~/.vim/config
 ln -sf $CWD/UltiSnips/* ~/.vim/UltiSnips
 ln -sf $CWD/after/ftplugin/* ~/.vim/after/ftplugin
 ln -sf $CWD/init.vim ~/.config/nvim
+
+# Install stuff
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim +'PlugInstall --sync' +qa
+vim +'GoInstallBinaries --sync' +qa
 
