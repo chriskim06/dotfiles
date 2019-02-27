@@ -15,7 +15,9 @@ ln -s $CWD/.inputrc ~
 ln -s $CWD/.tmux.conf ~
 
 mkdir -p ~/bin/completion
-ln -s $CWD/git-* ~/bin
+for f in $(find . -type f -name "git-*" -printf "%f\n"); do
+  ln -s $CWD/$f ~/bin
+done
 ln -s $CWD/completion/* ~/bin/completion
 
 # install docker

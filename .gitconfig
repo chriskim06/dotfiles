@@ -19,7 +19,7 @@
   trustExitCode = true
 [user]
   name = Chris Kim
-  email = christopher.kim@ask.com
+  email = chriskim06@gmail.com
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f

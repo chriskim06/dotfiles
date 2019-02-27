@@ -77,6 +77,7 @@ alias vv='vim ~/src/dotfiles/vim/.vimrc'
 alias vimfiles='cd ~/src/dotfiles/vim; pwd; ll'
 alias vbashrc='vim ~/src/dotfiles/.bashrc'
 alias config='cd ~/src/dotfiles; pwd; ll'
+alias fuck='fuck --yeah'
 alias soba='source ~/.bashrc'
 alias dk='docker'
 alias dkc='docker-compose'
@@ -86,7 +87,7 @@ alias ll='ls -lAh'
 alias shit='sudo $(history -p \!\!)'
 alias ssh='ssh -o ServerAliveInterval=60'
 alias fhere='find . -iname'
-alias weather='curl http://wttr.in/'
+alias weather='curl http://wttr.in/oakland'
 alias work='cd ~/go/src/git.ask.com; ll'
 alias npmlist='npm list -g --depth=0'
 alias prune='docker system prune -f'
@@ -190,14 +191,13 @@ complete -F _fzf_path_completion -o default -o bashdefault vim
 # }}}1
 
 # linuxbrew {{{1
-# brew_random () {
-#   if [[ -n "$(type -t cowsay)" ]]; then
-#     cat ~/.random_brew_cmd 2>/dev/null
-#     local formulae=($(brew search | grep -v /))
-#     local desc=$(brew desc "${formulae[$((RANDOM % ${#formulae[@]}))]}" 2>/dev/null)
-#     [[ $? -eq 0 ]] && cowsay "$desc" > ~/.random_brew_cmd
-#   fi
-# }
-# (brew_random &)
+brew_random () {
+  if [[ -n "$(type -t cowsay)" ]]; then
+    cat ~/.random_brew_cmd 2>/dev/null
+    local formulae=($(brew search | grep -v /))
+    local desc=$(brew desc "${formulae[$((RANDOM % ${#formulae[@]}))]}" 2>/dev/null)
+    [[ $? -eq 0 ]] && cowsay "$desc" > ~/.random_brew_cmd
+  fi
+}
+(brew_random &)
 # }}}1
-
