@@ -15,7 +15,7 @@ ln -s $CWD/.inputrc ~
 ln -s $CWD/.tmux.conf ~
 
 mkdir -p ~/bin/completion
-for f in $(find . -type f -name "git-*" -printf "%f\n"); do
+for f in scripts/git-*; do
   ln -s $CWD/$f ~/bin
 done
 ln -s $CWD/completion/* ~/bin/completion
