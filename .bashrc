@@ -7,7 +7,7 @@ tmux new-session -A -s main 2>/dev/null
 
 # Initialization {{{1
 # Bash {{{2
-[[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
+# [[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
 bash_prompt () {
   # Remember to install powerline fonts
   local e='\e[0m'
@@ -70,7 +70,8 @@ bind '"\e[1;3B": end-of-line'
 
 # Aliases {{{
 alias ls='ls --color=auto'
-alias ag='ag --hidden -p ~/.agignore'
+alias ag='ag --hidden -p ~/.ignore'
+alias rg='rg -S'
 alias vi='nvim'
 alias vim='nvim'
 alias vv='vim ~/src/dotfiles/vim/.vimrc'
@@ -91,14 +92,15 @@ alias weather='curl http://wttr.in/oakland'
 alias work='cd ~/go/src/git.ask.com; ll'
 alias npmlist='npm list -g --depth=0'
 alias prune='docker system prune -f'
-alias stuff='sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && brew cleanup -s'
+alias stuff='sudo apt update && sudo apt upgrade -y && brew update && brew upgrade --ignore-pinned && brew cleanup -s && npm up -g && rustup update'
+alias kc='kubectl'
 [[ -f ~/.private ]] && source ~/.private
 # }}}
 
 # Git stuff {{{1
 # Aliases {{{2
 alias gb='git branch'
-alias gf='git fetch'
+alias gf='git fetch --prune'
 alias gk='git checkout'
 alias gc='git commit'
 alias gl='git lg'
@@ -144,8 +146,8 @@ vn () { # {{{3
 } # }}}3
 # }}}2
 # Completion {{{2
-[[ -r '/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh' ]] && . '/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh'
-[[ -f '/home/linuxbrew/.linuxbrew/Cellar/git/2.20.1/etc/bash_completion.d/git-completion.bash' ]] && . '/home/linuxbrew/.linuxbrew/Cellar/git/2.20.1/etc/bash_completion.d/git-completion.bash'
+[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+[[ -f "$(brew --prefix)/Cellar/git/2.20.1/etc/bash_completion.d/git-completion.bash" ]] && . "$(brew --prefix)/Cellar/git/2.20.1/etc/bash_completion.d/git-completion.bash"
 [[ -f ~/bin/completion/git-custom-completion ]] && source ~/bin/completion/git-custom-completion
 __git_complete ga _git_add
 __git_complete gb _git_branch
@@ -170,7 +172,7 @@ fshow () { # {{{2
   git lg --since=\{"$d"\} | fzf --ansi --no-sort --tiebreak=index --bind "enter:execute:(echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show %')"
 } # }}}2
 fstash() { # {{{2
-  local out q k sha
+  local out k
   while out=$(git stash list --pretty="%C(bold 227)%gd %C(bold 14)<%ar> %C(bold 15)%gs" | fzf --ansi --no-sort --print-query --expect=ctrl-d,ctrl-p); do
     mapfile -t out <<< "$out"
     k="${out[1]}"

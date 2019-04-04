@@ -14,6 +14,17 @@ let g:airline_section_z = '%l/%L : %c'
 let g:deoplete#enable_at_startup = 1
 " }}}
 
+" LanguageClient " {{{
+let g:LanguageClient_rootMarkers = {
+      \ 'go': ['.git', 'go.mod']
+      \ }
+let g:LanguageClient_serverCommands = {
+      \ 'go': ['bingo'],
+      \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+      \ }
+let g:LanguageClient_useVirtualText = 0
+" }}}
+
 " Auto-Pairs " {{{
 au FileType html,vim let g:AutoPairs['<'] = '>'
 let g:AutoPairsMapBS = 0
@@ -52,6 +63,7 @@ let g:indent_guides_default_mapping = 0
 " }}}
 
 " vim-go {{{
+let g:go_def_mode = 'gopls'
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
 let g:go_highlight_build_constraints = 1
