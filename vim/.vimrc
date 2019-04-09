@@ -18,13 +18,11 @@ call plug#begin('~/.vim/bundle')
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf'
-Plug 'rking/ag.vim'
+Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'craigemery/vim-autotag'
 
 " Git
@@ -33,12 +31,12 @@ Plug 'airblade/vim-gitgutter'
 
 " Code completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'zchee/deoplete-go', { 'do': 'make' }
-" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
+Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+" Plug 'autozimu/LanguageClient-neovim', {
+"       \ 'branch': 'next',
+"       \ 'do': 'bash install.sh',
+"       \ }
 
 " Languages
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }

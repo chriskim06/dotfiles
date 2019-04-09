@@ -44,4 +44,3 @@ set helpheight=1000 " Set help window to max height
 set switchbuf=usetab,newtab " Options for determining how to switch buffers
 set splitbelow " Put new split windows below
 set cursorline " Highlight the current line
-

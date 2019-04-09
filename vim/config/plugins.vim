@@ -15,23 +15,19 @@ let g:deoplete#enable_at_startup = 1
 " }}}
 
 " LanguageClient " {{{
-let g:LanguageClient_rootMarkers = {
-      \ 'go': ['.git', 'go.mod']
-      \ }
-let g:LanguageClient_serverCommands = {
-      \ 'go': ['bingo'],
-      \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-      \ }
-let g:LanguageClient_useVirtualText = 0
+" let g:LanguageClient_rootMarkers = {
+"       \ 'go': ['.git', 'go.mod']
+"       \ }
+" let g:LanguageClient_serverCommands = {
+"       \ 'go': ['gopls'],
+"       \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+"       \ }
+" let g:LanguageClient_useVirtualText = 0
 " }}}
 
 " Auto-Pairs " {{{
 au FileType html,vim let g:AutoPairs['<'] = '>'
 let g:AutoPairsMapBS = 0
-" }}}
-
-" UltiSnips {{{
-let g:UltiSnipsExpandTrigger = '<c-space>'
 " }}}
 
 " FZF " {{{

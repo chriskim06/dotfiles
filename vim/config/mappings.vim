@@ -75,7 +75,7 @@ nnoremap <leader>d :PlugClean<cr>
 nnoremap <leader>u :PlugUpdate<cr>
 nnoremap <leader>r :GitGutterUndoHunk<cr>
 nnoremap <leader>b :TagbarToggle<cr>
-nnoremap <leader>/ :Ag <c-r><c-w><cr>
+nnoremap <leader>/ :Rg <c-r><c-w><cr>
 nnoremap <silent> <leader>p :GitGutterPreviewHunk<cr>
 nnoremap <silent> <leader>\ :NERDTreeToggle<cr>
 nnoremap <silent> P :FZF<cr>
