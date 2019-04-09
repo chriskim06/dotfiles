@@ -15,8 +15,8 @@ ln -s $CWD/.inputrc ~
 ln -s $CWD/.tmux.conf ~
 
 mkdir -p ~/bin/completion
-for f in scripts/git-*; do
-  ln -s $CWD/$f ~/bin
+for f in $CWD/scripts/git-*; do
+  ln -s $f ~/bin
 done
 ln -s $CWD/completion/* ~/bin/completion
 

@@ -3,7 +3,6 @@
 # Create directories if they don't exist
 [[ ! -d ~/.vim/config ]] && mkdir -p ~/.vim/config
 [[ ! -d ~/.vim/bundle ]] && mkdir -p ~/.vim/bundle
-[[ ! -d ~/.vim/UltiSnips ]] && mkdir -p ~/.vim/UltiSnips
 [[ ! -d ~/.vim/after/ftplugin ]] && mkdir -p ~/.vim/after/ftplugin
 [[ ! -d ~/.vim/autoload ]] && mkdir -p ~/.vim/autoload
 [[ ! -d ~/.config/nvim ]] && mkdir -p ~/.config/nvim
@@ -11,10 +10,9 @@
 # Symlink files into proper places
 CWD=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 ln -sf $CWD/.vimrc ~
-ln -sf $CWD/config/* ~/.vim/config
-ln -sf $CWD/UltiSnips/* ~/.vim/UltiSnips
-ln -sf $CWD/after/ftplugin/* ~/.vim/after/ftplugin
 ln -sf $CWD/init.vim ~/.config/nvim
+ln -sf $CWD/config/* ~/.vim/config
+ln -sf $CWD/after/ftplugin/* ~/.vim/after/ftplugin
 
 # Install stuff
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
