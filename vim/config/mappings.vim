@@ -46,6 +46,10 @@ nnoremap <silent> <expr> <m-[> (tabpagenr() == 1) ? ":tabm\<cr>" : ":-tabm\<cr>"
 nnoremap <silent> <expr> <m-]> (tabpagenr() == tabpagenr('$')) ? ":0tabm\<cr>" : ":+tabm\<cr>"
 nnoremap <leader>] <c-w>w
 nnoremap <leader>[ <c-w>W
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
 " }}}
 
 " Tag mappings {{{
