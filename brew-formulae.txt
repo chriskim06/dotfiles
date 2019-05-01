@@ -20,9 +20,9 @@ kubernetes-cli
 neovim
 node
 parallel
+ripgrep
 rust
 shellcheck
-the_silver_searcher
 thefuck
 tldr
 tmux

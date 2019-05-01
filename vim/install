@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Create directories if they don't exist
 [[ ! -d ~/.vim/config ]] && mkdir -p ~/.vim/config
 [[ ! -d ~/.vim/bundle ]] && mkdir -p ~/.vim/bundle
