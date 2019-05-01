@@ -91,7 +91,7 @@ alias fhere='find . -iname'
 alias weather='curl http://wttr.in/oakland'
 alias work='cd ~/go/src/git.ask.com; ll'
 alias npmlist='npm list -g --depth=0'
-alias prune='docker system prune -f'
+alias prune='docker system prune -af'
 alias stuff='sudo apt update && sudo apt upgrade -y && brew update && brew upgrade --ignore-pinned && brew cleanup -s && npm up -g && rustup update'
 alias kc='kubectl'
 [[ -f ~/.private ]] && source ~/.private
@@ -100,6 +100,7 @@ alias kc='kubectl'
 # Git stuff {{{1
 # Aliases {{{2
 alias gb='git branch'
+alias gd='git branch -D'
 alias gf='git fetch --prune'
 alias gk='git checkout'
 alias gc='git commit'
@@ -151,6 +152,7 @@ vn () { # {{{3
 [[ -f ~/bin/completion/git-custom-completion ]] && source ~/bin/completion/git-custom-completion
 __git_complete ga _git_add
 __git_complete gb _git_branch
+__git_complete gd _git_branch
 __git_complete gf _git_fetch
 __git_complete gc _git_commit
 __git_complete gk _git_checkout
