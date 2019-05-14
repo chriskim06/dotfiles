@@ -71,7 +71,7 @@ bind '"\e[1;3B": end-of-line'
 # Aliases {{{
 alias ls='ls --color=auto'
 alias ag='ag --hidden -p ~/.ignore'
-alias rg='rg -S'
+alias rg='rg --smart-case --hidden'
 alias vi='nvim'
 alias vim='nvim'
 alias vv='vim ~/src/dotfiles/vim/.vimrc'
@@ -92,7 +92,7 @@ alias weather='curl http://wttr.in/oakland'
 alias work='cd ~/go/src/git.ask.com; ll'
 alias npmlist='npm list -g --depth=0'
 alias prune='docker system prune -af'
-alias stuff='sudo apt update && sudo apt upgrade -y && brew update && brew upgrade --ignore-pinned && brew cleanup -s && npm up -g && rustup update'
+alias stuff='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && brew update && brew upgrade --ignore-pinned && brew cleanup -s && npm up -g && rustup update && ~/.tmux/plugins/tpm/bin/update_plugins all'
 alias kc='kubectl'
 [[ -f ~/.private ]] && source ~/.private
 # }}}

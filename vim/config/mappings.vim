@@ -76,7 +76,7 @@ inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 noremap <silent> <m-/> :Commentary<cr>
 nnoremap <leader>i :PlugInstall<cr>
 nnoremap <leader>d :PlugClean<cr>
-nnoremap <leader>u :PlugUpdate<cr>
+nnoremap <leader>u :PlugUpdate \| PlugUpgrade<cr>
 nnoremap <leader>r :GitGutterUndoHunk<cr>
 nnoremap <leader>b :TagbarToggle<cr>
 nnoremap <leader>/ :Rg <c-r><c-w><cr>
