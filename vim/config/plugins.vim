@@ -11,7 +11,7 @@ let g:airline_section_z = '%l/%L : %c'
 " }}}
 
 " deoplete " {{{
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 " }}}
 
 " LanguageClient " {{{
@@ -21,6 +21,7 @@ let g:deoplete#enable_at_startup = 1
 " let g:LanguageClient_serverCommands = {
 "       \ 'go': ['gopls'],
 "       \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+"       \ 'yaml': ['yaml-language-server', '--stdio'],
 "       \ }
 " let g:LanguageClient_useVirtualText = 0
 " }}}
@@ -76,4 +77,3 @@ let g:go_highlight_function_calls = 1
 " gitgutter {{{
 let g:gitgutter_terminal_report_focus = 0
 " }}}
-
