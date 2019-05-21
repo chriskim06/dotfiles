@@ -9,12 +9,12 @@ set -e
 # symlink stuff
 CWD=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-ln -s $CWD/.bashrc ~
-ln -s $CWD/.bash_profile ~
-ln -s $CWD/.gitconfig ~
-ln -s $CWD/.agignore ~
-ln -s $CWD/.inputrc ~
-ln -s $CWD/.tmux.conf ~
+ln -sf $CWD/.bashrc ~
+ln -sf $CWD/.bash_profile ~
+ln -sf $CWD/.gitconfig ~
+ln -sf $CWD/.agignore ~
+ln -sf $CWD/.inputrc ~
+ln -sf $CWD/.tmux.conf ~
 
 mkdir -p ~/bin/completion
 for f in $CWD/scripts/git-*; do
@@ -25,6 +25,7 @@ ln -s $CWD/completion/* ~/bin/completion
 # install docker
 sudo apt update
 sudo apt install -y \
+  gcc \
   apt-transport-https \
   ca-certificates \
   curl \

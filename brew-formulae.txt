@@ -1,3 +1,4 @@
+make
 awscli
 bash
 bash-completion
@@ -27,4 +28,4 @@ thefuck
 tldr
 tmux
 vegeta
-
+yarn
