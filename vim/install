@@ -15,6 +15,7 @@ ln -sf $CWD/.vimrc ~
 ln -sf $CWD/init.vim ~/.config/nvim
 ln -sf $CWD/config/* ~/.vim/config
 ln -sf $CWD/after/ftplugin/* ~/.vim/after/ftplugin
+ln -sf $CWD/coc-settings.json ~/.config/nvim
 
 # Install stuff
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
