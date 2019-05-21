@@ -10,22 +10,6 @@ let g:airline_extensions = ['branch', 'hunks', 'ale']
 let g:airline_section_z = '%l/%L : %c'
 " }}}
 
-" deoplete " {{{
-" let g:deoplete#enable_at_startup = 1
-" }}}
-
-" LanguageClient " {{{
-" let g:LanguageClient_rootMarkers = {
-"       \ 'go': ['.git', 'go.mod']
-"       \ }
-" let g:LanguageClient_serverCommands = {
-"       \ 'go': ['gopls'],
-"       \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-"       \ 'yaml': ['yaml-language-server', '--stdio'],
-"       \ }
-" let g:LanguageClient_useVirtualText = 0
-" }}}
-
 " Auto-Pairs " {{{
 au FileType html,vim let g:AutoPairs['<'] = '>'
 let g:AutoPairsMapBS = 0
@@ -42,11 +26,6 @@ au FileType fzf set laststatus=0 cmdheight=1 noshowmode noruler
 " NERDTree " {{{
 let g:NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
-" }}}
-
-" Ale " {{{
-let g:ale_sign_column_always = 1
-let g:ale_linters = { 'javascript': ['eslint'] }
 " }}}
 
 " Indent Guides " {{{
