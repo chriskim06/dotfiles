@@ -18,9 +18,9 @@ ln -sf $CWD/.tmux.conf ~
 
 mkdir -p ~/bin/completion
 for f in $CWD/scripts/git-*; do
-  ln -s $f ~/bin
+  ln -sf $f ~/bin
 done
-ln -s $CWD/completion/* ~/bin/completion
+ln -sf $CWD/completion/* ~/bin/completion
 
 # install docker
 sudo apt update
