@@ -12,7 +12,6 @@ let g:airline_section_z = '%l/%L : %c'
 
 " Auto-Pairs " {{{
 au FileType html,vim let g:AutoPairs['<'] = '>'
-let g:AutoPairsMapBS = 0
 " }}}
 
 " FZF " {{{
