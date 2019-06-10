@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#
+# brew-asdf
+#
+
+brew update
+[[ -n $(brew outdated) ]] && brew upgrade --ignore-pinned && brew cleanup -s
+exit 0
