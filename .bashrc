@@ -61,6 +61,8 @@ color () { # {{{2
   done
 } # }}}2
 
+bind '"\C-l": forward-word'
+bind '"\C-h": backward-word'
 bind '"\e[1;3C": forward-word'
 bind '"\e[1;3D": backward-word'
 bind '"\e[1;3A": beginning-of-line'
@@ -89,10 +91,13 @@ alias shit='sudo $(history -p \!\!)'
 alias ssh='ssh -o ServerAliveInterval=60'
 alias fhere='find . -iname'
 alias weather='curl http://wttr.in/oakland'
-alias work='cd ~/go/src/git.ask.com; ll'
+alias starwars='telnet towel.blinkenlights.nl'
+alias work='cd ~/src/work; ll'
+alias gowork=' cd ~/go/src/git.ask.com; ll'
+alias feat='git feature'
 alias npmlist='npm list -g --depth=0'
 alias prune='docker system prune -af'
-alias stuff='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && brew update && brew upgrade --ignore-pinned && brew cleanup -s && npm up -g && rustup update && ~/.tmux/plugins/tpm/bin/update_plugins all'
+alias stuff='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && brew asdf && npm up -g && rustup update && ~/.tmux/plugins/tpm/bin/update_plugins all'
 alias kc='kubectl'
 [[ -f ~/.private ]] && source ~/.private
 # }}}
