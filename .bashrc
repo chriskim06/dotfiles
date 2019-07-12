@@ -97,7 +97,7 @@ alias gowork=' cd ~/go/src/git.ask.com; ll'
 alias feat='git feature'
 alias npmlist='npm list -g --depth=0'
 alias prune='docker system prune -af'
-alias stuff='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && brew asdf && npm up -g && rustup update && ~/.tmux/plugins/tpm/bin/update_plugins all'
+alias tree='tree -a -I "\.git|node_modules"'
 alias kc='kubectl'
 [[ -f ~/.private ]] && source ~/.private
 # }}}

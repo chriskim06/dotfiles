@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+#
+# Update a bunch of shit
+#
+
+printf "\e[1m\e[38;5;40mUpgrading apt\e[0m\e[0m\n"
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+
+printf "\n\e[1m\e[38;5;40mUpgrading homebrew\e[0m\e[0m\n"
+brew asdf
+
+printf "\n\e[1m\e[38;5;40mUpgrading npm\e[0m\e[0m\n"
+npm up -g
+
+printf "\n\e[1m\e[38;5;40mUpgrading rust\e[0m\e[0m\n"
+rustup update
+
+printf "\n\e[1m\e[38;5;40mUpgrading tmux plugins\e[0m\e[0m\n"
+~/.tmux/plugins/tpm/bin/update_plugins all
