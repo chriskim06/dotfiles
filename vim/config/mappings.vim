@@ -77,7 +77,7 @@ noremap <silent> <m-/> :Commentary<cr>
 noremap <silent> ? :Commentary<cr>
 nnoremap <leader>i :PlugInstall<cr>
 nnoremap <leader>d :PlugClean<cr>
-nnoremap <leader>u :PlugUpdate \| PlugUpgrade<cr>
+nnoremap <leader>u :PlugUpdate \| PlugUpgrade \| CocUpdate<cr>
 nnoremap <leader>r :GitGutterUndoHunk<cr>
 nnoremap <leader>b :TagbarToggle<cr>
 nnoremap <leader>/ :Rg <c-r><c-w><cr>
