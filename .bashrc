@@ -99,6 +99,7 @@ alias npmlist='npm list -g --depth=0'
 alias prune='docker system prune -af'
 alias tree='tree -a -I "\.git|node_modules"'
 alias kc='kubectl'
+complete -F __start_kubectl kc
 [[ -f ~/.private ]] && source ~/.private
 # }}}
 
