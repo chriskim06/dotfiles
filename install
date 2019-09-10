@@ -11,6 +11,9 @@ CWD=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 ln -sf $CWD/.bashrc ~
 ln -sf $CWD/.bash_profile ~
+ln -sf $CWD/.aliases.sh ~
+ln -sf $CWD/.git-stuff.sh ~
+ln -sf $CWD/.fzf-stuff.sh ~
 ln -sf $CWD/.gitconfig ~
 ln -sf $CWD/.agignore ~
 ln -sf $CWD/.inputrc ~
