@@ -7,8 +7,7 @@ tmux new-session -A -s main 2>/dev/null
 
 # Initialization {{{1
 # Bash {{{2
-# [[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
-bash_prompt () {
+bash_prompt() {
   # Remember to install powerline fonts
   local e='\e[0m'
   local b='\e[48;5;'
@@ -49,7 +48,7 @@ if command -v bat >/dev/null; then
 fi
 complete -o default -F _fzf_path_completion bat
 
-color () { # {{{2
+color() { # {{{2
   printf "%s\n" '\e[38;5;COLOR_CODEm is a foreground color'
   printf "%s\n" '\e[48;5;COLOR_CODEm is a background color'
   printf "%s\n" '\e[1m is bold and \e[0m ends a sequence'
@@ -61,8 +60,14 @@ color () { # {{{2
   done
 } # }}}2
 
+b64() { # {{{2
+  printf "%s" "$@" | base64 -w 0
+  echo
+} # }}}2
+
 bind '"\C-l": forward-word'
 bind '"\C-h": backward-word'
+bind '"\C-d": backward-kill-word'
 bind '"\e[1;3C": forward-word'
 bind '"\e[1;3D": backward-word'
 bind '"\e[1;3A": beginning-of-line'
@@ -121,7 +126,7 @@ alias staged='git staged'
 alias branches='git branches'
 # }}}2
 # Functions {{{2
-stash () { # {{{3
+stash() { # {{{3
   if [[ $# -eq 0 ]]; then
     git stash list --pretty="%C(bold 227)%gd %C(bold 14)<%ar> %C(bold 15)%gs" | cat
   elif [[ $# -eq 1 && "$1" == "list" ]]; then
@@ -133,7 +138,7 @@ stash () { # {{{3
     git stash $*
   fi
 } # }}}3
-ga () { # {{{3
+ga() { # {{{3
   if [[ $# -eq 0 ]]; then
     printf "Choose files to stage for commit\n"
   else
@@ -141,14 +146,14 @@ ga () { # {{{3
     git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
   fi
 } # }}}3
-gconf () { # {{{3
+gconf() { # {{{3
   if [[ $# -eq 0 ]]; then
     git config --global -e
   else
     git config --global "$@"
   fi
 } # }}}3
-vn () { # {{{3
+vn() { # {{{3
   [[ $# -eq 1 ]] && vim $(git list "$@" | sed "s/"$'\E\[1;31m'"//g")
 } # }}}3
 # }}}2
@@ -175,7 +180,7 @@ __git_complete discard _git_discard
 
 # fzf stuff {{{1
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
-fshow () { # {{{2
+fshow() { # {{{2
   local d="$(date -v-1y +%F)"
   git lg --since=\{"$d"\} | fzf --ansi --no-sort --tiebreak=index --bind "enter:execute:(echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show %')"
 } # }}}2
@@ -201,7 +206,7 @@ complete -F _fzf_path_completion -o default -o bashdefault vim
 # }}}1
 
 # linuxbrew {{{1
-brew_random () {
+brew_random() {
   if [[ -n "$(type -t cowsay)" ]]; then
     cat ~/.random_brew_cmd 2>/dev/null
     local formulae=($(brew search | grep -v /))

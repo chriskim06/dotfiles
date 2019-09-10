@@ -23,7 +23,7 @@ au FileType fzf set laststatus=0 cmdheight=1 noshowmode noruler
 " }}}
 
 " NERDTree " {{{
-let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeQuitOnOpen = 0
 let NERDTreeShowHidden = 1
 " }}}
 
