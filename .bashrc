@@ -17,15 +17,15 @@ bash_prompt() {
   if [[ -z "$prompt" ]]; then
     local last="\[$e\]\[${f}23m\]$arrow\[$e\]"
   else
-    local color="42m"
+    local color="42m" # green
     if [[ "$prompt" =~ ^.*\|(MERGING|REBASE).*$ ]]; then
-      color="165m"
+      color="165m" # purple
     elif [[ "$prompt" =~ ^.*-[0-9]*$ ]]; then
-      color="196m"
+      color="196m" # red
     elif [[ "$prompt" =~ ^.*\+[0-9]*$ ]]; then
-      color="75m"
+      color="75m" # light blue
     elif [[ "$prompt" =~ ^.*(%|\*).*$ ]]; then
-      color="184m"
+      color="179m" # orange
     fi
     local branch=$'\ue0a0'
     # local branch=$'\u2387'
