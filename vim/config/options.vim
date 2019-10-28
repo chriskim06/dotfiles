@@ -10,6 +10,7 @@ set wrapmargin=0 " This should prevent vim from wrapping long lines of text
 set hidden " Hides buffer instead of closing; allows new tabs without saving
 set wildmenu " Better command-line completion
 set hlsearch " Highlight searches
+set incsearch " Jump to search results while typing
 set ignorecase " Use case insensitive search, except when using capital letters
 set smartcase " Uses case sensitive search if the search has capital letters
 set backspace=indent,eol,start " Makes backspace behave normally

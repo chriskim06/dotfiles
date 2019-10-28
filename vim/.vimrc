@@ -16,9 +16,9 @@ call plug#begin('~/.vim/bundle')
 
 " Useful
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf'
 Plug 'jremmen/vim-ripgrep'
-Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
