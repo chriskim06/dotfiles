@@ -85,6 +85,6 @@ nnoremap <leader>/ :Rg <c-r><c-w><cr>
 nnoremap <silent> <leader>p :GitGutterPreviewHunk<cr>
 nnoremap <silent> <leader>\ :NERDTreeToggle<cr>
 nnoremap <silent> P :FZF<cr>
-nnoremap <silent> C :CocConfig<cr>
+nnoremap <silent> C :tabe<cr>:CocConfig<cr>
 nnoremap <silent> K :call CocActionAsync('doHover')<cr>
 " }}}
