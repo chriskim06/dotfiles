@@ -6,7 +6,7 @@
 " Airline " {{{
 let g:airline_theme = 'onedark'
 let g:airline_powerline_fonts = 1
-let g:airline_extensions = ['branch', 'hunks', 'ale']
+let g:airline_extensions = ['branch', 'hunks', 'coc']
 let g:airline_section_z = '%l/%L : %c'
 " }}}
 

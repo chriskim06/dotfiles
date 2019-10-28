@@ -15,7 +15,6 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " Useful
-Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf'
 Plug 'jremmen/vim-ripgrep'
