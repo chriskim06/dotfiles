@@ -42,20 +42,12 @@ vnoremap > >gv
 " Tab and split mappings {{{
 nnoremap <tab> gt
 nnoremap <s-tab> gT
-nnoremap <silent> <expr> <m-[> (tabpagenr() == 1) ? ":tabm\<cr>" : ":-tabm\<cr>"
-nnoremap <silent> <expr> <m-]> (tabpagenr() == tabpagenr('$')) ? ":0tabm\<cr>" : ":+tabm\<cr>"
-nnoremap <leader>] <c-w>w
-nnoremap <leader>[ <c-w>W
+nnoremap <silent> <expr> <leader>[ (tabpagenr() == 1) ? ":tabm\<cr>" : ":-tabm\<cr>"
+nnoremap <silent> <expr> <leader>] (tabpagenr() == tabpagenr('$')) ? ":0tabm\<cr>" : ":+tabm\<cr>"
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-" }}}
-
-" Tag mappings {{{
-nnoremap <leader><cr> :tab tag <c-r><c-w><cr>
-nnoremap <c-]> :tab tag <c-r><c-w><cr>
-vnoremap <c-]> <esc>:tab tag <c-r><c-w><cr>
 " }}}
 
 " Command line and some insert mappings {{{
@@ -65,7 +57,7 @@ inoremap <c-b> <c-o>b
 inoremap <c-f> <c-o>w
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
-cnoremap <m-bs> <c-w>
+cnoremap <c-d> <c-w>
 cnoremap ~~ <c-r>"
 " }}}
 
@@ -73,7 +65,6 @@ cnoremap ~~ <c-r>"
 inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
 inoremap <expr> <tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-noremap <silent> <m-/> :Commentary<cr>
 noremap <silent> ? :Commentary<cr>
 nnoremap <leader>i :PlugInstall<cr>
 nnoremap <leader>d :PlugClean<cr>
@@ -96,4 +87,3 @@ nnoremap gg gg0
 nnoremap <silent> H :h <c-r><c-w><cr>
 vnoremap <silent> H <esc>:h <c-r><c-w><cr>
 " }}}
-
