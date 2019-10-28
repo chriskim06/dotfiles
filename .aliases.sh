@@ -5,8 +5,6 @@
 alias ls='ls --color=auto'
 alias ag='ag --hidden -p ~/.ignore'
 alias rg='rg --smart-case --hidden'
-alias vi='nvim'
-alias vim='nvim'
 alias vv='vim ~/src/dotfiles/vim/.vimrc'
 alias vimfiles='cd ~/src/dotfiles/vim; pwd; ll'
 alias vbashrc='vim ~/src/dotfiles/.bashrc'
