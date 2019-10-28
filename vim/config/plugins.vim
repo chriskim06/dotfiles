@@ -12,6 +12,7 @@ let g:airline_section_z = '%l/%L : %c'
 
 " Auto-Pairs " {{{
 au FileType html,vim let g:AutoPairs['<'] = '>'
+au FileType vim let g:AutoPairsMapBS = 0
 " }}}
 
 " FZF " {{{
@@ -20,6 +21,13 @@ let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_colors = { 'fg': ['fg', 'Comment'] }
 au FileType fzf set laststatus=0 cmdheight=1 noshowmode noruler
       \| au BufLeave <buffer> set laststatus=2 cmdheight=2 showmode ruler
+" }}}
+
+" NERDCommenter " {{{
+let g:NERDSpaceDelims = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDToggleCheckAllLines = 1
+let g:NERDTrimTrailingWhitespace = 1
 " }}}
 
 " NERDTree " {{{

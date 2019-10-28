@@ -61,11 +61,21 @@ cnoremap <c-d> <c-w>
 cnoremap ~~ <c-r>"
 " }}}
 
+" Movement commands {{{
+noremap B ^
+noremap E $
+nnoremap j gj
+nnoremap k gk
+nnoremap gg gg0
+nnoremap <silent> H :h <c-r><c-w><cr>
+vnoremap <silent> H <esc>:h <c-r><c-w><cr>
+" }}}
+
 " Plugin mappings {{{
 inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
 inoremap <expr> <tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-noremap <silent> ? :Commentary<cr>
+noremap ? :normal \ci<cr>
 nnoremap <leader>i :PlugInstall<cr>
 nnoremap <leader>d :PlugClean<cr>
 nnoremap <leader>u :PlugUpdate \| PlugUpgrade \| CocUpdate<cr>
@@ -77,14 +87,4 @@ nnoremap <silent> <leader>\ :NERDTreeToggle<cr>
 nnoremap <silent> P :FZF<cr>
 nnoremap <silent> C :CocConfig<cr>
 nnoremap <silent> K :call CocActionAsync('doHover')<cr>
-" }}}
-
-" Movement commands {{{
-noremap B ^
-noremap E $
-nnoremap j gj
-nnoremap k gk
-nnoremap gg gg0
-nnoremap <silent> H :h <c-r><c-w><cr>
-vnoremap <silent> H <esc>:h <c-r><c-w><cr>
 " }}}
