@@ -8,7 +8,6 @@ cowsay
 dep
 diff-so-fancy
 docker
-fd
 fzf
 git
 git-number
@@ -18,14 +17,15 @@ htop
 httpie
 jq
 kubernetes-cli
-neovim
 node
 parallel
-ripgrep
 rust
+fd
+ripgrep
 shellcheck
 thefuck
 tldr
 tmux
 vegeta
+vim
 yarn
