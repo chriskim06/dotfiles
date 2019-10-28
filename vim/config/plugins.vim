@@ -39,6 +39,7 @@ let g:indent_guides_default_mapping = 0
 
 " vim-go {{{
 let g:go_def_mode = 'gopls'
+let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
 let g:go_highlight_build_constraints = 1
