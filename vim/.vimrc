@@ -23,9 +23,6 @@ Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
 Plug 'craigemery/vim-autotag'
-
-" Git
-Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Languages
@@ -51,6 +48,9 @@ call plug#end()
 
 " Autocommand Settings {{{
 if has('autocmd')
+  augroup Files
+    au FileType * set formatoptions-=cro
+  augroup END
   augroup Buffer
     au BufWritePost,BufWinLeave,BufLeave,WinLeave ?* if &ft != 'help' && &ft != 'fzf' | mkview! | endif
     au BufWinEnter,BufEnter ?* if &ft != 'help' && &ft != 'fzf' | silent! loadview | execute "AirlineRefresh" | endif

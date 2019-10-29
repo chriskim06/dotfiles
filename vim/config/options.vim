@@ -30,7 +30,6 @@ set mouse=a " Enable use of the mouse in all modes
 set mousem=popup " Disable extending selection with right click
 set foldmethod=syntax " Use syntax for folding
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip " Exclude these files and directories
-set formatoptions-=cro " Remove comment related formatting options
 set shiftwidth=2 " Number of spaces to use when indenting lines
 set tabstop=2 " Number of spaces a tab counts for in a file
 set softtabstop=2 " Number of spaces for tabs when editing a file
