@@ -23,12 +23,15 @@ Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
 Plug 'craigemery/vim-autotag'
+Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
+Plug 'henrik/vim-indexed-search'
+Plug 'conradirwin/vim-bracketed-paste'
 
 " Languages
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'othree/javascript-libraries-syntax.vim'
 
 " Style
@@ -37,11 +40,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
-
-" Miscellaneous
-Plug 'airblade/vim-rooter'
-Plug 'henrik/vim-indexed-search'
-Plug 'conradirwin/vim-bracketed-paste'
 
 call plug#end()
 " }}}
