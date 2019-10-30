@@ -28,6 +28,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'henrik/vim-indexed-search'
 Plug 'conradirwin/vim-bracketed-paste'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 
 " Languages
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }

@@ -54,7 +54,7 @@ vn() { # {{{2
 
 # Completion {{{
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-[[ -f "$(brew --prefix)/Cellar/git/2.20.1/etc/bash_completion.d/git-completion.bash" ]] && . "$(brew --prefix)/Cellar/git/2.20.1/etc/bash_completion.d/git-completion.bash"
+[[ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ]] && . "$(brew --prefix)/etc/bash_completion.d/git-completion.bash"
 [[ -f ~/bin/completion/git-custom-completion ]] && source ~/bin/completion/git-custom-completion
 __git_complete ga _git_add
 __git_complete gb _git_branch
