@@ -9,6 +9,7 @@ set -e
 # symlink stuff
 CWD=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
+mkdir -p ~/bin/completion
 ln -sf $CWD/.bashrc ~
 ln -sf $CWD/.bash_profile ~
 ln -sf $CWD/.aliases.sh ~
@@ -18,11 +19,7 @@ ln -sf $CWD/.gitconfig ~
 ln -sf $CWD/.agignore ~
 ln -sf $CWD/.inputrc ~
 ln -sf $CWD/.tmux.conf ~
-
-mkdir -p ~/bin/completion
-for f in $CWD/scripts/*; do
-  ln -sf $f ~/bin
-done
+ln -sf $CWD/scripts/* ~/bin
 ln -sf $CWD/completion/* ~/bin/completion
 
 # install docker
