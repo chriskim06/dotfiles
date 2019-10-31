@@ -6,7 +6,7 @@
 " Useful and Random mappings {{{
 map ; :
 noremap <cr> G
-nnoremap <silent> Q :q<cr>
+nnoremap <silent> <expr> Q (len(getbufinfo({'buflisted':1})) == 1) ? ":q\<cr>" : ":bdel\<cr>"
 nnoremap <silent> W :%s/\s\+$//ge<cr>:w<cr>
 nnoremap r <c-r>
 nnoremap <ScrollWheelUp> <c-y>
@@ -85,6 +85,7 @@ nnoremap <leader>/ :Rg <c-r><c-w><cr>
 nnoremap <silent> <leader>p :GitGutterPreviewHunk<cr>
 nnoremap <silent> <leader>\ :NERDTreeToggle<cr>
 nnoremap <silent> P :FZF<cr>
+nnoremap <silent> O :Buffers<cr>
 nnoremap <silent> C :tabe<cr>:CocConfig<cr>
 nnoremap <silent> K :call CocActionAsync('doHover')<cr>
 " }}}

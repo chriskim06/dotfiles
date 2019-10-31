@@ -15,9 +15,9 @@ au FileType html,vim let g:AutoPairs['<'] = '>'
 " }}}
 
 " FZF " {{{
-let g:fzf_action = { 'enter': 'tab split' }
 let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_colors = { 'fg': ['fg', 'Comment'] }
+let g:fzf_buffers_jump = 1
 au FileType fzf set laststatus=0 cmdheight=1 noshowmode noruler
       \| au BufLeave <buffer> set laststatus=2 cmdheight=2 showmode ruler
 " }}}
@@ -27,6 +27,7 @@ let g:NERDSpaceDelims = 1
 let g:NERDCommentEmptyLines = 1
 let g:NERDToggleCheckAllLines = 1
 let g:NERDTrimTrailingWhitespace = 1
+let g:NERDDefaultAlign = 'start'
 " }}}
 
 " NERDTree " {{{
