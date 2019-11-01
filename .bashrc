@@ -24,6 +24,8 @@ bash_prompt() {
       color="196m" # red
     elif [[ "$prompt" =~ ^.*\+[0-9]*$ ]]; then
       color="75m" # light blue
+    elif [[ "$prompt" =~ ^.*\+.*$ ]]; then
+      color="73m" # grayish blue
     elif [[ "$prompt" =~ ^.*(%|\*).*$ ]]; then
       color="179m" # orange
     fi
