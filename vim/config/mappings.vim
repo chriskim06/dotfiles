@@ -39,9 +39,9 @@ vnoremap < <gv
 vnoremap > >gv
 " }}}
 
-" Tab and split mappings {{{
-nnoremap <tab> gt
-nnoremap <s-tab> gT
+" Buffer, tab, split mappings {{{
+nnoremap <tab> :bn<cr>
+nnoremap <s-tab> :bp<cr>
 nnoremap <silent> <expr> <leader>[ (tabpagenr() == 1) ? ":tabm\<cr>" : ":-tabm\<cr>"
 nnoremap <silent> <expr> <leader>] (tabpagenr() == tabpagenr('$')) ? ":0tabm\<cr>" : ":+tabm\<cr>"
 nnoremap <c-j> <c-w>j
