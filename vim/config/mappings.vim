@@ -84,8 +84,11 @@ nnoremap <leader>b :TagbarToggle<cr>
 nnoremap <leader>/ :Rg <c-r><c-w><cr>
 nnoremap <silent> <leader>p :GitGutterPreviewHunk<cr>
 nnoremap <silent> <leader>\ :NERDTreeToggle<cr>
+nnoremap <silent> gd <plug>(coc-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
+nnoremap <silent> C :CocConfig<cr>
 nnoremap <silent> P :FZF<cr>
 nnoremap <silent> O :Buffers<cr>
-nnoremap <silent> C :tabe<cr>:CocConfig<cr>
 nnoremap <silent> K :call CocActionAsync('doHover')<cr>
 " }}}
