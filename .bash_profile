@@ -4,7 +4,7 @@
 
 # Environment variables
 export GOPATH="$HOME/go"
-export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH:$HOME/bin:/usr/local/bin:${GOPATH//://bin:}/bin:$HOME/.cargo/bin"
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH:$HOME/bin:/usr/local/bin:${GOPATH//://bin:}/bin:$HOME/.cargo/bin:$HOME/.krew/bin"
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
