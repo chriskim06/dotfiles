@@ -32,7 +32,7 @@ let g:NERDDefaultAlign = 'start'
 
 " NERDTree " {{{
 let g:NERDTreeQuitOnOpen = 0
-let NERDTreeShowHidden = 1
+let g:NERDTreeShowHidden = 1
 " }}}
 
 " Indent Guides " {{{
