@@ -35,7 +35,6 @@ Plug 'junegunn/gv.vim'
 " Languages
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'othree/javascript-libraries-syntax.vim'
 
 " Style
 Plug 'morhetz/gruvbox'
