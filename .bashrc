@@ -92,3 +92,9 @@ brew_random() {
 [[ -f ~/.git-stuff.sh ]] && source ~/.git-stuff.sh
 [[ -f ~/.fzf-stuff.sh ]] && source ~/.fzf-stuff.sh
 # }}}
+
+# this is used to map caps lock to ctrl/escape on linux
+if [[ "$OSTYPE" == "linux-gnu" && -n "$(command -v setxkbmap)" && -n "$(command -v xcape)" ]]; then
+  setxkbmap -option 'caps:ctrl_modifier'
+  xcape -e '#66=Escape'
+fi
