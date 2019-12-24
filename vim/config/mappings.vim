@@ -85,8 +85,8 @@ nnoremap <leader>/ :Rg <c-r><c-w><cr>
 nnoremap <silent> <leader>p :GitGutterPreviewHunk<cr>
 nnoremap <silent> <leader>\ :NERDTreeToggle<cr>
 nnoremap <silent> gd <plug>(coc-definition)
-nnoremap <silent> gi <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
+nnoremap <silent> gi <plug>(coc-implementation)
+nnoremap <silent> gr :call CocAction('jumpReferences')<cr>
 nnoremap <silent> C :CocConfig<cr>
 nnoremap <silent> P :FZF<cr>
 nnoremap <silent> O :Buffers<cr>
