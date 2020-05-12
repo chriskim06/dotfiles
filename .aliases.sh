@@ -28,6 +28,7 @@ alias npmlist='npm list -g --depth=0'
 alias prune='docker system prune -af'
 alias tree='tree -a -I "\.git|node_modules"'
 alias kc='kubectl'
+alias krew='kubectl krew'
 alias kdev='KREW_ROOT="/home/kimc/playground" /home/kimc/go/src/sigs.k8s.io/krew/out/bin/krew-linux_amd64'
 alias tkrew='go clean -testcache && hack/make-binary.sh && hack/run-integration-tests.sh && hack/run-tests.sh && hack/run-lint.sh'
 complete -F __start_kubectl kc

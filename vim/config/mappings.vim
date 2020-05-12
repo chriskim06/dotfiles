@@ -88,7 +88,7 @@ nnoremap <silent> gd <plug>(coc-definition)
 nnoremap <silent> gi <plug>(coc-implementation)
 nnoremap <silent> gr :call CocAction('jumpReferences')<cr>
 nnoremap <silent> C :CocConfig<cr>
-nnoremap <silent> P :FZF<cr>
+nnoremap <silent> P :Files<cr>
 nnoremap <silent> O :Buffers<cr>
 nnoremap <silent> K :call CocActionAsync('doHover')<cr>
 " }}}
