@@ -4,6 +4,17 @@
 
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" --exclude "node_modules" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" --exclude "node_modules" . "$1"
+}
+
 fshow() { # {{{
   local d="$(date -v-1y +%F)"
   git lg --since=\{"$d"\} | fzf --ansi --no-sort --tiebreak=index --bind "enter:execute:(echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show %')"
