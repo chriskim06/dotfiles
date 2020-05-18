@@ -78,7 +78,7 @@ inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 noremap ? :normal \ci<cr>
 nnoremap <leader>i :source %<cr>:PlugInstall<cr>
 nnoremap <leader>d :source %<cr>:PlugClean<cr>
-nnoremap <leader>u :PlugUpdate \| PlugUpgrade \| CocUpdate<cr>
+nnoremap <leader>u :PlugUpdate \| PlugUpgrade<cr>
 nnoremap <leader>r :GitGutterUndoHunk<cr>
 nnoremap <leader>b :TagbarToggle<cr>
 nnoremap <leader>/ :Rg <c-r><c-w><cr>
