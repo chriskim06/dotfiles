@@ -30,5 +30,8 @@ export FZF_COMPLETION_TRIGGER='jj'
 export THEFUCK_WAIT_COMMAND=3
 export THEFUCK_HISTORY_LIMIT='200'
 
+# Load private environment variables such as secrets/tokens
+[[ -f $HOME/.private ]] && source $HOME/.private
+
 # Load .bashrc
 [[ -f $HOME/.bashrc ]] && source $HOME/.bashrc
