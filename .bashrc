@@ -93,6 +93,9 @@ brew_random() {
 [[ -f ~/.fzf-stuff.sh ]] && source ~/.fzf-stuff.sh
 # }}}
 
+source <(kubectl completion bash)
+complete -F __start_kubectl kc
+
 # this is used to map caps lock to ctrl/escape on linux
 if [[ "$OSTYPE" == "linux-gnu" && -n "$(command -v setxkbmap)" && -n "$(command -v xcape)" ]]; then
   setxkbmap -option 'caps:ctrl_modifier'
