@@ -35,7 +35,7 @@ bash_prompt() {
   fi
   PS1="\n\[\e[1m\]\[${b}30m\]\[${f}15m\]  \u@\h \[${b}23m\]\[${f}30m\]$arrow\[${b}23m\]\[${f}15m\]  \w $last\n\[${b}32m\]\[${f}15m\]  \A \[$e\]\[${f}32m\]$arrow \[$e\]"
 }
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prompt"
+export PROMPT_COMMAND="history -a; history -c; history -r; bash_prompt"
 # }}}2
 # Miscellaneous {{{2
 complete -d cd

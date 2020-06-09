@@ -60,12 +60,16 @@ if has('autocmd')
     au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
     au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
   augroup END
+  augroup Ask
+    au BufNewFile,BufRead *.src set ft=sh
+    au BufNewFile,BufRead Dockerfile.* set ft=dockerfile
+  augroup END
 endif
 " }}}
 
 " Configurations {{{
-runtime! config/colors.vim
 runtime! config/options.vim
 runtime! config/plugins.vim
 runtime! config/mappings.vim
+runtime! config/colors.vim
 " }}}
