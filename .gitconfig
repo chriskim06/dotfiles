@@ -70,3 +70,5 @@
   show = diff-so-fancy | less +Gg
 [http]
 	sslVerify = true
+[pull]
+	rebase = false
