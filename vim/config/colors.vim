@@ -3,9 +3,9 @@
 " Description: Color settings
 "
 
-colorscheme gruvbox
 let g:gruvbox_contrast_dark='hard'
 set background=dark
+colorscheme gruvbox
 augroup Colors
   au!
   au ColorScheme * hi CursorLine ctermbg=235
