@@ -37,6 +37,7 @@ vnoremap L g<c-g>
 vnoremap / y/<c-r>"<cr>
 vnoremap < <gv
 vnoremap > >gv
+command Json %!jq .
 " }}}
 
 " Buffer, tab, split mappings {{{
