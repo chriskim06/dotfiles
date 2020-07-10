@@ -87,10 +87,11 @@ brew_random() {
 # }}}2
 # }}}1
 
-# Aliases, git, and fzf {{{
+# Load other stuff {{{
 [[ -f ~/.aliases.sh ]] && source ~/.aliases.sh
 [[ -f ~/.git-stuff.sh ]] && source ~/.git-stuff.sh
 [[ -f ~/.fzf-stuff.sh ]] && source ~/.fzf-stuff.sh
+[[ -f ~/.private ]] && source ~/.private
 # }}}
 
 source <(kubectl completion bash)
