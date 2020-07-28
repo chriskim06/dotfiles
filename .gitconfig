@@ -69,6 +69,6 @@
   diff = diff-so-fancy | less +Gg
   show = diff-so-fancy | less +Gg
 [http]
-	sslVerify = true
+  sslVerify = true
 [pull]
-	rebase = false
+  rebase = false

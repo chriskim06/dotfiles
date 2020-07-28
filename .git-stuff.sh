@@ -56,18 +56,20 @@ vn() { # {{{2
 # [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 [[ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ]] && . "$(brew --prefix)/etc/bash_completion.d/git-completion.bash"
 [[ -f ~/bin/completion/git-custom-completion ]] && source ~/bin/completion/git-custom-completion
-__git_complete ga _git_add
-__git_complete gb _git_branch
-__git_complete gd _git_branch
-__git_complete gf _git_fetch
-__git_complete gc _git_commit
-__git_complete gk _git_checkout
-__git_complete gu _git_unstage
-__git_complete gs _git_number
-__git_complete gconf _git_config
-__git_complete stash _git_stash
-__git_complete push _git_push
-__git_complete pull _git_pull
-__git_complete delete _git_delete
-__git_complete discard _git_discard
+if command -v __git_complete; then
+  __git_complete ga _git_add
+  __git_complete gb _git_branch
+  __git_complete gd _git_branch
+  __git_complete gf _git_fetch
+  __git_complete gc _git_commit
+  __git_complete gk _git_checkout
+  __git_complete gu _git_unstage
+  __git_complete gs _git_number
+  __git_complete gconf _git_config
+  __git_complete stash _git_stash
+  __git_complete push _git_push
+  __git_complete pull _git_pull
+  __git_complete delete _git_delete
+  __git_complete discard _git_discard
+fi
 # }}}
