@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+#
+# Custom kubectl completion functions
+#
+
+_kubectl_ns () {
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  COMPREPLY=($(compgen -W "$(kubectl get ns --no-headers -o custom-columns=':metadata.name')" -- "$cur"))
+}
+
+_kubectl_ctx () {
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  COMPREPLY=($(compgen -W "$(kubectl config get-contexts --output=name)" -- "$cur"))
+}
