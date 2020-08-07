@@ -13,3 +13,6 @@ _kubectl_ctx () {
   local cur="${COMP_WORDS[COMP_CWORD]}"
   COMPREPLY=($(compgen -W "$(kubectl config get-contexts --output=name)" -- "$cur"))
 }
+
+complete -F _kubectl_ns ns
+complete -F _kubectl_ctx ctx

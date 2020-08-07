@@ -97,8 +97,6 @@ brew_random() {
 source <(kubectl completion bash)
 complete -F __start_kubectl kc
 [[ -f ~/bin/completion/kubectl-custom-completion ]] && source ~/bin/completion/kubectl-custom-completion
-complete -F _kubectl_ns ns
-complete -F _kubectl_ctx ctx
 
 # this is used to map caps lock to ctrl/escape on linux
 if [[ "$OSTYPE" == "linux-gnu" && -n "$(command -v setxkbmap)" && -n "$(command -v xcape)" ]]; then
