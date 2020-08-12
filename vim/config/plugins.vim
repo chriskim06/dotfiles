@@ -36,13 +36,15 @@ let g:NERDTreeShowHidden = 1
 " }}}
 
 " Indent Guides " {{{
-let g:indent_guides_color_change_percent = 15
-let g:indent_guides_start_level = 2
+let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_soft_pattern = ' '
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_default_mapping = 0
+let g:indent_guides_auto_colors = 0
+au VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=236
+au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
 " }}}
 
 " vim-go {{{

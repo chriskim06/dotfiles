@@ -3,9 +3,9 @@
 " Description: Color settings
 "
 
-let g:gruvbox_contrast_dark='hard'
+let g:miramare_disable_italic_comment = 1
 set background=dark
-colorscheme gruvbox
+colorscheme miramare
 augroup Colors
   au!
   au ColorScheme * hi CursorLine ctermbg=235
