@@ -32,6 +32,8 @@ Plug 'conradirwin/vim-bracketed-paste'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'diepm/vim-rest-console'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " Languages
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
