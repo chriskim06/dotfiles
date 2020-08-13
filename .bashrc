@@ -56,6 +56,7 @@ bind '"\e[1;3B": end-of-line'
 [[ -f ~/.functions.sh ]] && source ~/.functions.sh
 [[ -f ~/.git-stuff.sh ]] && source ~/.git-stuff.sh
 [[ -f ~/.fzf-stuff.sh ]] && source ~/.fzf-stuff.sh
+[[ -f ~/.local-aliases.sh ]] && source ~/.local-aliases.sh
 [[ -f ~/.private ]] && source ~/.private
 
 # kubectl stuff
