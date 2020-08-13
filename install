@@ -13,6 +13,7 @@ mkdir -p ~/bin/completion
 ln -sf $CWD/.bashrc ~
 ln -sf $CWD/.bash_profile ~
 ln -sf $CWD/.aliases.sh ~
+ln -sf $CWD/.functions.sh ~
 ln -sf $CWD/.git-stuff.sh ~
 ln -sf $CWD/.fzf-stuff.sh ~
 ln -sf $CWD/.gitconfig ~

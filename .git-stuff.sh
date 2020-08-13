@@ -2,7 +2,7 @@
 
 # Git stuff
 
-# Aliases {{{
+# aliases
 alias gb='git branch'
 alias gd='git branch -D'
 alias gf='git fetch --prune'
@@ -17,10 +17,9 @@ alias delete='git delete'
 alias discard='git discard'
 alias staged='git staged'
 alias branches='git branches'
-# }}}
 
-# Functions {{{1
-stash() { # {{{2
+# functions
+stash() {
   if [[ $# -eq 0 ]]; then
     git stash list --pretty="%C(bold 227)%gd %C(bold 14)<%ar> %C(bold 15)%gs" | cat
   elif [[ $# -eq 1 && "$1" == "list" ]]; then
@@ -31,28 +30,27 @@ stash() { # {{{2
   else
     git stash $*
   fi
-} # }}}2
-ga() { # {{{2
+}
+ga() {
   if [[ $# -eq 0 ]]; then
     printf "Choose files to stage for commit\n"
   else
     git add $(git list "$@" | sed "s/"$'\E\[1;31m'"//g")
     git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
   fi
-} # }}}2
-gconf() { # {{{2
+}
+gconf() {
   if [[ $# -eq 0 ]]; then
     git config --global -e
   else
     git config --global "$@"
   fi
-} # }}}2
-vn() { # {{{2
+}
+vn() {
   [[ $# -eq 1 ]] && vim $(git list "$@" | sed "s/"$'\E\[1;31m'"//g")
-} # }}}2
-# }}}1
+}
 
-# Completion {{{
+# completion
 # [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 [[ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ]] && . "$(brew --prefix)/etc/bash_completion.d/git-completion.bash"
 [[ -f ~/bin/completion/git-custom-completion ]] && source ~/bin/completion/git-custom-completion
@@ -72,4 +70,3 @@ if command -v __git_complete > /dev/null; then
   __git_complete delete _git_delete
   __git_complete discard _git_discard
 fi
-# }}}
