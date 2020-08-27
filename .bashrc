@@ -2,6 +2,9 @@
 # .bashrc
 #
 
+# fixes scp problem
+[[ -z "$PS1" ]] && return
+
 # tmux
 tmux new-session -A -s main 2>/dev/null
 

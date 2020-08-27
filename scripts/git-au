@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+#
+# git-au
+#
+
+[[ $# -ne 1 ]] && printf "Usage: git au {remote uri}\n" && exit 1
+
+git remote add upstream "$1"
+git remote set-url --push upstream no_push
+git remote -v

@@ -10,6 +10,17 @@ if command -v bat >/dev/null; then
 fi
 complete -o default -F _fzf_path_completion bat
 
+# find and replace
+fr() {
+  if [[ $# -ne 2 ]]; then
+    echo "ft {text_to_find} {replacement_text}"
+    return 1
+  fi
+
+  fd --type f --exec sed -i -e "s/$1/$2/g" {} \;
+}
+
+# print color table
 color() { # {{{3
   printf "%s\n" '\e[38;5;COLOR_CODEm is a foreground color'
   printf "%s\n" '\e[48;5;COLOR_CODEm is a background color'
@@ -22,11 +33,13 @@ color() { # {{{3
   done
 } # }}}3
 
+# base64 encode a string without the newline
 b64() { # {{{3
   printf "%s" "$@" | base64 -w 0
   echo
 } # }}}3
 
+# pick a random homebrew formulae to display in new shells
 brew_random() {
   if [[ -n "$(type -t cowsay)" ]]; then
     cat ~/.random_brew_cmd 2>/dev/null
