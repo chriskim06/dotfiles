@@ -4,8 +4,10 @@
 # Update a bunch of shit
 #
 
-printf "\e[1m\e[38;5;40mUpgrading apt\e[0m\e[0m\n"
-sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+if [[ "$(uname)" == "Linux" && -n "$(command -v apt)" ]]; then
+  printf "\e[1m\e[38;5;40mUpgrading apt\e[0m\e[0m\n"
+  sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+fi
 
 printf "\n\e[1m\e[38;5;40mUpgrading homebrew\e[0m\e[0m\n"
 brew asdf
