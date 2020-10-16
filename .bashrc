@@ -14,7 +14,8 @@ bash_prompt() {
   local e='\e[0m'
   local b='\e[48;5;'
   local f='\e[38;5;'
-  local arrow=$'\ue0b0'
+  local arrow=''
+#   local arrow=$'\ue0b0'
   local prompt=$(__git_ps1 " %s")
   if [[ -z "$prompt" ]]; then
     local last="\[$e\]\[${f}23m\]$arrow\[$e\]"
@@ -31,8 +32,9 @@ bash_prompt() {
     elif [[ "$prompt" =~ ^.*(%|\*).*$ ]]; then
       color="179m" # orange
     fi
-    local branch=$'\ue0a0'
-    # local branch=$'\u2387'
+    local branch=''
+#     local branch=$'\ue0a0'
+#     local branch=$'\u2387'
     local last="\[${b}$color\]\[${f}23m\]$arrow\[${b}$color\]\[${f}15m\]  $branch$prompt \[$e\]\[${f}$color\]$arrow\[$e\]"
   fi
   local line1="\n\[\e[1m\]\[${b}30m\]\[${f}15m\]  \u@\h \[${b}23m\]\[${f}30m\]$arrow\[${b}23m\]\[${f}15m\]  \w $last"

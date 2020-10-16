@@ -29,6 +29,7 @@ export FZF_DEFAULT_OPTS='--reverse --bind=tab:down,btab:up --color=fg:-1,bg:-1,h
 export FZF_COMPLETION_TRIGGER='jj'
 export THEFUCK_WAIT_COMMAND=3
 export THEFUCK_HISTORY_LIMIT='200'
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Load private environment variables such as secrets/tokens
 [[ -f $HOME/.private ]] && source $HOME/.private

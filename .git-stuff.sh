@@ -53,6 +53,7 @@ vn() {
 # completion
 # [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 [[ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ]] && . "$(brew --prefix)/etc/bash_completion.d/git-completion.bash"
+[[ -f "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh" ]] && . "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
 [[ -f ~/bin/completion/git-custom-completion ]] && source ~/bin/completion/git-custom-completion
 if command -v __git_complete > /dev/null; then
   __git_complete ga _git_add
