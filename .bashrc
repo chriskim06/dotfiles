@@ -63,6 +63,7 @@ bind '"\e[1;3B": end-of-line'
 [[ -f ~/.fzf-stuff.sh ]] && source ~/.fzf-stuff.sh
 [[ -f ~/.local-aliases.sh ]] && source ~/.local-aliases.sh
 [[ -f ~/.private ]] && source ~/.private
+[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 
 # kubectl stuff
 source <(kubectl completion bash)
