@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+#
+# shortcut for running local krew
+#
+
+KREW_EXECUTABLE="krew-$(uname | tr '[:upper:]' '[:lower:]')_amd64"
+KREW_HOME="$HOME/playground" $HOME/go/src/sigs.k8s.io/krew/out/bin/$KREW_EXECUTABLE
