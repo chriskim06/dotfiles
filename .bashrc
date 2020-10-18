@@ -57,13 +57,13 @@ bind '"\e[1;3A": beginning-of-line'
 bind '"\e[1;3B": end-of-line'
 
 # other stuff
+[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 [[ -f ~/.aliases.sh ]] && source ~/.aliases.sh
 [[ -f ~/.functions.sh ]] && source ~/.functions.sh
 [[ -f ~/.git-stuff.sh ]] && source ~/.git-stuff.sh
 [[ -f ~/.fzf-stuff.sh ]] && source ~/.fzf-stuff.sh
 [[ -f ~/.local-aliases.sh ]] && source ~/.local-aliases.sh
 [[ -f ~/.private ]] && source ~/.private
-[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 
 # kubectl stuff
 source <(kubectl completion bash)

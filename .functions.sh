@@ -17,11 +17,11 @@ fr() {
     return 1
   fi
 
-  fd --type f --exec sed -i -e "s/$1/$2/g" {} \;
+  fd --type f --exec sed -i '' -e "s/$1/$2/g" {} \;
 }
 
 # print color table
-color() { # {{{3
+color() {
   printf "%s\n" '\e[38;5;COLOR_CODEm is a foreground color'
   printf "%s\n" '\e[48;5;COLOR_CODEm is a background color'
   printf "%s\n" '\e[1m is bold and \e[0m ends a sequence'
@@ -31,13 +31,18 @@ color() { # {{{3
     printf "\e[48;5;${code}m  \e[38;5;0m$val  \e[0m|  \e[38;5;${code}m$val\e[0m  |"
     [[ $((($code + 1) % 8)) -eq 0 ]] && printf "\n"
   done
-} # }}}3
+}
 
 # base64 encode a string without the newline
-b64() { # {{{3
-  printf "%s" "$@" | base64 -w 0
+b64() {
+  if [[ "$(uname)" == "Linux" ]]; then
+    printf "%s" "$@" | base64 -w 0
+  else
+    # macos defaults the line wrapping to 0 already
+    printf "%s" "$@" | base64
+  fi
   echo
-} # }}}3
+}
 
 # pick a random homebrew formulae to display in new shells
 brew_random() {
