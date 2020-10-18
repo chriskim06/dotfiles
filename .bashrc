@@ -37,7 +37,7 @@ bash_prompt() {
 #     local branch=$'\u2387'
     local last="\[${b}$color\]\[${f}23m\]$arrow\[${b}$color\]\[${f}15m\]  $branch$prompt \[$e\]\[${f}$color\]$arrow\[$e\]"
   fi
-  local line1="\n\[\e[1m\]\[${b}30m\]\[${f}15m\]  \u@\h \[${b}23m\]\[${f}30m\]$arrow\[${b}23m\]\[${f}15m\]  \w $last"
+  local line1="\n\[\e[1m\]\[${b}30m\]\[${f}15m\]  \u@not-computer \[${b}23m\]\[${f}30m\]$arrow\[${b}23m\]\[${f}15m\]  \w $last"
   local line2="\n\[${b}32m\]\[${f}15m\]  \A \[$e\]\[${f}32m\]$arrow \[$e\]"
   PS1="${line1}${line2}"
 }
