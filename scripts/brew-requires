@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-#
-# brew-requires
-#
+set -euo pipefail
 
 [[ $# -ne 1 ]] && printf "usage: brew requires [formula]\n" && exit
 req="$(brew uses --installed --skip-recommended "$1" | sort)"

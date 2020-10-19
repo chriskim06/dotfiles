@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-#
-# git-squash
-#
+set -euo pipefail
 
 __print_squash_usage() {
   printf "Usage: git squash [amount|commit]\n"

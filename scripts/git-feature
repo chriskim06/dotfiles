@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-#
-# git-feature
-#
+set -euo pipefail
 
 _get_jira_ticket_for_description () {
   local endpoint="$1"

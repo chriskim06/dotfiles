@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 if [[ $# -eq 0 ]]; then
   branch=$(git rev-parse --abbrev-ref HEAD)
 else
@@ -10,4 +12,3 @@ commit=$(diff -u <(git rev-list --first-parent $branch) <(git rev-list --first-p
 commit=${commit:0:7}
 printf "The immediate parent branch of $branch is: \e[38;5;220m$parent$\e[0m\n"
 printf "The base commit of $branch is:             \e[38;5;220m$commit$\e[0m\n"
-

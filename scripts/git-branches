@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 #
-# git-branches
+# print branches with their descriptions
 #
 
 if [[ $# -gt 0 ]]; then
@@ -65,7 +67,7 @@ if [[ $# -gt 0 ]]; then
 else
   while read -r branch; do
     clean_branch_name="${branch//\*\ /}"
-    description=$(git config branch.$clean_branch_name.description)
+    description=$(git config branch.$clean_branch_name.description || echo "")
     if [[ "${branch::1}" == "*" ]]; then
       printf "* \e[38;5;10m$clean_branch_name\e[0m \e[38;5;255m$description\e[0m\n"
     else

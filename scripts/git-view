@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 if [[ $# -ne 2 ]]; then
   printf "Usage: git view <revision> <file>\n"
   exit 1
@@ -28,4 +30,3 @@ else
   fi
   git show "$1:$file"
 fi
-

@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 if [[ $# -ne 1 ]]; then
   printf "Usage: git sync <branch>\n"
 else
   git fetch origin "$1":"$1"
 fi
-

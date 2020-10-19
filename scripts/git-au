@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-#
-# git-au
-#
+set -euo pipefail
 
 [[ $# -ne 1 ]] && printf "Usage: git au {remote uri}\n" && exit 1
 

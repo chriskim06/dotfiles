@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-#
-# brew-asdf
-#
+set -euo pipefail
 
 brew update
 [[ -n $(brew outdated) ]] && brew upgrade --ignore-pinned && brew cleanup -s
