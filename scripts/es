@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+PORT=${1:-4205}
+HTTP_RESPONSE='HTTP/1.1 200 OK\r\nContent-type: application/json\r\nContent-Length: 3\r\n\r\n{}\n'
+while true; do
+  echo "${HTTP_RESPONSE}" | nc -l $PORT
+done
