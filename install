@@ -6,6 +6,9 @@ set -e
 # install everything on Ubuntu
 #
 
+# make directory for personal repos
+mkdir -p $HOME/src/chriskim06
+
 # symlink stuff
 CWD=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
@@ -34,7 +37,7 @@ if [[ "$(uname)" == 'Linux' ]]; then
   sudo apt install -y docker-ce docker-ce-cli containerd.io
   sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
-  
+
   # install linuxbrew and stuff
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
   /home/linuxbrew/.linuxbrew/bin/brew install $(cat brew-formulae.txt | tr '\n' ' ')
