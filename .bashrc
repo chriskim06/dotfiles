@@ -70,6 +70,7 @@ bind '"\e[1;3B": end-of-line'
 [[ -f ~/.fzf-stuff.sh ]] && source ~/.fzf-stuff.sh
 [[ -f ~/.local-aliases.sh ]] && source ~/.local-aliases.sh
 [[ -f ~/.private ]] && source ~/.private
+[[ -f ~/.local-aliases.sh ]] && source ~/.local-aliases.sh
 
 # kubectl stuff
 source <(kubectl completion bash)

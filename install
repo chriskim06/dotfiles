@@ -25,8 +25,9 @@ ln -sf $CWD/.tmux.conf ~
 ln -sf $CWD/scripts/* ~/bin
 ln -sf $CWD/completion/* ~/bin/completion
 
-# create empty file for secrets/tokens
+# create empty file for secrets/tokens and local aliases
 touch $HOME/.private
+touch $HOME/.local-aliases.sh
 
 if [[ "$(uname)" == 'Linux' ]]; then
   # install docker
