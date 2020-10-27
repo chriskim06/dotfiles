@@ -3,9 +3,8 @@
 set -euo pipefail
 
 _get_jira_ticket_for_description () {
-  local endpoint="$1"
-  [[ "$JIRA_URL" =~ /$ ]] && endpoint="$JIRA_URL$endpoint" || endpoint="$JIRA_URL/$endpoint"
-  local summary=$(curl -s -u $USERNAME:$PASSWORD $endpoint | jq -M -r '.fields.summary')
+  local url="$JIRA_URL/rest/api/latest/issue/$1"
+  local summary=$(curl -s -u $JIRA_USERNAME:$JIRA_PASSWORD $url | jq -M -r '.fields.summary')
   if [[ -n "$summary" ]]; then
     git config branch.$1.description "$summary"
     [[ -n "$(type -p 'git-branches')" ]] && git branches
@@ -14,21 +13,22 @@ _get_jira_ticket_for_description () {
 
 _print_usage () {
   printf "Usage:  git feature <ticket_id>\n"
-  printf "\tThis script uses \$USERNAME, \$PASSWORD, and \$JIRA_URL environment variables. An optional \$PREFIX\n"
-  printf "\tvariable can be set for your JIRA project prefix so that you can simply provide the ticket number\n"
-  printf "\tas the only argument to this script. If \$PREFIX is not used then you must provide the full ticket\n"
-  printf "\tname (e.g., XYZ-1234). \$PREFIX should just be letters without a dash. These variables can be set in\n"
-  printf "\tyour .bashrc or in a file in your home directory called '.git-feature'.\n"
+  printf "\tThis script uses \$JIRA_USERNAME, \$JIRA_PASSWORD, and \$JIRA_URL environment variables. An optional\n"
+  printf "\t\$PREFIX variable can be set for your JIRA project prefix so that you can simply provide the ticket\n"
+  printf "\tnumber as the only argument to this script. If \$PREFIX is not used then you must provide the full\n"
+  printf "\tticket name (e.g., XYZ-1234). \$PREFIX should just be letters without a dash.\n"
 }
 
 [[ $# -ne 1 ]] && _print_usage && exit 0
 [[ -z "$(type -t jq)" ]] && printf "jq is required to parse the response from JIRA.\n" && exit 0
 if [[ "$1" =~ ^[A-Z]*-?[0-9]+$ ]]; then
   br="$1"
-  [[ -f ~/.git-feature ]] && source ~/.git-feature
-  [[ -z "$USERNAME" || -z "$PASSWORD" || -z "$JIRA_URL" ]] && _print_usage && exit 1
+  [[ -z "$JIRA_USERNAME" || -z "$JIRA_PASSWORD" || -z "$JIRA_URL" ]] && _print_usage && exit 1
   if [[ -n "$PREFIX" ]] && ! [[ "$br" =~ ^[A-Z]+-[0-9]+$ ]]; then
-    [[ "$PREFIX" =~ -$ ]] && br="$PREFIX$br" || br="$PREFIX-$br"
+    br="$PREFIX-$br"
+  fi
+  if [[ -n "$BRANCH_PREFIX" ]]; then
+    br="$BRANCH_PREFIX/$br"
   fi
   if [[ -n "$(git branch --all | grep $br)" ]]; then
     [[ -n "$(git config branch.$br.description)" ]] && printf "$br already exists and has a description.\n" && exit 0
