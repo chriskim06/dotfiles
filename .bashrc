@@ -74,7 +74,7 @@ bind '"\e[1;3B": end-of-line'
 
 # kubectl stuff
 source <(kubectl completion bash)
-complete -F __start_kubectl kc
+complete -F __start_kubectl k
 [[ -f ~/bin/completion/kubectl-custom-completion ]] && source ~/bin/completion/kubectl-custom-completion
 
 # this is used to map caps lock to ctrl/escape on linux
