@@ -10,6 +10,16 @@ if command -v bat >/dev/null; then
 fi
 complete -o default -F _fzf_path_completion bat
 
+# run interactive bash in docker container
+dr() {
+  if [[ $# -ne 1 ]]; then
+    echo "dr {image}"
+    return 1
+  fi
+  local image="$1"
+  docker run --interactive --rm --entrypoint /bin/bash "$image"
+}
+
 # find and replace
 fr() {
   if [[ $# -ne 2 ]]; then

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 PORT=${1:-4205}
 HTTP_RESPONSE='HTTP/1.1 200 OK\r\nContent-type: application/json\r\nContent-Length: 3\r\n\r\n{}\n'
 while true; do
