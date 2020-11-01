@@ -6,7 +6,7 @@ _get_jira_ticket_for_description () {
   local url="$JIRA_URL/rest/api/latest/issue/$1"
   local summary=$(curl -s -u $JIRA_USERNAME:$JIRA_PASSWORD $url | jq -M -r '.fields.summary')
   if [[ -n "$summary" ]]; then
-    git config branch.$1.description "$summary"
+    git config branch.$2.description "$summary"
     [[ -n "$(type -p 'git-branches')" ]] && git branches
   fi
 }
@@ -27,18 +27,19 @@ if [[ "$1" =~ ^[A-Z]*-?[0-9]+$ ]]; then
   if [[ -n "$PREFIX" ]] && ! [[ "$br" =~ ^[A-Z]+-[0-9]+$ ]]; then
     br="$PREFIX-$br"
   fi
+  brp="$br"
   if [[ -n "$BRANCH_PREFIX" ]]; then
-    br="$BRANCH_PREFIX/$br"
+    brp="$BRANCH_PREFIX/$br"
   fi
-  if [[ -n "$(git branch --all | grep $br)" ]]; then
-    [[ -n "$(git config branch.$br.description)" ]] && printf "$br already exists and has a description.\n" && exit 0
-    read -e -r -p "$br exists without a description. Try to get its JIRA summary? [y/n]: " choice && printf "\n"
-    [[ "$choice" =~ ^y|Y ]] && _get_jira_ticket_for_description "$br"
+  if [[ -n "$(git branch --all | grep $brp)" ]]; then
+    [[ -n "$(git config branch.$brp.description)" ]] && printf "$brp already exists and has a description.\n" && exit 0
+    read -e -r -p "$brp exists without a description. Try to get its JIRA summary? [y/n]: " choice && printf "\n"
+    [[ "$choice" =~ ^y|Y ]] && _get_jira_ticket_for_description "$br" "$brp"
   else
-    git fetch origin master:master
-    git checkout -b "$br" origin/master
-    git push -u origin "$br"
-    _get_jira_ticket_for_description "$br"
+    git fetch
+    git checkout -b "$brp" origin/master
+    git push -u origin "$brp"
+    _get_jira_ticket_for_description "$br" "$brp"
   fi
 else
   _print_usage
