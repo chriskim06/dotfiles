@@ -17,7 +17,7 @@ dr() {
     return 1
   fi
   local image="$1"
-  docker run --interactive --rm --entrypoint /bin/bash "$image"
+  docker run --interactive --tty --rm --entrypoint /bin/bash "$image"
 }
 
 # find and replace
