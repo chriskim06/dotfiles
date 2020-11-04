@@ -65,14 +65,23 @@ if [[ $# -gt 0 ]]; then
     printf "# usage: git branches [-d|-h]\n# \t[-d]: Interactively delete your branches\n# \t[-h]: Print help text\n"
   fi
 else
+  current=$'\u276f'
+  if [[ "$(uname)" == "Darwin" ]]; then
+    current="$(echo -e '\u276f')"
+  fi
   while read -r branch; do
     clean_branch_name="${branch//\*\ /}"
     description=$(git config branch.$clean_branch_name.description || echo "")
+    branch_len=${#clean_branch_name}
+    description_len=${#description}
+    remaining_len=$((80 - branch_len - 6)) # max line width - branch name length - 3 (for the padding around branch) - 3 (for ellipses)
+    if [[ $description_len -gt $remaining_len ]]; then
+      description="${description:0:$remaining_len}..."
+    fi
     if [[ "${branch::1}" == "*" ]]; then
-      printf "* \e[38;5;10m$clean_branch_name\e[0m \e[38;5;255m$description\e[0m\n"
+      printf "$current \e[38;5;10m$clean_branch_name\e[0m \e[38;5;255m$description\e[0m\n"
     else
       printf "  $branch \e[38;5;255m$description\e[0m\n"
     fi
   done <<< "$(git branch --list)"
 fi
-
