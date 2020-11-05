@@ -7,7 +7,7 @@ _get_jira_ticket_for_description () {
   local summary=$(curl -s -u $JIRA_USERNAME:$JIRA_PASSWORD $url | jq -M -r '.fields.summary')
   if [[ -n "$summary" ]]; then
     git config branch.$2.description "$summary"
-    [[ -n "$(type -p 'git-branches')" ]] && git branches
+    [[ -n "$(type -p 'git-branches')" ]] && echo && git branches
   fi
 }
 

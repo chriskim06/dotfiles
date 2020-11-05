@@ -67,23 +67,3 @@ let g:go_version_warning = 0
 " gitgutter {{{
 let g:gitgutter_terminal_report_focus = 0
 " }}}
-
-" rainbow_parentheses {{{
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-\  'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-\  'ctermfgs': ['white', 'lightgreen', 'cyan', 'magenta'],
-\  'operators': '_,_',
-\  'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-\  'separately': {
-\    '*': {},
-\    'markdown': {
-\      'parentheses_options': 'containedin=markdownCode contained',
-\    },
-\    'vim': {
-\      'parentheses_options': 'containedin=vimFuncBody',
-\    },
-\    'css': 0,
-\  }
-\}
-" }}}

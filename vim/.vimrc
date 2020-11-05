@@ -46,7 +46,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'luochen1990/rainbow'
 
 call plug#end()
 " }}}
