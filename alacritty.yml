@@ -1,0 +1,54 @@
+# window configuration
+window:
+  startup_mode: Maximized
+  decorations: none
+
+# font configuration (changes require restart)
+font:
+  size: 14
+  offset:
+    x: 0
+    y: 1
+  glyph_offset:
+    x: 0
+    y: 2
+  normal:
+    family: Hack
+    style: Regular
+  bold:
+    family: Hack
+  italic:
+    family: Hack
+
+# color configuration
+colors:
+  cursor:
+   text: CellBackground
+   cursor: '0xb4b1b1'
+
+  # Default colors
+  primary:
+    background: '0x282828'
+    foreground: '0xeeeeee'
+
+  # Normal colors
+  normal:
+    black:   '0x080200'
+    red:     '0xfa5e5b'
+    green:   '0x16c98d'
+    yellow:  '0xffc83f'
+    blue:    '0x288ad6'
+    magenta: '0xd34590'
+    cyan:    '0x28ddde'
+    white:   '0xe7e7e7'
+
+  # Bright colors
+  bright:
+    black:   '0x6f6b67'
+    red:     '0xfa5e5b'
+    green:   '0x16c98d'
+    yellow:  '0xfeef6d'
+    blue:    '0x278ad6'
+    magenta: '0xd34590'
+    cyan:    '0x27dede'
+    white:   '0xffffff'
