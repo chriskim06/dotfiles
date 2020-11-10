@@ -4,4 +4,3 @@
 "
 
 set foldmethod=marker
-
