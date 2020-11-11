@@ -2,7 +2,7 @@
 
 # Aliases
 
-alias rg='rg --smart-case --hidden --glob "!.git/**"'
+alias rg='rg --smart-case --hidden --glob "!.git/**" --glob "!vendor/**"'
 alias fd='fd --hidden --exclude ".git/*"'
 alias vv='vim ~/src/dotfiles/vim/.vimrc'
 alias vimfiles='cd ~/src/dotfiles/vim; pwd; ll'
