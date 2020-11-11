@@ -47,6 +47,7 @@ bash_prompt() {
   local line2="\n\[${b}32m\]\[${f}15m\]  \A \[$e\]\[${f}32m\]$arrow \[$e\]"
   PS1="${line1}${line2}"
 }
+export PROMPT_DIRTRIM=3
 export PROMPT_COMMAND="history -a; history -c; history -r; bash_prompt"
 
 # miscellaneous
