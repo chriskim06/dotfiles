@@ -3,10 +3,12 @@
 #
 
 # Environment variables
-export PATH="$PATH:$HOME/bin:${GOPATH//://bin:}/bin:$HOME/.cargo/bin:$HOME/.krew/bin"
+PATH=$(getconf PATH)
+PATH="$PATH:/usr/local/bin:$HOME/bin:${GOPATH//://bin:}/bin:$HOME/.cargo/bin:$HOME/.krew/bin"
 if [[ "$(uname)" == Linux ]]; then
-  export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
+  PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
 fi
+export PATH="$PATH"
 export GOPATH="$HOME/go"
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
