@@ -4,7 +4,7 @@
 
 # Environment variables
 PATH=$(getconf PATH)
-PATH="$PATH:/usr/local/bin:$HOME/bin:${GOPATH//://bin:}/bin:$HOME/.cargo/bin:$HOME/.krew/bin"
+PATH="/usr/local/bin:$HOME/bin:${GOPATH//://bin:}/bin:$HOME/.krew/bin:$PATH"
 if [[ "$(uname)" == Linux ]]; then
   PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
 fi
