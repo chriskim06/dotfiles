@@ -14,9 +14,9 @@ _get_jira_ticket_for_description () {
 _print_usage () {
   printf "Usage:  git feature <ticket_id>\n"
   printf "\tThis script uses \$JIRA_USERNAME, \$JIRA_PASSWORD, and \$JIRA_URL environment variables. An optional\n"
-  printf "\t\$PREFIX variable can be set for your JIRA project prefix so that you can simply provide the ticket\n"
-  printf "\tnumber as the only argument to this script. If \$PREFIX is not used then you must provide the full\n"
-  printf "\tticket name (e.g., XYZ-1234). \$PREFIX should just be letters without a dash.\n"
+  printf "\t\$JIRA_PREFIX variable can be set for your JIRA project prefix so that you can simply provide the ticket\n"
+  printf "\tnumber as the only argument to this script. If \$JIRA_PREFIX is not used then you must provide the full\n"
+  printf "\tticket name (e.g., XYZ-1234). \$JIRA_PREFIX should just be letters without a dash.\n"
 }
 
 [[ $# -ne 1 ]] && _print_usage && exit 0
@@ -24,8 +24,8 @@ _print_usage () {
 if [[ "$1" =~ ^[A-Z]*-?[0-9]+$ ]]; then
   br="$1"
   [[ -z "$JIRA_USERNAME" || -z "$JIRA_PASSWORD" || -z "$JIRA_URL" ]] && _print_usage && exit 1
-  if [[ -n "$PREFIX" ]] && ! [[ "$br" =~ ^[A-Z]+-[0-9]+$ ]]; then
-    br="$PREFIX-$br"
+  if [[ -n "$JIRA_PREFIX" ]] && ! [[ "$br" =~ ^[A-Z]+-[0-9]+$ ]]; then
+    br="$JIRA_PREFIX-$br"
   fi
   brp="$br"
   if [[ -n "$BRANCH_PREFIX" ]]; then
