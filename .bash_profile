@@ -5,6 +5,9 @@
 # Environment variables
 PATH=$(getconf PATH)
 PATH="/usr/local/bin:$HOME/bin:${GOPATH//://bin:}/bin:$HOME/.krew/bin:$PATH"
+if [[ "$(uname)" == "Darwin" ]]; then
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/opt/grep/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+fi
 if [[ "$(uname)" == Linux ]]; then
   PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
 fi
