@@ -29,11 +29,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'henrik/vim-indexed-search'
 Plug 'conradirwin/vim-bracketed-paste'
-Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'diepm/vim-rest-console'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'zivyangll/git-blame.vim'
 
 " Languages
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }

@@ -81,10 +81,10 @@ nnoremap <leader>i :source %<cr>:PlugInstall<cr>
 nnoremap <leader>d :source %<cr>:PlugClean<cr>
 nnoremap <leader>u :PlugUpdate \| PlugUpgrade<cr>
 nnoremap <leader>r :GitGutterUndoHunk<cr>
-nnoremap <leader>b :TagbarToggle<cr>
+nnoremap <leader>\ :TagbarToggle<cr>
 nnoremap <leader>/ :Rg <c-r><c-w><cr>
 nnoremap <silent> <leader>p :GitGutterPreviewHunk<cr>
-nnoremap <silent> <leader>\ :NERDTreeToggle<cr>
+nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 nnoremap <silent> gd <plug>(coc-definition)
 nnoremap <silent> gi <plug>(coc-implementation)
 nnoremap <silent> gr :call CocAction('jumpReferences')<cr>
@@ -92,4 +92,5 @@ nnoremap <silent> C :CocConfig<cr>
 nnoremap <silent> P :Files<cr>
 nnoremap <silent> O :Buffers<cr>
 nnoremap <silent> K :call CocActionAsync('doHover')<cr>
+command Gblame call gitblame#echo()
 " }}}

@@ -14,6 +14,13 @@ let g:airline_section_z = '%l/%L : %c'
 au FileType html,vim let g:AutoPairs['<'] = '>'
 " }}}
 
+" Tagbar {{{
+let g:tagbar_width = max([25, winwidth(0) / 4])
+let g:tagbar_autofocus = 1
+let g:tagbar_case_insensitive = 1
+let g:tagbar_show_visibility = 0
+" }}}
+
 " FZF {{{
 let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_colors = { 'fg': ['fg', 'Comment'] }
