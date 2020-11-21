@@ -6,7 +6,7 @@
 " Useful and Random mappings {{{
 map ; :
 noremap <cr> G
-nnoremap <silent> <expr> Q (len(getbufinfo({'buflisted':1})) == 1) ? ":q\<cr>" : ":bp\|bd #\<cr>"
+nnoremap <silent> <expr> Q (len(getbufinfo({'buflisted':1})) == 1) ? ":q\<cr>" : ":bp\|bw #\<cr>"
 nnoremap <silent> W :%s/\s\+$//ge<cr>:w<cr>
 nnoremap r <c-r>
 nnoremap <ScrollWheelUp> <c-y>
@@ -17,7 +17,7 @@ nnoremap <c-p> P
 nnoremap <silent> ~ mZ~`Z:delm Z<cr>
 nnoremap <silent> U mZgUiw`Z:delm Z<cr>
 nnoremap <silent> <space> @=(foldlevel('.') ? 'za' : "\<space>")<cr>
-nnoremap <silent> L :noh<cr>
+nnoremap <silent> L :noh \| echo<cr>
 nnoremap + <c-a>
 nnoremap - <c-x>
 nnoremap v <c-v>
