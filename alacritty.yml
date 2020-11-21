@@ -5,7 +5,7 @@ window:
 
 # font configuration (changes require restart)
 font:
-  size: 14
+  size: 16
   offset:
     x: 0
     y: 1
@@ -19,6 +19,11 @@ font:
     family: Hack
   italic:
     family: Hack
+
+key_bindings:
+  - { key: Equals, mods: Command, action: None }
+  - { key: Add,    mods: Command, action: None }
+  - { key: Minus,  mods: Command, action: None }
 
 # color configuration
 colors:
