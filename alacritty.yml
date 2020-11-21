@@ -25,6 +25,11 @@ key_bindings:
   - { key: Add,    mods: Command, action: None }
   - { key: Minus,  mods: Command, action: None }
 
+mouse:
+  hide_when_typing: false
+  url:
+    modifiers: Shift
+
 # color configuration
 colors:
   cursor:
