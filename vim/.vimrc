@@ -53,7 +53,7 @@ call plug#end()
 " Autocommand Settings {{{
 if has('autocmd')
   augroup Files
-    au FileType * set formatoptions-=cro
+    au BufNewFile,BufRead Dockerfile.* set ft=dockerfile
   augroup END
   augroup Buffer
     au BufWritePost,BufWinLeave,BufLeave,WinLeave ?* if &ft != 'help' && &ft != 'fzf' | mkview! | endif
@@ -63,10 +63,6 @@ if has('autocmd')
   augroup Folding
     au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
     au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-  augroup END
-  augroup Ask
-    au BufNewFile,BufRead *.src set ft=sh
-    au BufNewFile,BufRead Dockerfile.* set ft=dockerfile
   augroup END
 endif
 " }}}
