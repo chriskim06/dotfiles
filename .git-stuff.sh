@@ -5,7 +5,7 @@
 # aliases
 alias gb='git branch'
 alias gd='git branch -D'
-alias gf='git fetch --prune'
+alias gf='git fetch --all --prune'
 alias gk='git checkout'
 alias gc='git commit'
 alias gl='git lg'
