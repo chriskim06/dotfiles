@@ -6,7 +6,7 @@
 " Useful and Random mappings {{{
 map ; :
 noremap <cr> G
-nnoremap <silent> <expr> Q (len(getbufinfo({'buflisted':1})) == 1) ? ":q\<cr>" : ":bp\|bw #\<cr>"
+nnoremap <silent> Q :call CloseBuffer()<cr>
 nnoremap <silent> W :%s/\s\+$//ge<cr>:w<cr>
 nnoremap r <c-r>
 nnoremap <ScrollWheelUp> <c-y>

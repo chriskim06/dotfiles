@@ -72,4 +72,5 @@ runtime! config/options.vim
 runtime! config/plugins.vim
 runtime! config/mappings.vim
 runtime! config/colors.vim
+runtime! config/functions.vim
 " }}}
