@@ -19,7 +19,3 @@ ln -sf $CWD/coc-settings.json ~/.vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +'PlugInstall --sync' +qa
-
-# Try moving onedark theme to vim-airline-themes
-airline="$HOME/.vim/bundle/vim-airline-themes/autoload/airline/themes"
-[[ -d $airline ]] && ln -sf $CWD/onedark.vim $airline
