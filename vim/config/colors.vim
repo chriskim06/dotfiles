@@ -3,8 +3,12 @@
 " Description: Color settings
 "
 
+" these are for enabling italics
+set t_ZH=[3m
+set t_ZR=[23m
 set termguicolors
-let g:miramare_disable_italic_comment = 1
+let g:miramare_enable_italic = 1
+let g:miramare_enable_italic_string = 1
 let g:miramare_palette = {
       \ 'bg0':        ['#2A2426',   '235',  'Black'],
       \ 'bg1':        ['#242032',   '236',  'DarkGrey'],
