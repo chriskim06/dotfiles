@@ -5,7 +5,6 @@
 # aliases
 alias gb='git branch'
 alias gd='git branch -D'
-alias gf='git fetch --all --prune'
 alias gk='git checkout'
 alias gc='git commit'
 alias gl='git lg'
@@ -31,6 +30,15 @@ stash() {
     git stash $*
   fi
 }
+
+gf() {
+  if [[ $# -eq 0 ]]; then
+    git fetch --all --prune
+  else
+    git fetch --prune "$@"
+  fi
+}
+
 ga() {
   if [[ $# -eq 0 ]]; then
     printf "Choose files to stage for commit\n"
@@ -39,6 +47,7 @@ ga() {
     git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
   fi
 }
+
 gconf() {
   if [[ $# -eq 0 ]]; then
     git config --global -e
@@ -46,6 +55,7 @@ gconf() {
     git config --global "$@"
   fi
 }
+
 vn() {
   [[ $# -eq 1 ]] && vim $(git list "$@" | sed "s/"$'\E\[1;31m'"//g")
 }
