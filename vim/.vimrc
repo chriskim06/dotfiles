@@ -52,10 +52,10 @@ call plug#end()
 " }}}
 
 " Configurations {{{
-runtime! config/autocmd.vim
-runtime! config/options.vim
-runtime! config/plugins.vim
-runtime! config/mappings.vim
-runtime! config/colors.vim
-runtime! config/functions.vim
+runtime config/autocmd.vim
+runtime config/options.vim
+runtime config/plugins.vim
+runtime config/mappings.vim
+runtime config/colors.vim
+runtime config/functions.vim
 " }}}
