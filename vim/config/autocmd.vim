@@ -6,6 +6,7 @@
 if has('autocmd')
   augroup Files
     au BufNewFile,BufRead Dockerfile.* set ft=dockerfile
+    au FileType yaml set foldmethod=indent
   augroup END
   augroup Buffer
     au BufWritePost,BufWinLeave,BufLeave,WinLeave ?* if &ft != 'help' && &ft != 'fzf' | mkview! | endif
