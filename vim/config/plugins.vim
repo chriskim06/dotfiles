@@ -19,6 +19,7 @@ let g:tagbar_width = max([25, winwidth(0) / 4])
 let g:tagbar_autofocus = 1
 let g:tagbar_case_insensitive = 1
 let g:tagbar_show_visibility = 0
+let g:tagbar_show_tag_linenumbers = 1
 " }}}
 
 " FZF {{{

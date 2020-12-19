@@ -30,6 +30,20 @@ fr() {
   fd --type f --exec sed -i '' -e "s/$1/$2/g" {} \;
 }
 
+# interactively find process to kill
+fkill() {
+  local pid
+  if [[ "$UID" != "0" ]]; then
+    pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+  else
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+  fi
+
+  if [[ "x$pid" != "x" ]]; then
+    echo $pid | xargs kill -${1:-9}
+  fi
+}
+
 # print color table
 color() {
   printf "%s\n" '\e[38;5;COLOR_CODEm is a foreground color'

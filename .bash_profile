@@ -34,6 +34,7 @@ export LESS_TERMCAP_us=$(printf "\e[1;38;5;11m")
 export LESS='-KRSgis -j4 -#4 -P [?f%f:stdin.] ?lt?lbLines %lt-%lb..?L (%L).'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude ".git/*" --exclude "*.swp"'
 export FZF_DEFAULT_OPTS='--reverse --bind=tab:down,btab:up --color=fg:-1,bg:-1,hl:24,fg+:254,bg+:239,hl+:33,info:136,prompt:136,pointer:230,marker:230,spinner:136'
+export FZF_COMPLETION_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
 export FZF_COMPLETION_TRIGGER='jj'
 export THEFUCK_WAIT_COMMAND=3
 export THEFUCK_HISTORY_LIMIT='200'
