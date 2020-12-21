@@ -72,7 +72,7 @@ b64() {
 brew_random() {
   if [[ -n "$(type -t cowsay)" ]]; then
     cat ~/.random_brew_cmd 2>/dev/null
-    local formulae=($(brew search | grep -v /))
+    local formulae=($(brew formulae | grep -v /))
     local desc=$(brew desc "${formulae[$((RANDOM % ${#formulae[@]}))]}" 2>/dev/null)
     [[ $? -eq 0 ]] && cowsay "$desc" > ~/.random_brew_cmd
   fi
