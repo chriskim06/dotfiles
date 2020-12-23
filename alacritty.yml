@@ -20,10 +20,14 @@ font:
   italic:
     family: Hack
 
+# \x00 is the character sequence for my tmux prefix ctrl+space
 key_bindings:
-  - { key: Equals, mods: Command, action: None }
-  - { key: Add,    mods: Command, action: None }
-  - { key: Minus,  mods: Command, action: None }
+  - { key: Equals, mods: Command,       action: None }
+  - { key: Add,    mods: Command,       action: None }
+  - { key: Minus,  mods: Command,       action: None }
+  - { key: D,      mods: Control,       action: None }
+  - { key: Tab,    mods: Control,       chars: "\x00n" }
+  - { key: Tab,    mods: Control|Shift, chars: "\x00p" }
 
 mouse:
   hide_when_typing: false
