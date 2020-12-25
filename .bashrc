@@ -57,11 +57,13 @@ shopt -s histappend
 
 bind '"\C-l": forward-word'
 bind '"\C-h": backward-word'
+bind '"\C-j": end-of-line'
+bind '"\C-k": beginning-of-line'
 bind '"\C-d": backward-kill-word'
-bind '"\e[1;3C": forward-word'
-bind '"\e[1;3D": backward-word'
-bind '"\e[1;3A": beginning-of-line'
-bind '"\e[1;3B": end-of-line'
+# bind '"\e[1;3C": forward-word'
+# bind '"\e[1;3D": backward-word'
+# bind '"\e[1;3A": beginning-of-line'
+# bind '"\e[1;3B": end-of-line'
 
 # other stuff
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
@@ -71,7 +73,6 @@ bind '"\e[1;3B": end-of-line'
 [[ -f ~/.fzf-stuff.sh ]] && source ~/.fzf-stuff.sh
 [[ -f ~/.local-aliases.sh ]] && source ~/.local-aliases.sh
 [[ -f ~/.private ]] && source ~/.private
-[[ -f ~/.local-aliases.sh ]] && source ~/.local-aliases.sh
 
 # kubectl stuff
 source <(kubectl completion bash)
