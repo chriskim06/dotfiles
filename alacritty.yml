@@ -25,7 +25,7 @@ key_bindings:
   - { key: Equals, mods: Command,       action: None }
   - { key: Add,    mods: Command,       action: None }
   - { key: Minus,  mods: Command,       action: None }
-  - { key: D,      mods: Control,       action: None }
+  - { key: D,      mods: Control,       chars: "\x17" } # send ctrl+w to delete word backwords
   - { key: Tab,    mods: Control,       chars: "\x00n" }
   - { key: Tab,    mods: Control|Shift, chars: "\x00p" }
 
