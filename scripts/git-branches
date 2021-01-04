@@ -74,9 +74,13 @@ else
     description=$(git config branch.$clean_branch_name.description || echo "")
     branch_len=${#clean_branch_name}
     description_len=${#description}
-    remaining_len=$((80 - branch_len - 6)) # max line width - branch name length - 3 (for the padding around branch) - 3 (for ellipses)
+    remaining_len=$((80 - branch_len - 4)) # max line width - branch name length - 3 (for the padding around branch) - 1 (for ellipses)
     if [[ $description_len -gt $remaining_len ]]; then
-      description="${description:0:$remaining_len}..."
+      ellipses=$'\u2026'
+      if [[ "$(uname)" == "Darwin" ]]; then
+        ellipses="$(echo -e '\u2026')"
+      fi
+      description="${description:0:$remaining_len}${ellipses}"
     fi
     if [[ "${branch::1}" == "*" ]]; then
       printf "$current \e[38;5;10m$clean_branch_name\e[0m \e[38;5;255m$description\e[0m\n"
