@@ -25,7 +25,7 @@ if [[ "$1" =~ ^[A-Z]*-?[0-9]+$ ]]; then
   br="$1"
   [[ -z "$JIRA_USERNAME" || -z "$JIRA_PASSWORD" || -z "$JIRA_URL" ]] && _print_usage && exit 1
   if [[ -n "$JIRA_PREFIX" ]] && ! [[ "$br" =~ ^[A-Z]+-[0-9]+$ ]]; then
-    br="$JIRA_PREFIX-$br"
+    br="$(echo $JIRA_PREFIX | tr '[:upper:]' '[:lower:]')-$br"
   fi
   brp="$br"
   if [[ -n "$BRANCH_PREFIX" ]]; then
