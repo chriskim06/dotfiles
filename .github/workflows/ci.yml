@@ -1,0 +1,14 @@
+name: CI test
+
+on: push
+
+jobs:
+  build:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: test tee /dev/stderr
+      run : |
+        set -x
+        set -euo pipefail
+        seq 0 10 | tee /dev/stderr | xargs echo
