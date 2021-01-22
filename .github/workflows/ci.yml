@@ -11,5 +11,4 @@ jobs:
       run : |
         set -x
         set -euo pipefail
-        ls -la /dev
         seq 0 10 | tee /dev/stderr | xargs echo
