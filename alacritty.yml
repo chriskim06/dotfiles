@@ -9,17 +9,17 @@ font:
   size: 16
   offset:
     x: 0
-    y: 3
+    y: 0
   glyph_offset:
     x: 0
     y: 0
   normal:
-    family: Hack
+    family: Roboto Mono for Powerline
     style: Regular
   bold:
-    family: Hack
+    family: Roboto Mono for Powerline
   italic:
-    family: Hack
+    family: Roboto Mono for Powerline
 
 # \x00 is the character sequence for my tmux prefix ctrl+space
 key_bindings:
