@@ -8,7 +8,7 @@ set -euo pipefail
 
 if [[ $# -gt 0 ]]; then
   if [[ "$1" =~ ^-?(d|D) ]]; then
-    branch_array=($(git branch --list | grep -v "\*\|^..\(master\|develop\)$" | sed 's/^..//'))
+    branch_array=($(git branch --list | grep -v "\*\|^..\(main\|master\|develop\)$" | sed 's/^..//'))
     branch_list=''
     count=0
     for i in "${branch_array[@]}"; do

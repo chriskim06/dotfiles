@@ -37,7 +37,7 @@ if [[ "$1" =~ ^[A-Z]*-?[0-9]+$ ]]; then
     [[ "$choice" =~ ^y|Y ]] && _get_jira_ticket_for_description "$br" "$brp"
   else
     git fetch
-    git checkout -b "$brp" origin/master
+    git checkout -b "$brp" origin/HEAD
     git push -u origin "$brp"
     _get_jira_ticket_for_description "$br" "$brp"
   fi
