@@ -14,12 +14,12 @@ font:
     x: 0
     y: 0
   normal:
-    family: Roboto Mono for Powerline
+    family: Hack
     style: Regular
   bold:
-    family: Roboto Mono for Powerline
+    family: Hack
   italic:
-    family: Roboto Mono for Powerline
+    family: Hack
 
 # \x00 is the character sequence for my tmux prefix ctrl+space
 key_bindings:

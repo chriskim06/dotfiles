@@ -11,15 +11,10 @@ tmux new-session -A -s main 2>/dev/null
 # custom prompt
 bash_prompt() {
   # Remember to install powerline fonts
-#   local os="$(uname)"
   local e='\e[0m'
   local b='\e[48;5;'
   local f='\e[38;5;'
   local arrow=''
-#   local arrow=$'\ue0b0'
-#   if [[ "$os" == "Darwin" ]]; then
-#     arrow="$(echo -e '\ue0b0')"
-#   fi
   local prompt=$(__git_ps1 " %s")
   if [[ -z "$prompt" ]]; then
     local last="\[$e\]\[${f}23m\]$arrow\[$e\]"
@@ -37,14 +32,16 @@ bash_prompt() {
       color="179m" # orange
     fi
     local branch=''
-#     local branch=$'\ue0a0'
-#     if [[ "$os" == "Darwin" ]]; then
-#       branch="$(echo -e '\ue0a0')"
-#     fi
     local last="\[${b}$color\]\[${f}23m\]$arrow\[${b}$color\]\[${f}15m\]  $branch$prompt \[$e\]\[${f}$color\]$arrow\[$e\]"
   fi
-  local line1="\n\[\e[1m\]\[${b}30m\]\[${f}15m\]  \u@not-computer \[${b}23m\]\[${f}30m\]$arrow\[${b}23m\]\[${f}15m\]  \w $last"
+
+  local aws_session_expiration=''
+  if [[ -n "$AWS_SESSION_EXPIRATION" ]]; then
+    aws_session_expiration=" ($(date --date="$AWS_SESSION_EXPIRATION" +%H:%M))"
+  fi
+  local line1="\n\[\e[1m\]\[${b}30m\]\[${f}15m\]  \u@not-computer${aws_session_expiration} \[${b}23m\]\[${f}30m\]$arrow\[${b}23m\]\[${f}15m\]  \w $last"
   local line2="\n\[${b}32m\]\[${f}15m\]  \A \[$e\]\[${f}32m\]$arrow \[$e\]"
+
   PS1="${line1}${line2}"
 }
 export PROMPT_DIRTRIM=3
