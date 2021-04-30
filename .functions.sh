@@ -27,7 +27,11 @@ fr() {
     return 1
   fi
 
-  fd --type f --exec sed -i '' -e "s/$1/$2/g" {} \;
+  if [[ "$(uname)" == "Darwin" ]]; then
+    fd --type f --exec sed -i "s|$1|$2|g" {} \;
+  else
+    fd --type f --exec sed -i '' -e "s/$1/$2/g" {} \;
+  fi
 }
 
 # interactively find process to kill
