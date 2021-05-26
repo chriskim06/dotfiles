@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-branches=$(git branch --format "%(refname:short) %(upstream)" | awk '{if (!$2) print $1;}')
+branches=$(git branch --format "%(refname:short) %(upstream:track)" | awk '{if ($2) print $1;}')
 
 if [[ $# -eq 0 ]]; then
   if [[ -z "$branches" ]]; then
