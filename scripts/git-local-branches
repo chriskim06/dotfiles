@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+branches=$(git branch --format "%(refname:short) %(upstream)" | awk '{if (!$2) print $1;}')
+
+if [[ $# -eq 0 ]]; then
+  echo "$branches"
+  exit 0
+fi
+
+printf "Delete the following branches:\n$branches\n\n"
+read -erp "Confirm [y/n]: " confirm && printf "\n"
+[[ ! "$confirm" =~ ^y|Y ]] && printf "Not deleting branches\n" && exit 0
+echo "$branches" | xargs git branch -D
