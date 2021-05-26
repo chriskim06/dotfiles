@@ -5,7 +5,11 @@ set -euo pipefail
 branches=$(git branch --format "%(refname:short) %(upstream)" | awk '{if (!$2) print $1;}')
 
 if [[ $# -eq 0 ]]; then
-  echo "$branches"
+  if [[ -z "$branches" ]]; then
+    echo "no local branches without a remote"
+  else
+    echo "$branches"
+  fi
   exit 0
 fi
 
