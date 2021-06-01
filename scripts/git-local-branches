@@ -2,13 +2,30 @@
 
 set -euo pipefail
 
-branches=$(git branch --format "%(refname:short) %(upstream:track)" | awk '{if ($2) print $1;}')
+remote_gone=$(git branch --format "%(refname:short) %(upstream:track)" | awk '{if ($2) print $1;}')
+local_branches=$(git branch --format "%(refname:short) %(upstream)" | awk '{if (!$2) print $1;}')
+branches=$(echo "$remote_gone" && echo $local_branches)
 
 if [[ $# -eq 0 ]]; then
   if [[ -z "$branches" ]]; then
     echo "no local branches without a remote"
   else
-    echo "$branches"
+    echo "$branches" | while read -r branch; do
+      description=$(git config branch.$branch.description || echo "")
+      if [[ -n "$description" ]]; then
+        branch_len=${#branch}
+        description_len=${#description}
+        remaining_len=$((80 - branch_len - 1))
+        if [[ $description_len -gt $remaining_len ]]; then
+          ellipses=$'\u2026'
+          if [[ "$(uname)" == "Darwin" ]]; then
+            ellipses="$(echo -e '\u2026')"
+          fi
+          description="${description:0:$remaining_len}${ellipses}"
+        fi
+      fi
+      echo "$branch $description"
+    done
   fi
   exit 0
 fi
