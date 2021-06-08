@@ -12,3 +12,10 @@ function CloseBuffer()
     execute 'bw'
   endif
 endfunction
+
+function! FindAndReplace(find, replace)
+  if a:find != ""
+    execute ':%s/'.a:find.'/'.a:replace.'/gI'
+  endif
+endfunction
+command! -nargs=* FR call FindAndReplace(<f-args>)
