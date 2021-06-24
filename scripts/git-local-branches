@@ -4,7 +4,7 @@ set -euo pipefail
 
 remote_gone=$(git branch --format "%(refname:short) %(upstream:track)" | awk '{if ($2) print $1;}')
 local_branches=$(git branch --format "%(refname:short) %(upstream)" | awk '{if (!$2) print $1;}')
-branches=$(echo "$remote_gone" && echo $local_branches)
+branches=$(echo "$remote_gone" && echo "$local_branches")
 
 if [[ $# -eq 0 ]]; then
   if [[ -z "$branches" ]]; then

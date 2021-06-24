@@ -43,3 +43,9 @@ _git_sync () {
   __gitcomp "$(git branch)"
 }
 
+_git_branch_alias_completer () {
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  COMPREPLY=($(compgen -W "$(git branch)" -- "$cur"))
+}
+complete -F _git_branch_alias_completer gk
+complete -F _git_branch_alias_completer gd
