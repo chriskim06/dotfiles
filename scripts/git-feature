@@ -31,7 +31,7 @@ if [[ "$1" =~ ^[A-Z]*-?[0-9]+$ ]]; then
   if [[ -n "$BRANCH_PREFIX" ]]; then
     brp="$BRANCH_PREFIX/$br"
   fi
-  if [[ -n "$(git branch --all | grep $brp)" ]]; then
+  if [[ "$(git branch --all | grep $brp)" == "$brp" ]]; then
     [[ -n "$(git config branch.$brp.description)" ]] && printf "$brp already exists and has a description.\n" && exit 0
     read -e -r -p "$brp exists without a description. Try to get its JIRA summary? [y/n]: " choice && printf "\n"
     [[ "$choice" =~ ^y|Y ]] && _get_jira_ticket_for_description "$br" "$brp"
