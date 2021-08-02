@@ -9,7 +9,10 @@ kube_tmux() {
   local ns=$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)
   local out="⎈"
   if [[ -n "$ctx" ]]; then
-    out="$out ${ctx##*/}"
+    ctx="${ctx#arn:aws:eks:}"
+    region="${ctx%%:*}"
+    name="${ctx##*/}"
+    out="$out $region/$name"
   fi
   if [[ -n "$ns" ]]; then
     out="$out:$ns"
