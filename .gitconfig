@@ -67,8 +67,25 @@
   untracked = red bold
   unmerged = white red bold
 [pager]
-  diff = diff-so-fancy | less +Gg
-  show = diff-so-fancy | less +Gg
+  diff = delta | less +Gg
+  show = delta | less +Gg
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+[delta]
+  features = decorations line-numbers
+  syntax-theme = zenburn
+  plus-style = syntax "#003800"
+  minus-style = syntax "#3f0001"
+[delta "decorations"]
+  commit-decoration-style = bold yellow
+  file-style = bold yellow box
+  file-decoration-style = none
+  hunk-header-decoration-style = cyan
+[delta "line-numbers"]
+  line-numbers-left-style = cyan
+  line-numbers-right-style = cyan
+  line-numbers-minus-style = 124
+  line-numbers-plus-style = 28
 [http]
   sslVerify = true
 [pull]
