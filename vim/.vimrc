@@ -38,7 +38,6 @@ Plug 'zivyangll/git-blame.vim'
 
 " Languages
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Style
 Plug 'morhetz/gruvbox'

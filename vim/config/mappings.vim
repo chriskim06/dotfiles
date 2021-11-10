@@ -85,7 +85,7 @@ nnoremap <leader>\ :TagbarToggle<cr>
 nnoremap <leader>/ :Rg <c-r><c-w><cr>
 nnoremap <silent> <leader>p :GitGutterPreviewHunk<cr>
 nnoremap <silent> <leader>n :NERDTreeToggle<cr>
-nnoremap <silent> gd <plug>(coc-definition)
+nnoremap <silent> gd :call CocAction('jumpDefinition', 'drop')<cr>
 nnoremap <silent> gi <plug>(coc-implementation)
 nnoremap <silent> gr :call CocAction('jumpReferences')<cr>
 nnoremap <silent> C :CocConfig<cr>
