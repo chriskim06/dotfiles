@@ -92,4 +92,5 @@ nnoremap <silent> C :CocConfig<cr>
 nnoremap <silent> P :Files<cr>
 nnoremap <silent> O :Buffers<cr>
 nnoremap <silent> K :call CocActionAsync('doHover')<cr>
+command Gblame Git blame
 " }}}
