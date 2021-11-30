@@ -22,13 +22,9 @@ ln -sf $CWD/.fzf-stuff.sh ~
 ln -sf $CWD/.gitconfig ~
 ln -sf $CWD/.inputrc ~
 ln -sf $CWD/.tmux.conf ~
+ln -sf $CWD/.hyper.js ~
 ln -sf $CWD/scripts/* ~/bin
 ln -sf $CWD/completion/* ~/bin/completion
-
-# hyper configuration
-mkdir -p ~/.hyper_plugins/local
-ln -sf $CWD/.hyper.js ~
-ln -sf $CWD/hyper/hyper-theme ~/.hyper_plugins/local
 
 # create empty file for secrets/tokens and local aliases
 touch $HOME/.private
