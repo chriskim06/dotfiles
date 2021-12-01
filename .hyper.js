@@ -137,6 +137,9 @@ module.exports = {
     // rendering (slower, but supports transparent backgrounds)
     webGLRenderer: false,
 
+    // use the shift key as a modifier to click links
+    webLinksActivationKey: 'shift',
+
     // for advanced config flags please refer to https://hyper.is/#cfg
   },
 
