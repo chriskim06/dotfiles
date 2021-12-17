@@ -32,7 +32,7 @@
         "go"
       ],
       "initializationOptions": {
-        "usePlaceholders": true
+        "usePlaceholders": false
       }
     }
   },
