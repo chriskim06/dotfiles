@@ -24,7 +24,7 @@ font:
 # \x00 is the character sequence for my tmux prefix ctrl+space
 key_bindings:
   - { key: Equals, mods: Command,       action: None }
-  - { key: Add,    mods: Command,       action: None }
+  - { key: Plus,    mods: Command,       action: None }
   - { key: Minus,  mods: Command,       action: None }
 #   - { key: D,      mods: Control,       chars: "\x17" } # send ctrl+w to delete word backwords
   - { key: Tab,    mods: Control,       chars: "\x00n" }
@@ -41,7 +41,7 @@ key_bindings:
 
 mouse:
   hide_when_typing: false
-  url:
+  hints:
     modifiers: Shift
 
 # color configuration
