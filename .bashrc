@@ -65,8 +65,8 @@ bind '"\C-d": backward-kill-word'
 # other stuff
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 [[ -f ~/.aliases.sh ]] && source ~/.aliases.sh
-[[ -f ~/.functions.sh ]] && source ~/.functions.sh
 [[ -f ~/.git-stuff.sh ]] && source ~/.git-stuff.sh
+[[ -f ~/.functions.sh ]] && source ~/.functions.sh
 [[ -f ~/.fzf-stuff.sh ]] && source ~/.fzf-stuff.sh
 [[ -f ~/.local-aliases.sh ]] && source ~/.local-aliases.sh
 [[ -f ~/.private ]] && source ~/.private

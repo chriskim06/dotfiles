@@ -72,13 +72,25 @@ b64() {
   echo
 }
 
-# pick a random homebrew formulae to display in new shells
-brew_random() {
-  if [[ -n "$(type -t cowsay)" ]]; then
-    cat ~/.random_brew_cmd 2>/dev/null
-    local formulae=($(brew formulae | grep -v /))
-    local desc=$(brew desc "${formulae[$((RANDOM % ${#formulae[@]}))]}" 2>/dev/null)
-    [[ $? -eq 0 ]] && cowsay "$desc" > ~/.random_brew_cmd
+# pick a random krew plugin to display in new shells
+krew_random() {
+  if [[ -n "$(type -t cowsay)" && -n "$(type -t yq)" ]]; then
+    cat ~/.random_krew_plugin 2>/dev/null
+    (__krew_random_helper &)
   fi
 }
-(brew_random &)
+
+__krew_random_helper() {
+  local plugins=($(krew search | tail -n +2 | sed 's/ .*//g'))
+  local random_plugin="${plugins[$((RANDOM % ${#plugins[@]}))]}"
+  local index="default"
+  local plugin="$random_plugin"
+  if [[ "$random_plugin" == *"/"* ]]; then
+    index="$(echo ${random_plugin%%/*})"
+    plugin="$(echo ${random_plugin##*/})"
+  fi
+  local info="$(cat ~/.krew/index/${index}/plugins/${plugin}.yaml | yq -r '.spec.shortDescription')"
+  [[ $? -eq 0 ]] && cowsay "${random_plugin}: ${info}" > ~/.random_krew_plugin
+}
+
+krew_random
