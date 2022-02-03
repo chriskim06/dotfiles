@@ -161,6 +161,8 @@ module.exports = {
     // 'window:devtools': 'cmd+alt+o',
     'editor:deletePreviousWord': 'ctrl+d',
     'zoom:in': '',
-    'zoom:out': ''
+    'zoom:out': '',
+    'pane:close': '',
+    'window:close': '',
   },
 };
