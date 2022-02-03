@@ -41,6 +41,7 @@
   dnw = diff -w --ignore-blank-lines
   staged = diff --cached
   untracked = ls-files -o --exclude-standard
+  drb = delete-remote-branch
 [push]
   default = simple
 [color]

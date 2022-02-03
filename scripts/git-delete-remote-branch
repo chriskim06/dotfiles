@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: git delete-remote-branch {branch}"
+  exit 1
+fi
+
+git push origin --delete $1
