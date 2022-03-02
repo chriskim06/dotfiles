@@ -23,12 +23,10 @@ font:
 
 # \x00 is the character sequence for my tmux prefix ctrl+space
 key_bindings:
-  - { key: Equals, mods: Command,       action: None }
-  - { key: Plus,    mods: Command,       action: None }
-  - { key: Minus,  mods: Command,       action: None }
-#   - { key: D,      mods: Control,       chars: "\x17" } # send ctrl+w to delete word backwords
-  - { key: Tab,    mods: Control,       chars: "\x00n" }
-  - { key: Tab,    mods: Control|Shift, chars: "\x00p" }
+  - { key: Equals,    mods: Command,       action: None }
+  - { key: Plus,      mods: Command,       action: None }
+  - { key: Minus,     mods: Command,       action: None }
+  - { key: W,         mods: Command,       chars: "\x00q" }
   - { key: Key1,      mods: Command,       chars: "\x001" }
   - { key: Key2,      mods: Command,       chars: "\x002" }
   - { key: Key3,      mods: Command,       chars: "\x003" }
@@ -38,6 +36,21 @@ key_bindings:
   - { key: Key7,      mods: Command,       chars: "\x007" }
   - { key: Key8,      mods: Command,       chars: "\x008" }
   - { key: Key9,      mods: Command,       chars: "\x009" }
+  - { key: Tab,       mods: Control,       chars: "\x00n" }
+  - { key: Tab,       mods: Control|Shift, chars: "\x00p" }
+  - { key: Equals,    mods: Control,       action: None }
+  - { key: Plus,      mods: Control,       action: None }
+  - { key: Minus,     mods: Control,       action: None }
+  - { key: W,         mods: Control,       chars: "\x00q" }
+  - { key: Key1,      mods: Control,       chars: "\x001" }
+  - { key: Key2,      mods: Control,       chars: "\x002" }
+  - { key: Key3,      mods: Control,       chars: "\x003" }
+  - { key: Key4,      mods: Control,       chars: "\x004" }
+  - { key: Key5,      mods: Control,       chars: "\x005" }
+  - { key: Key6,      mods: Control,       chars: "\x006" }
+  - { key: Key7,      mods: Control,       chars: "\x007" }
+  - { key: Key8,      mods: Control,       chars: "\x008" }
+  - { key: Key9,      mods: Control,       chars: "\x009" }
 
 mouse:
   hide_when_typing: false
