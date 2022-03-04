@@ -37,3 +37,6 @@ augroup ColorOverrides
   au FileType * hi IndentGuidesOdd guifg=#434343 guibg=#2A2426
   au FileType * hi IndentGuidesEven guifg=#434343 guibg=#363031
 augroup END
+
+" airline theme
+let g:airline_theme='tomorrow'
