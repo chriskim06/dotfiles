@@ -41,7 +41,7 @@ key_bindings:
   - { key: Equals,    mods: Control,       action: None }
   - { key: Plus,      mods: Control,       action: None }
   - { key: Minus,     mods: Control,       action: None }
-  - { key: W,         mods: Control,       chars: "\x00q" }
+  - { key: W,         mods: Control|Shift,       chars: "\x00q" }
   - { key: Key1,      mods: Control,       chars: "\x001" }
   - { key: Key2,      mods: Control,       chars: "\x002" }
   - { key: Key3,      mods: Control,       chars: "\x003" }
