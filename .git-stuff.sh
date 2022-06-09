@@ -70,7 +70,7 @@ if command -v __git_complete > /dev/null; then
 #   __git_complete gd _git_branch
   __git_complete gf _git_fetch
   __git_complete gc _git_commit
-#   __git_complete gk _git_checkout # something changed here recently and this errors now, commenting out temporarily and replacing with my own function
+  __git_complete gk _git_checkout
   __git_complete gu _git_unstage
   __git_complete gs _git_number
   __git_complete gconf _git_config
