@@ -42,5 +42,7 @@
     "json",
     "typescript",
     "yaml"
-  ]
+  ],
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false
 }

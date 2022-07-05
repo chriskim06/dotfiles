@@ -3,6 +3,11 @@
 " Description: Custom functions
 "
 
+function FullPathToFile()
+  echo expand('%:p')
+endfunction
+command Path call FullPathToFile()
+
 function CloseBuffer()
   if &ft == "help"
     execute 'bd'
