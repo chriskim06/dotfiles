@@ -81,6 +81,7 @@ nnoremap <leader>i :source %<cr>:PlugInstall<cr>
 nnoremap <leader>d :source %<cr>:PlugClean<cr>
 nnoremap <leader>u :PlugUpdate \| PlugUpgrade<cr>
 nnoremap <leader>r :GitGutterUndoHunk<cr>
+nnoremap <leader>g :Magit<cr>
 nnoremap <leader>\ :TagbarToggle<cr>
 nnoremap <leader>/ :Rg <c-r><c-w><cr>
 nnoremap <silent> <leader>p :GitGutterPreviewHunk<cr>
