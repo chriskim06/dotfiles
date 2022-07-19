@@ -35,6 +35,7 @@ Plug 'diepm/vim-rest-console'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'zivyangll/git-blame.vim'
+Plug 'jreybert/vimagit'
 
 " Languages
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
