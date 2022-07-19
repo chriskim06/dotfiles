@@ -13,6 +13,7 @@ if has('autocmd')
     au BufWritePost,BufWinLeave,BufLeave,WinLeave ?* if &ft != 'help' && &ft != 'fzf' | mkview! | endif
     au BufWinEnter,BufEnter ?* if &ft != 'help' && &ft != 'fzf' | silent! loadview | execute "AirlineRefresh" | endif
     au BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    au BufWritePost * GitGutter
     au User VimagitUpdateFile call gitgutter#all(1)
   augroup END
   augroup Folding
