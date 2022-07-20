@@ -20,6 +20,7 @@ ln -sf $CWD/.functions.sh ~
 ln -sf $CWD/.git-stuff.sh ~
 ln -sf $CWD/.fzf-stuff.sh ~
 ln -sf $CWD/.gitconfig ~
+ln -sf $CWD/.gitignore_global ~
 ln -sf $CWD/.inputrc ~
 ln -sf $CWD/.tmux.conf ~
 ln -sf $CWD/.hyper.js ~
