@@ -3,7 +3,7 @@
 set -e
 
 #
-# install everything on Ubuntu
+# install everything
 #
 
 # make directory for personal repos
@@ -43,8 +43,11 @@ if [[ "$(uname)" == 'Linux' ]]; then
 
   # install linuxbrew and stuff
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-  /home/linuxbrew/.linuxbrew/bin/brew install $(cat brew-formulae.txt | tr '\n' ' ')
+  /home/linuxbrew/.linuxbrew/bin/brew bundle install
   $(/home/linuxbrew/.linuxbrew/bin/brew --prefix)/opt/fzf/install
+elif [[ "$(uname)" == 'Darwin' ]]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  brew bundle install
 fi
 
 # install tpm
