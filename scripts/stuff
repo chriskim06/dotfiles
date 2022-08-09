@@ -20,3 +20,6 @@ printf "\n\e[1m\e[38;5;40mUpgrading tmux plugins\e[0m\e[0m\n"
 
 printf "\n\e[1m\e[38;5;40mUpgrading krew plugins\e[0m\e[0m\n"
 kubectl krew upgrade
+
+printf "\n\e[1m\e[38;5;40mUpgrading vim plugins\e[0m\e[0m\n"
+vim +'PlugUpdate --sync' +'PlugUpgrade' +'qa' &> /dev/null
