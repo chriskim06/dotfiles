@@ -73,9 +73,19 @@ vnoremap <silent> H <esc>:h <c-r><c-w><cr>
 " }}}
 
 " Plugin mappings {{{
-inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
-inoremap <expr> <tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+inoremap <silent><expr> <tab>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<tab>" :
+      \ coc#refresh()
+inoremap <expr><s-tab> coc#pum#visible() ? coc#pum#prev(1) : "\<c-h>"
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm()
+      \: "\<c-g>u\<cr>\<c-r>=coc#on_enter()\<cr>"
+let g:coc_snippet_next = '<tab>'
+
 noremap ? :normal \ci<cr>
 nnoremap <leader>i :source %<cr>:PlugInstall<cr>
 nnoremap <leader>d :source %<cr>:PlugClean<cr>
