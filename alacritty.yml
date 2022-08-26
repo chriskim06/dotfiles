@@ -6,7 +6,7 @@ window:
 
 # font configuration (changes require restart)
 font:
-  size: 16
+  size: 15
   offset:
     x: 0
     y: 0
