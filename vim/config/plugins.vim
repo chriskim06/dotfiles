@@ -54,7 +54,7 @@ let g:indent_guides_default_mapping = 0
 let g:indent_guides_auto_colors = 0
 " }}}
 
-" vim-go {{{
+" go settings {{{
 let g:go_def_mode = 'gopls'
 let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = 'goimports'
