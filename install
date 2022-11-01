@@ -26,6 +26,7 @@ ln -sf $CWD/.tmux.conf ~
 ln -sf $CWD/.hyper.js ~
 ln -sf $CWD/scripts/* ~/bin
 ln -sf $CWD/completion/* ~/bin/completion
+ln -sf $CWD/.rgignore ~
 
 # create empty file for secrets/tokens and local aliases
 touch $HOME/.private
