@@ -23,4 +23,7 @@ kubectl krew upgrade
 
 printf "\n\e[1m\e[38;5;40mUpgrading vim plugins\e[0m\e[0m\n"
 vim +'PlugUpdate --sync' +'PlugUpgrade' +'qa' &> /dev/null
+
+printf "\n\e[1m\e[38;5;40mUpgrading go binaries\e[0m\e[0m\n"
+vim +'GoUpdateBinaries' +'q' &> /dev/null
 printf "Done!\n"

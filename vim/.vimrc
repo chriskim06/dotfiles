@@ -36,6 +36,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'zivyangll/git-blame.vim'
 Plug 'jreybert/vimagit'
+Plug 'fatih/vim-go'
 
 " Languages
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }

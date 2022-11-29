@@ -7,7 +7,7 @@ if has('autocmd')
   augroup Files
     au BufNewFile,BufRead Dockerfile.* set ft=dockerfile
     au FileType yaml set foldmethod=indent
-    au BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+    au BufWritePre *.go :silent! call CocAction('runCommand', 'editor.action.organizeImport')
   augroup END
   augroup Buffer
     au BufWritePost,BufWinLeave,BufLeave,WinLeave ?* if &ft != 'help' && &ft != 'fzf' | mkview! | endif
