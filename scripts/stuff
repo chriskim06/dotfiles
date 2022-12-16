@@ -12,9 +12,6 @@ fi
 printf "\n\e[1m\e[38;5;40mUpgrading homebrew\e[0m\e[0m\n"
 brew asdf
 
-printf "\n\e[1m\e[38;5;40mUpgrading npm\e[0m\e[0m\n"
-npm up -g
-
 printf "\n\e[1m\e[38;5;40mUpgrading tmux plugins\e[0m\e[0m\n"
 ~/.tmux/plugins/tpm/bin/update_plugins all
 
