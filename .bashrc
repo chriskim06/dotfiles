@@ -72,8 +72,10 @@ bind '"\C-d": backward-kill-word'
 [[ -f ~/.private ]] && source ~/.private
 
 # kubectl stuff
-source <(kubectl completion bash)
-complete -F __start_kubectl k
+mkdir -p ~/.local/share/bash_completion
+[[ ! -f "~/.local/share/bash_completion/kubectl" ]] && kubectl completion bash > ~/.local/share/bash_completion/kubectl
+source ~/.local/share/bash_completion/kubectl
+complete -o default -F __start_kubectl k
 [[ -f ~/bin/completion/kubectl-custom-completion ]] && source ~/bin/completion/kubectl-custom-completion
 
 # this is used to map caps lock to ctrl/escape on linux

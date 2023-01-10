@@ -63,13 +63,7 @@ color() {
 
 # base64 encode a string without the newline
 b64() {
-  if [[ "$(uname)" == "Linux" ]]; then
-    printf "%s" "$@" | base64 -w 0
-  else
-    # macos defaults the line wrapping to 0 already
-    printf "%s" "$@" | base64
-  fi
-  echo
+  printf "%s" "$@" | base64 -w 0
 }
 
 # pick a random krew plugin to display in new shells
