@@ -46,6 +46,7 @@ set switchbuf=useopen,usetab " Options for determining how to switch buffers
 set splitbelow " Put new split windows below
 set cursorline " Highlight the current line
 set signcolumn=yes " Always show signcolumn
+set clipboard=unnamed " Use the system clipboard
 let &t_SI = "\<Esc>[6 q" " Insert mode solid vertical line cursor
 let &t_SR = "\<Esc>[4 q" " Replace mode solid underscore cursor
 let &t_EI = "\<Esc>[2 q" " Normal mode solid block cursor

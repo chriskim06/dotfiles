@@ -23,15 +23,12 @@ nnoremap - <c-x>
 nnoremap v <c-v>
 nnoremap V v
 nnoremap <c-v> V
-nnoremap <silent> Y ""dd
+nnoremap <silent> Y "*dd
 nnoremap d "_d
 nnoremap x "_x
 vnoremap c "_c
 vnoremap d "_d
-vnoremap x "*x
 vnoremap y ygv
-vnoremap Y "*ygv
-vnoremap <c-c> "*ygv
 vnoremap p P
 vnoremap L g<c-g>
 vnoremap / y/<c-r>"<cr>
