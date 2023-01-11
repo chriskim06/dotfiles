@@ -9,38 +9,50 @@
 tmux new-session -A -s main 2>/dev/null
 
 # custom prompt
+ANSI_ESC=$'\033'
+ANSI_CSI="${ANSI_ESC}["
+_ansi_bg() {
+  printf '%s48;5;%sm' "$ANSI_CSI" "$1"
+}
+_ansi_fg() {
+  printf '%s38;5;%sm' "$ANSI_CSI" "$1"
+}
+_ansi_bold() {
+  printf '%s1m' "$ANSI_CSI"
+}
+_ansi_reset() {
+  printf '%s0m' "$ANSI_CSI"
+}
 bash_prompt() {
   # Remember to install powerline fonts
-  local e='\e[0m'
-  local b='\e[48;5;'
-  local f='\e[38;5;'
   local arrow=''
+  local char_color="$(_ansi_fg 15)"
   local prompt=$(__git_ps1 " %s")
   if [[ -z "$prompt" ]]; then
-    local last="\[$e\]\[${f}23m\]$arrow\[$e\]"
+    local last="$(_ansi_reset)$(_ansi_fg 23)${arrow}$(_ansi_reset)"
   else
-    local color="42m" # green
+    local color="42" # green
     if [[ "$prompt" =~ ^.*\|(MERGING|REBASE).*$ ]]; then
-      color="165m" # purple
+      color="165" # purple
     elif [[ "$prompt" =~ ^.*-[0-9]*$ ]]; then
-      color="196m" # red
+      color="196" # red
     elif [[ "$prompt" =~ ^.*\+[0-9]*$ ]]; then
-      color="75m" # light blue
+      color="75" # light blue
     elif [[ "$prompt" =~ ^.*\+.*$ ]]; then
-      color="73m" # grayish blue
+      color="73" # grayish blue
     elif [[ "$prompt" =~ ^.*(%|\*).*$ ]]; then
-      color="179m" # orange
+      color="179" # orange
     fi
     local branch=''
-    local last="\[${b}$color\]\[${f}23m\]$arrow\[${b}$color\]\[${f}15m\]  $branch$prompt \[$e\]\[${f}$color\]$arrow\[$e\]"
+    local last="$(_ansi_bg $color)$(_ansi_fg 23)${arrow}$(_ansi_bg $color)${char_color}  ${branch}${prompt} $(_ansi_reset)$(_ansi_fg $color)${arrow}$(_ansi_reset)"
   fi
 
   local aws_session_expiration=''
   if [[ -n "$AWS_SESSION_EXPIRATION" ]]; then
     aws_session_expiration=" ($(date --date="$AWS_SESSION_EXPIRATION" +%H:%M))"
   fi
-  local line1="\n\[\e[1m\]\[${b}30m\]\[${f}15m\]  \u@not-computer${aws_session_expiration} \[${b}23m\]\[${f}30m\]$arrow\[${b}23m\]\[${f}15m\]  \w $last"
-  local line2="\n\[${b}32m\]\[${f}15m\]  \A \[$e\]\[${f}32m\]$arrow \[$e\]"
+  local line1="\n$(_ansi_reset)$(_ansi_bold)$(_ansi_bg 30)${char_color}  \u@not-computer${aws_session_expiration} $(_ansi_bg 23)$(_ansi_fg 30)${arrow}$(_ansi_bg 23)${char_color}  \w ${last}"
+  local line2="\n$(_ansi_bg 32)${char_color}  \A $(_ansi_reset)$(_ansi_fg 32)${arrow} $(_ansi_reset)"
 
   PS1="${line1}${line2}"
 }
