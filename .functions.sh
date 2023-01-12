@@ -10,6 +10,18 @@ if command -v bat >/dev/null; then
 fi
 complete -o default -F _fzf_path_completion bat
 
+bs() {
+  cat << EOF > "$1"
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+
+EOF
+  chmod +x "$1"
+  vim "$1"
+}
+
 # run interactive bash in docker container
 dr() {
   if [[ $# -ne 1 ]]; then
