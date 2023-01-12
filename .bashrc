@@ -12,16 +12,16 @@ tmux new-session -A -s main 2>/dev/null
 ANSI_ESC=$'\033'
 ANSI_CSI="${ANSI_ESC}["
 _ansi_bg() {
-  printf '%s48;5;%sm' "$ANSI_CSI" "$1"
+  printf '\[%s48;5;%sm\]' "$ANSI_CSI" "$1"
 }
 _ansi_fg() {
-  printf '%s38;5;%sm' "$ANSI_CSI" "$1"
+  printf '\[%s38;5;%sm\]' "$ANSI_CSI" "$1"
 }
 _ansi_bold() {
-  printf '%s1m' "$ANSI_CSI"
+  printf '\[%s1m\]' "$ANSI_CSI"
 }
 _ansi_reset() {
-  printf '%s0m' "$ANSI_CSI"
+  printf '\[%s0m\]' "$ANSI_CSI"
 }
 bash_prompt() {
   # Remember to install powerline fonts
@@ -51,7 +51,7 @@ bash_prompt() {
   if [[ -n "$AWS_SESSION_EXPIRATION" ]]; then
     aws_session_expiration=" ($(date --date="$AWS_SESSION_EXPIRATION" +%H:%M))"
   fi
-  local line1="\n$(_ansi_reset)$(_ansi_bold)$(_ansi_bg 30)${char_color}  \u@not-computer${aws_session_expiration} $(_ansi_bg 23)$(_ansi_fg 30)${arrow}$(_ansi_bg 23)${char_color}  \w ${last}"
+  local line1="\n$(_ansi_bold)$(_ansi_bg 30)${char_color}  \u@not-computer${aws_session_expiration} $(_ansi_bg 23)$(_ansi_fg 30)${arrow}$(_ansi_bg 23)${char_color}  \w ${last}"
   local line2="\n$(_ansi_bg 32)${char_color}  \A $(_ansi_reset)$(_ansi_fg 32)${arrow} $(_ansi_reset)"
 
   PS1="${line1}${line2}"
