@@ -20,17 +20,23 @@ _ansi_fg() {
 _ansi_bold() {
   printf '\[%s1m\]' "$ANSI_CSI"
 }
-_ansi_reset() {
-  printf '\[%s0m\]' "$ANSI_CSI"
+_section() {
+  printf '%s%s' "$(_ansi_bg $1)" "$(_ansi_fg 15)"
+}
+_arrow() {
+  local arrow=''
+  if [[ $# -eq 1 ]]; then
+    local reset="$(printf '\[%s0m\]' "$ANSI_CSI")"
+    printf '%s%s%s%s' "$reset" "$(_ansi_fg $1)" "$arrow" "$reset"
+  else
+    printf '%s%s%s' "$(_ansi_fg $1)" "$(_ansi_bg $2)" "$arrow"
+  fi
 }
 bash_prompt() {
   # Remember to install powerline fonts
-  local arrow=''
-  local char_color="$(_ansi_fg 15)"
+  local last="$(_arrow 23)"
   local prompt=$(__git_ps1 " %s")
-  if [[ -z "$prompt" ]]; then
-    local last="$(_ansi_reset)$(_ansi_fg 23)${arrow}$(_ansi_reset)"
-  else
+  if [[ -n "$prompt" ]]; then
     local color="42" # green
     if [[ "$prompt" =~ ^.*\|(MERGING|REBASE).*$ ]]; then
       color="165" # purple
@@ -44,17 +50,17 @@ bash_prompt() {
       color="179" # orange
     fi
     local branch=''
-    local last="$(_ansi_bg $color)$(_ansi_fg 23)${arrow}$(_ansi_bg $color)${char_color}  ${branch}${prompt} $(_ansi_reset)$(_ansi_fg $color)${arrow}$(_ansi_reset)"
+    last="$(_arrow 23 $color)$(_section $color)  ${branch}${prompt} $(_arrow $color)"
   fi
 
   local aws_session_expiration=''
   if [[ -n "$AWS_SESSION_EXPIRATION" ]]; then
     aws_session_expiration=" ($(date --date="$AWS_SESSION_EXPIRATION" +%H:%M))"
   fi
-  local line1="\n$(_ansi_bold)$(_ansi_bg 30)${char_color}  \u@not-computer${aws_session_expiration} $(_ansi_bg 23)$(_ansi_fg 30)${arrow}$(_ansi_bg 23)${char_color}  \w ${last}"
-  local line2="\n$(_ansi_bg 32)${char_color}  \A $(_ansi_reset)$(_ansi_fg 32)${arrow} $(_ansi_reset)"
 
-  PS1="${line1}${line2}"
+  local line1="$(_ansi_bold)$(_section 30)  \u@not-computer${aws_session_expiration} $(_arrow 30 23)$(_section 23)  \w ${last}"
+  local line2="$(_section 32)  \A $(_arrow 32) "
+  PS1="\n${line1}\n${line2}"
 }
 export PROMPT_DIRTRIM=3
 export PROMPT_COMMAND="history -a; history -c; history -r; bash_prompt"
