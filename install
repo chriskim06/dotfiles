@@ -31,7 +31,6 @@ ln -sf $CWD/.rgignore ~
 
 # create empty file for secrets/tokens and local aliases
 touch $HOME/.private
-touch $HOME/.local-aliases.sh
 
 if [[ "$(uname)" == 'Linux' ]]; then
   # install docker
