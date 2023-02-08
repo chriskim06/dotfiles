@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+u=$(gum input --placeholder "username")
+p=$(gum input --password --placeholder "password")
+LIBRESPOT_USERNAME="$u" LIBRESPOT_PASSWORD="$p" librespot \
+  --initial-volume 100 \
+  --cache ~/.config/librespotcache \
+  --cache-size-limit "1G" \
+  --quiet &>/dev/null &
+
+pid=$!
+spt
+kill -9 $pid
