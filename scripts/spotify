@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+if [[ -z "$(command -v librespot)" || -z "$(command -v spt)" ]]; then
+  echo "must have librespot and spotify-tui installed"
+  exit 1
+fi
+
 u=$(gum input --placeholder "username")
 p=$(gum input --password --placeholder "password")
 LIBRESPOT_USERNAME="$u" LIBRESPOT_PASSWORD="$p" librespot \
