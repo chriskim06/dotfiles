@@ -29,6 +29,9 @@ ln -sf $CWD/scripts/* ~/bin
 ln -sf $CWD/completion/* ~/bin/completion
 ln -sf $CWD/.rgignore ~
 
+mkdir -p ~/.config/spotify-tui
+ln -sf $CWD/spotify-tui-config.yml ~/.config/spotify-tui/config.yml
+
 # create empty file for secrets/tokens and local aliases
 touch $HOME/.private
 
