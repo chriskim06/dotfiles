@@ -50,12 +50,16 @@ bash_prompt() {
     last="$(_arrow 23 $color)$(_section $color)  ${branch}${prompt} $(_arrow $color)"
   fi
 
-  local aws_session_expiration=''
+  local aws_session=''
   if [[ -n "$AWS_SESSION_EXPIRATION" ]]; then
-    aws_session_expiration=" ($(date --date="$AWS_SESSION_EXPIRATION" +%H:%M))"
+    local profile=''
+    if [[ -n "$AWS_VAULT" ]]; then
+      profile="$AWS_VAULT "
+    fi
+    aws_session=" (${profile}$(date --date="$AWS_SESSION_EXPIRATION" +%H:%M))"
   fi
 
-  local line1="$(_ansi_bold)$(_section 30)  \u@not-computer${aws_session_expiration} $(_arrow 30 23)$(_section 23)  \w ${last}"
+  local line1="$(_ansi_bold)$(_section 30)  \u@not-computer${aws_session} $(_arrow 30 23)$(_section 23)  \w ${last}"
   local line2="$(_section 32)  \A $(_arrow 32) "
   PS1="\n${line1}\n${line2}"
 }
