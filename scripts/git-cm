@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+changes=$(git status --short | cut -c 4- | gum choose --no-limit)
+echo "$changes" | xargs git add
+SUMMARY=$(gum input --placeholder "Summary of this change")
+DESCRIPTION=$(gum write --placeholder "Details of this change (CTRL+D to finish)")
+gum confirm "Commit changes?" && git commit -m "$SUMMARY" -m "$DESCRIPTION"
