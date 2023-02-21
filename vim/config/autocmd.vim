@@ -15,6 +15,7 @@ if has('autocmd')
     au BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     au BufWritePost * GitGutter
     au User VimagitUpdateFile call gitgutter#all(1)
+    au User CocStatusChange AirlineRefresh
   augroup END
   augroup Folding
     au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
