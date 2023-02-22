@@ -13,6 +13,7 @@ if [[ "$(uname)" == Linux ]]; then
 fi
 export PATH="$PATH"
 export GOPATH="$HOME/go"
+export MANPAGER="less"
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
@@ -39,9 +40,6 @@ export FZF_COMPLETION_TRIGGER='jj'
 export THEFUCK_WAIT_COMMAND=3
 export THEFUCK_HISTORY_LIMIT='200'
 export BASH_SILENCE_DEPRECATION_WARNING=1
-
-# Load private environment variables such as secrets/tokens
-[[ -f $HOME/.private ]] && source $HOME/.private
 
 # Load .bashrc
 [[ -f $HOME/.bashrc ]] && source $HOME/.bashrc

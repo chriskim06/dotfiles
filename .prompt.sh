@@ -15,6 +15,10 @@ _ansi_bold() {
   printf '\[%s1m\]' "$ANSI_CSI"
 }
 
+_ansi_reset() {
+  printf '\[%s0m\]' "$ANSI_CSI"
+}
+
 _section() {
   printf '%s%s' "$(_ansi_bg $1)" "$(_ansi_fg 15)"
 }
@@ -22,8 +26,7 @@ _section() {
 _arrow() {
   local arrow=''
   if [[ $# -eq 1 ]]; then
-    local reset="$(printf '\[%s0m\]' "$ANSI_CSI")"
-    printf '%s%s%s%s' "$reset" "$(_ansi_fg $1)" "$arrow" "$reset"
+    printf '%s%s%s%s' "$(_ansi_reset)" "$(_ansi_fg $1)" "$arrow" "$(_ansi_reset)"
   else
     printf '%s%s%s' "$(_ansi_fg $1)" "$(_ansi_bg $2)" "$arrow"
   fi
@@ -47,7 +50,7 @@ bash_prompt() {
       color="179" # orange
     fi
     local branch=''
-    last="$(_arrow 23 $color)$(_section $color)  ${branch}${prompt} $(_arrow $color)"
+    last="$(_arrow 23 $color)  $(_ansi_reset)$(_section $color)${branch}$(_ansi_bold)${prompt} $(_arrow $color)"
   fi
 
   local aws_session=''
