@@ -12,7 +12,11 @@ kube_tmux() {
     ctx="${ctx#arn:aws:eks:}"
     region="${ctx%%:*}"
     name="${ctx##*/}"
-    out="$out $region/$name"
+    if [[ "$region" == "$name" ]]; then
+      out="$out $name"
+    else
+      out="$out $region/$name"
+    fi
   fi
   if [[ -n "$ns" ]]; then
     out="$out:$ns"

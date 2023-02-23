@@ -15,24 +15,19 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" --exclude "node_modules" . "$1"
 }
 
-fstash() { # {{{
-  local out k
-  while out=$(git stash list --pretty="%C(bold 227)%gd %C(bold 14)<%ar> %C(bold 15)%gs" | fzf --ansi --no-sort --print-query --expect=ctrl-d,ctrl-p); do
-    mapfile -t out <<< "$out"
-    k="${out[1]}"
-    stash_id="${out[-1]}"
-    stash_id="${stash_id%% *}"
-    [[ -z "$stash_id" ]] && continue
-    if [[ "$k" == 'ctrl-d' ]]; then
-      git stash drop $stash_id
-    elif [[ "$k" == 'ctrl-p' ]]; then
-      git stash pop $stash_id
-      break;
-    else
-      git stash show -p $stash_id
-    fi
+fstash() {
+  local out q sha
+  while out=$(
+    git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+      fzf --ansi --no-sort --query="$q")
+  do
+    read -a out <<< $out
+    sha="${out[0]}"
+    sha="${sha%% *}"
+    [[ -z "$sha" ]] && continue
+    git stash show -p $sha
   done
-} # }}}
+}
 
 fshow() {
   _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
