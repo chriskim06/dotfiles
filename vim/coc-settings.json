@@ -37,6 +37,7 @@
     }
   },
   "coc.preferences.formatOnSave": true,
+  "coc.preferences.formatOnType": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false
 }

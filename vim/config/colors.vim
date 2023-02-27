@@ -4,8 +4,8 @@
 "
 
 " these are for enabling italics
-set t_ZH=[3m
-set t_ZR=[23m
+" set t_ZH=[3m
+" set t_ZR=[23m
 set termguicolors
 let g:miramare_enable_italic = 1
 let g:miramare_enable_italic_string = 1

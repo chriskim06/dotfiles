@@ -13,11 +13,7 @@ let g:airline_skip_empty_sections = 1
 " }}}
 
 " coc-nvim {{{
-let g:coc_global_extensions = ['coc-json', 'coc-vimlsp', 'coc-yaml', 'coc-tsserver', 'coc-sh', 'coc-markdownlint']
-" }}}
-
-" Auto-Pairs {{{
-au FileType html,vim let g:AutoPairs['<'] = '>'
+let g:coc_global_extensions = ['coc-json', 'coc-vimlsp', 'coc-yaml', 'coc-tsserver', 'coc-sh', 'coc-markdownlint', 'coc-pairs']
 " }}}
 
 " Tagbar {{{

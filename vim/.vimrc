@@ -23,7 +23,6 @@ Plug 'burntsushi/ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'jiangmiao/auto-pairs'
 Plug 'craigemery/vim-autotag'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
@@ -41,7 +40,6 @@ Plug 'jreybert/vimagit'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 " Style
-Plug 'morhetz/gruvbox'
 Plug 'franbach/miramare'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
