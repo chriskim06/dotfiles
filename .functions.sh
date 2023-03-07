@@ -99,4 +99,56 @@ __krew_random_helper() {
   [[ $? -eq 0 ]] && cowsay "${random_plugin}: ${info}" > ~/.random_krew_plugin
 }
 
+workspaces() {
+  if [[ ! -d "$HOME/.config/workspaces" ]]; then
+    mkdir -p "$HOME/.config/workspaces"
+  fi
+  local listfile="$HOME/.config/workspaces/list"
+  if [[ ! -f $listfile ]]; then
+    touch $listfile
+  fi
+
+  if [[ $# -eq 0 ]]; then
+    local dest=$(cat $listfile | fzf --height 30%)
+    dest=${dest#*: }
+    if [[ -n "$dest" ]]; then
+      echo "switching to $dest"
+      cd "$dest"
+      return
+    fi
+  fi
+
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      add)
+        echo "$2: $(pwd)" >> $listfile
+        return
+        ;;
+      delete|remove)
+        sed -i "/^$2/d" $listfile
+        return
+        ;;
+      list)
+        cat $listfile
+        return
+        ;;
+      help|-h|--help)
+        echo "workspaces saves commonly used directories"
+        echo
+        echo "when invoked with no arguments it will allow you to choose"
+        echo "from the list of workspaces to switch to"
+        echo
+        echo "valid args:"
+        echo "  - list: list the available workspaces"
+        echo "  - add {name}: save the current directory to workspaces with {name}"
+        echo "  - delete {name}: delete directory {name} from workspaces"
+        echo "  - remove {name}: delete directory {name} from workspaces"
+        return
+        ;;
+      *)
+        ;;
+    esac
+  done
+}
+
 krew_random
