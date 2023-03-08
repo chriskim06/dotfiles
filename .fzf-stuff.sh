@@ -33,7 +33,7 @@ fshow() {
   _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
   _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
   git log --color=always --format="%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)" "$@" |
-    fzf --no-sort --reverse --tiebreak=index --no-multi \
+    fzf --no-sort --reverse --tiebreak=index --no-multi --no-mouse \
     --ansi --preview="$_viewGitLogLine" \
     --bind "enter:execute:$_viewGitLogLine | less -R"
 }

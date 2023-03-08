@@ -99,7 +99,7 @@ __krew_random_helper() {
   [[ $? -eq 0 ]] && cowsay "${random_plugin}: ${info}" > ~/.random_krew_plugin
 }
 
-workspaces() {
+wm() {
   if [[ ! -d "$HOME/.config/workspaces" ]]; then
     mkdir -p "$HOME/.config/workspaces"
   fi
@@ -133,7 +133,7 @@ workspaces() {
         return
         ;;
       help|-h|--help)
-        echo "workspaces saves commonly used directories"
+        echo "saves commonly used directories to easily switch to"
         echo
         echo "when invoked with no arguments it will allow you to choose"
         echo "from the list of workspaces to switch to"
