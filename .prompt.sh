@@ -54,12 +54,12 @@ bash_prompt() {
   fi
 
   local aws_session=''
-  if [[ -n "$AWS_SESSION_EXPIRATION" ]]; then
+  if [[ -n "$AWS_CREDENTIAL_EXPIRATION" ]]; then
     local profile=''
     if [[ -n "$AWS_VAULT" ]]; then
       profile="$AWS_VAULT "
     fi
-    aws_session=" (${profile}$(date --date="$AWS_SESSION_EXPIRATION" +%H:%M))"
+    aws_session=" (${profile}$(date --date="$AWS_CREDENTIAL_EXPIRATION" +%H:%M))"
   fi
 
   local line1="$(_ansi_bold)$(_section 30)  \u@not-computer${aws_session} $(_arrow 30 23)$(_section 23)  \w ${last}"
