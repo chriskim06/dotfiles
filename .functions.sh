@@ -110,10 +110,11 @@ wm() {
 
   if [[ $# -eq 0 ]]; then
     local dest=$(cat $listfile | fzf --height 30%)
-    dest=${dest#*: }
     if [[ -n "$dest" ]]; then
+      dest=${dest#*: }
       echo "switching to $dest"
       cd "$dest"
+      ls -lAh
       return
     fi
   fi
@@ -121,14 +122,16 @@ wm() {
   while [[ $# -gt 0 ]]; do
     case $1 in
       add)
+        [[ $# -ne 2 ]] && echo "must provide a workspace name"
         echo "$2: $(pwd)" >> $listfile
         return
         ;;
-      delete|remove)
+      delete|rm)
+        [[ $# -ne 2 ]] && echo "must provide a workspace name"
         sed -i "/^$2/d" $listfile
         return
         ;;
-      list)
+      list|ls)
         cat $listfile
         return
         ;;
@@ -139,10 +142,9 @@ wm() {
         echo "from the list of workspaces to switch to"
         echo
         echo "valid args:"
-        echo "  - list: list the available workspaces"
+        echo "  - ls|list: list the available workspaces"
         echo "  - add {name}: save the current directory to workspaces with {name}"
-        echo "  - delete {name}: delete directory {name} from workspaces"
-        echo "  - remove {name}: delete directory {name} from workspaces"
+        echo "  - rm|delete {name}: delete directory {name} from workspaces"
         return
         ;;
       *)

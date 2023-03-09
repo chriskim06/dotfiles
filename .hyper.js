@@ -9,10 +9,10 @@ module.exports = {
     updateChannel: 'stable',
 
     // default font size in pixels for all tabs
-    fontSize: 16,
+    fontSize: 15,
 
     // font family with optional fallbacks
-    fontFamily: 'Hack, Menlo',
+    fontFamily: 'Hack',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: 'normal',
@@ -27,7 +27,7 @@ module.exports = {
     letterSpacing: 0,
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(248,248,229,0.8)',
+    cursorColor: 'rgba(180,177,177,0.8)',
 
     // terminal text color under BLOCK cursor
     cursorAccentColor: '#000',
@@ -39,11 +39,11 @@ module.exports = {
     cursorBlink: false,
 
     // color of the text
-    foregroundColor: '#f8f8f8',
+    foregroundColor: '#eeeeee',
 
     // terminal background color
     // opacity is only supported on macOS
-    backgroundColor: 'rgb(38,38,38)',
+    backgroundColor: '#282828',
 
     // terminal selection color
     selectionColor: 'rgba(248,28,229,0.3)',
@@ -52,7 +52,7 @@ module.exports = {
     borderColor: '#333',
 
     // custom CSS to embed in the main window
-    css: '.term_fit.term_active {padding: 0px !important;}',
+    //     css: '.term_fit.term_active {padding: 0px !important;}',
 
     // custom CSS to embed in the terminal window
     termCSS: '',
@@ -72,24 +72,24 @@ module.exports = {
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
     // an array here instead of a color map object
-//     colors: {
-//       black: '#2A2426',
-//       red: '#ff7860',
-//       green: '#00ffa3',
-//       yellow: '#FFF46B',
-//       blue: '#0071b3',
-//       magenta: '#FFA2BF',
-//       cyan: '#00cccc',
-//       white: '#f8f8f8',
-//       lightBlack: '#808080',
-//       lightRed: '#ff7860',
-//       lightGreen: '#00ffa3',
-//       lightYellow: '#FFF46B',
-//       lightBlue: '#0071b3',
-//       lightMagenta: '#FFA2BF',
-//       lightCyan: '#00cccc',
-//       lightWhite: '#f8f8f8'
-//     }
+    colors: {
+      black: '#080200',
+      red: '#fa5e5b',
+      green: '#16c98d',
+      yellow: '#ffc83f',
+      blue: '#288ad6',
+      magenta: '#d34590',
+      cyan: '#28ddde',
+      white: '#e7e7e7',
+      lightBlack: '#6f6b67',
+      lightRed: '#fa5e5b',
+      lightGreen: '#16c98d',
+      lightYellow: '#feef6d',
+      lightBlue: '#278ad6',
+      lightMagenta: '#d34590',
+      lightCyan: '#27dede',
+      lightWhite: '#ffffff'
+    },
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
     // if left empty, your system's login shell will be used by default
