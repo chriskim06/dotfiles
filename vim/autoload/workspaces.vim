@@ -19,13 +19,18 @@ endfunction
 function! workspaces#pick_session()
   let l:changes = len(filter(getbufinfo(), 'v:val.changed == 1'))
   if l:changes > 0
-    echo "unsaved changes in current buffers. not switching workspaces"
+    echo 'unsaved changes in current buffers. not switching workspaces'
     return
   endif
-  call fzf#run({'source': 'ls ' . g:session_dir, 'sink': function('workspaces#restore_session')})
+  call fzf#run({
+        \ 'source': 'ls ' . g:session_dir,
+        \ 'sink': function('workspaces#restore_session'),
+        \ 'down': '30%'
+        \ })
 endfunction
 
 function! workspaces#restore_session(session)
   bufdo bd
   exec 'source ' . g:session_dir . '/' . a:session
+  echo 'switched to workspace ' . a:session
 endfunction
