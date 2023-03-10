@@ -15,8 +15,11 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " Useful
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/tagbar'
+Plug 'preservim/vim-indent-guides'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'burntsushi/ripgrep'
@@ -24,7 +27,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'craigemery/vim-autotag'
-Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'henrik/vim-indexed-search'
@@ -35,16 +37,11 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'zivyangll/git-blame.vim'
 Plug 'jreybert/vimagit'
-
-" Languages
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-
-" Style
 Plug 'franbach/miramare'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 " }}}

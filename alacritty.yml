@@ -6,7 +6,7 @@ window:
 
 # font configuration (changes require restart)
 font:
-  size: 15
+  size: 16
   offset:
     x: 0
     y: 3
@@ -14,12 +14,11 @@ font:
     x: 0
     y: 2
   normal:
-    family: Hack
-    style: Regular
+    family: Hack Nerd Font Mono
   bold:
-    family: Hack
+    family: Hack Nerd Font Mono
   italic:
-    family: Hack
+    family: Hack Nerd Font Mono
 
 # \x00 is the character sequence for my tmux prefix ctrl+space
 key_bindings:

@@ -26,6 +26,7 @@ set expandtab " Inserts spaces when tab is pressed
 set completeopt-=preview " Do not display scratch/preview window
 set completeopt+=noselect " Force a selection from the menu
 set formatoptions-=cro " Remove certain comment stuff from format options
+set sessionoptions+=globals
 set scrolloff=3 " Keep at least 3 lines above/below cursor when possible
 set mouse=a " Enable use of the mouse in all modes
 set mousem=popup " Disable extending selection with right click

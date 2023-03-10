@@ -69,6 +69,11 @@ nnoremap <silent> H :h <c-r><c-w><cr>
 vnoremap <silent> H <esc>:h <c-r><c-w><cr>
 " }}}
 
+" Sessions {{{
+nnoremap <leader>ss :call workspaces#save_session()<cr>
+nnoremap <leader>sr :call workspaces#pick_session()<cr>
+" }}}
+
 " Plugin mappings {{{
 function! CheckBackspace() abort
   let col = col('.') - 1
@@ -83,7 +88,7 @@ inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm()
       \ : "\<c-g>u\<cr>\<c-r>=coc#on_enter()\<cr>"
 let g:coc_snippet_next = '<tab>'
 
-noremap ? :normal \ci<cr>
+noremap ? :normal \c<space><cr>
 nnoremap <leader>i :source %<cr>:PlugInstall<cr>
 nnoremap <leader>d :source %<cr>:PlugClean<cr>
 nnoremap <leader>u :PlugUpdate \| PlugUpgrade<cr>
