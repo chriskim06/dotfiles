@@ -69,9 +69,8 @@ nnoremap <silent> H :h <c-r><c-w><cr>
 vnoremap <silent> H <esc>:h <c-r><c-w><cr>
 " }}}
 
-" Sessions {{{
-nnoremap <leader>ss :call workspaces#save_session()<cr>
-nnoremap <leader>sr :call workspaces#pick_session()<cr>
+" Workspaces {{{
+command -nargs=? -complete=custom,workspaces#completion Workspaces call workspaces#run(<f-args>)
 " }}}
 
 " Plugin mappings {{{
