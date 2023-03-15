@@ -92,10 +92,11 @@ __krew_random_helper() {
   local index="default"
   local plugin="$random_plugin"
   if [[ "$random_plugin" == *"/"* ]]; then
-    index="$(echo ${random_plugin%%/*})"
-    plugin="$(echo ${random_plugin##*/})"
+    index="${random_plugin%%/*}"
+    plugin="${random_plugin##*/}"
   fi
-  local info="$(cat ~/.krew/index/${index}/plugins/${plugin}.yaml | yq -r '.spec.shortDescription')"
+  local info
+  info="$(cat ~/.krew/index/${index}/plugins/${plugin}.yaml | yq -r '.spec.shortDescription')"
   [[ $? -eq 0 ]] && cowsay "${random_plugin}: ${info}" > ~/.random_krew_plugin
 }
 
@@ -105,15 +106,16 @@ wm() {
   fi
   local listfile="$HOME/.config/workspaces/list"
   if [[ ! -f $listfile ]]; then
-    touch $listfile
+    touch "$listfile"
   fi
 
   if [[ $# -eq 0 ]]; then
-    local dest=$(cat $listfile | fzf --height 30%)
+    local dest
+    dest=$(fzf --height 30% < "$listfile")
     if [[ -n "$dest" ]]; then
       dest=${dest#*: }
       echo "switching to $dest"
-      cd "$dest"
+      cd "$dest" || return
       ls -lAh
       return
     fi
@@ -123,16 +125,16 @@ wm() {
     case $1 in
       add)
         [[ $# -ne 2 ]] && echo "must provide a workspace name"
-        echo "$2: $(pwd)" >> $listfile
+        echo "$2: $(pwd)" >> "$listfile"
         return
         ;;
       delete|rm)
         [[ $# -ne 2 ]] && echo "must provide a workspace name"
-        sed -i "/^$2/d" $listfile
+        sed -i "/^$2/d" "$listfile"
         return
         ;;
       list|ls)
-        cat $listfile
+        cat "$listfile"
         return
         ;;
       help|-h|--help)

@@ -37,6 +37,7 @@
       }
     }
   },
+  "bashIde.shellcheckArguments": "--exclude=SC1090,SC1091",
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
