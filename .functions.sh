@@ -78,6 +78,67 @@ b64() {
   printf "%s" "$@" | base64 -w 0
 }
 
+# simple workspace manager
+wm() {
+  local config_dir="$HOME/.config/workspaces"
+  local listfile="$config_dir/list"
+  [[ ! -d "$config_dir" ]] && mkdir -p "$config_dir"
+  [[ ! -f $listfile ]] && touch "$listfile"
+
+  if [[ $# -eq 0 ]]; then
+    local dest
+    dest=$(fzf --height 30% < "$listfile")
+    if [[ -n "$dest" ]]; then
+      dest=${dest##* }
+      echo "switching to $dest"
+      cd "$dest" || return
+      ls -lAh
+      return
+    fi
+  fi
+
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      add)
+        [[ $# -ne 2 ]] && echo "must provide a workspace name"
+        local updated=$(printf '%s\n%s' "$(cat "$listfile")" "$2: $(pwd)" | sort | column -t)
+        echo "$updated" > "$listfile"
+        echo "added $(pwd) to workspaces as $2"
+        return
+        ;;
+      rm)
+        [[ $# -eq 2 ]] && sed -i "/^$2:/d" "$listfile" && return
+        local dir
+        dir=$(fzf --height 30% < "$listfile")
+        if [[ -n "$dir" ]]; then
+          dir=${dir%:*}
+          sed -i "/^$dir:/d" "$listfile"
+        fi
+        return
+        ;;
+      ls)
+        cat "$listfile"
+        return
+        ;;
+      help|-h|--help)
+        echo "saves commonly used directories to easily switch to"
+        echo
+        echo "when invoked with no arguments it will allow you to choose"
+        echo "from the list of workspaces to switch to"
+        echo
+        echo "valid args:"
+        echo "  - ls: list the available workspaces"
+        echo "  - add {name}: save the current directory to workspaces with {name}"
+        echo "  - rm {name}: delete directory {name} from workspaces or pick if no name is given"
+        return
+        ;;
+      *)
+        return
+        ;;
+    esac
+  done
+}
+
 # pick a random krew plugin to display in new shells
 krew_random() {
   if [[ -n "$(type -t cowsay)" && -n "$(type -t yq)" ]]; then
@@ -98,64 +159,6 @@ __krew_random_helper() {
   local info
   info="$(cat ~/.krew/index/${index}/plugins/${plugin}.yaml | yq -r '.spec.shortDescription')"
   [[ $? -eq 0 ]] && cowsay "${random_plugin}: ${info}" > ~/.random_krew_plugin
-}
-
-wm() {
-  if [[ ! -d "$HOME/.config/workspaces" ]]; then
-    mkdir -p "$HOME/.config/workspaces"
-  fi
-  local listfile="$HOME/.config/workspaces/list"
-  if [[ ! -f $listfile ]]; then
-    touch "$listfile"
-  fi
-
-  if [[ $# -eq 0 ]]; then
-    local dest
-    dest=$(fzf --height 30% < "$listfile")
-    if [[ -n "$dest" ]]; then
-      dest=${dest#*: }
-      echo "switching to $dest"
-      cd "$dest" || return
-      ls -lAh
-      return
-    fi
-  fi
-
-  while [[ $# -gt 0 ]]; do
-    case $1 in
-      add)
-        [[ $# -ne 2 ]] && echo "must provide a workspace name"
-#         echo "$2: $(pwd)" >> "$listfile"
-        local updated=$(printf '%s\n%s' "$(cat "$listfile")" "$2: $(pwd)" | sort | column -t)
-        echo "$updated" > "$listfile"
-        echo "added $(pwd) to workspaces as $2"
-        return
-        ;;
-      delete|rm)
-        [[ $# -ne 2 ]] && echo "must provide a workspace name"
-        sed -i "/^$2/d" "$listfile"
-        return
-        ;;
-      list|ls)
-        cat "$listfile"
-        return
-        ;;
-      help|-h|--help)
-        echo "saves commonly used directories to easily switch to"
-        echo
-        echo "when invoked with no arguments it will allow you to choose"
-        echo "from the list of workspaces to switch to"
-        echo
-        echo "valid args:"
-        echo "  - ls|list: list the available workspaces"
-        echo "  - add {name}: save the current directory to workspaces with {name}"
-        echo "  - rm|delete {name}: delete directory {name} from workspaces"
-        return
-        ;;
-      *)
-        ;;
-    esac
-  done
 }
 
 krew_random
