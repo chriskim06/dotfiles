@@ -35,7 +35,7 @@ au FileType fzf set laststatus=0 cmdheight=1 noshowmode noruler
 " NERDCommenter {{{
 let g:NERDSpaceDelims = 1
 let g:NERDCommentEmptyLines = 1
-let g:NERDToggleCheckAllLines = 1
+let g:NERDToggleCheckAllLines = 0
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDDefaultAlign = 'start'
 " }}}

@@ -125,7 +125,10 @@ wm() {
     case $1 in
       add)
         [[ $# -ne 2 ]] && echo "must provide a workspace name"
-        echo "$2: $(pwd)" >> "$listfile"
+#         echo "$2: $(pwd)" >> "$listfile"
+        local updated=$(printf '%s\n%s' "$(cat "$listfile")" "$2: $(pwd)" | sort | column -t)
+        echo "$updated" > "$listfile"
+        echo "added $(pwd) to workspaces as $2"
         return
         ;;
       delete|rm)
