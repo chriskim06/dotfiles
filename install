@@ -6,43 +6,31 @@ set -euo pipefail
 # install everything
 #
 
-# make directory for personal repos
-mkdir -p $HOME/src/chriskim06
+# get Homebrew
+if ! command -v brew &> /dev/null; then
+  if [[ "$(uname)" == 'Linux' ]]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+    /home/linuxbrew/.linuxbrew/bin/brew bundle install
+    /home/linuxbrew/.linuxbrew/bin/brew/opt/fzf/install
+  else
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew bundle install
+  fi
+fi
 
 # symlink stuff
 CWD=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-mkdir -p "$HOME/.vim/after/ftplugin"
-mkdir -p "$HOME/.vim/autoload"
-mkdir -p "$HOME/.vim/config"
-mkdir -p "$HOME/.config/alacritty"
-mkdir -p "$HOME/.config/spotify-tui"
-mkdir -p "$HOME/bin/completion"
-while read -r -d '' f; do
-  ln -sf "$f" "${f/$CWD/$HOME}"
-done < <(find ~+ -type f -not -path "*/.git*" -not -path "*/ignore/*" -not -name "*README.md" -not -name "*install" -not -name "*Brewfile" -exec printf "%s\0" {} +)
-
-# create empty file for secrets/tokens and local aliases
-touch $HOME/.private
-
-if [[ "$(uname)" == 'Linux' ]]; then
-  # install docker
-  sudo apt update
-  sudo apt install -y gcc apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  sudo apt install -y docker-ce docker-ce-cli containerd.io
-  sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-  sudo chmod +x /usr/local/bin/docker-compose
-
-  # install linuxbrew and stuff
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-  /home/linuxbrew/.linuxbrew/bin/brew bundle install
-  $(/home/linuxbrew/.linuxbrew/bin/brew --prefix)/opt/fzf/install
-elif [[ "$(uname)" == 'Darwin' ]]; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  brew bundle install
-fi
+mkdir -p "$HOME/.vim/after/ftplugin" "$HOME/.vim/autoload" "$HOME/.vim/config" "$HOME/.config/alacritty" "$HOME/.config/spotify-tui" "$HOME/bin/completion"
+for f in $(git ls-files -- ':!:README.md' ':!:Brewfile' ':!:install' ':!:.github/*'); do
+  ln -sf "$CWD/$f" "$HOME/$f"
+done
 
 # install tpm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+[[ ! -d ~/.tmux/plugins/tpm ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# make directory for personal repos
+mkdir -p "$HOME/src/chriskim06"
+
+# create empty file for secrets/tokens and local aliases
+touch "$HOME/.private"
