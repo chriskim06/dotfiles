@@ -14,7 +14,6 @@ endif
 " vim-plug management {{{
 call plug#begin('~/.vim/bundle')
 
-" Useful
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
