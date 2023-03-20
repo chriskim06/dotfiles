@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 #
 # install everything
@@ -12,25 +12,15 @@ mkdir -p $HOME/src/chriskim06
 # symlink stuff
 CWD=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-mkdir -p ~/bin/completion
-ln -sf $CWD/.bashrc ~
-ln -sf $CWD/.bash_profile ~
-ln -sf $CWD/.prompt.sh ~
-ln -sf $CWD/.aliases.sh ~
-ln -sf $CWD/.functions.sh ~
-ln -sf $CWD/.git-stuff.sh ~
-ln -sf $CWD/.fzf-stuff.sh ~
-ln -sf $CWD/.gitconfig ~
-ln -sf $CWD/.gitignore_global ~
-ln -sf $CWD/.inputrc ~
-ln -sf $CWD/.tmux.conf ~
-ln -sf $CWD/.hyper.js ~
-ln -sf $CWD/scripts/* ~/bin
-ln -sf $CWD/completion/* ~/bin/completion
-ln -sf $CWD/.rgignore ~
-
-mkdir -p ~/.config/spotify-tui
-ln -sf $CWD/spotify-tui-config.yml ~/.config/spotify-tui/config.yml
+mkdir -p "$HOME/.vim/after/ftplugin"
+mkdir -p "$HOME/.vim/autoload"
+mkdir -p "$HOME/.vim/config"
+mkdir -p "$HOME/.config/alacritty"
+mkdir -p "$HOME/.config/spotify-tui"
+mkdir -p "$HOME/bin/completion"
+while read -r -d '' f; do
+  ln -sf "$f" "${f/$CWD/$HOME}"
+done < <(find ~+ -type f -not -path "*/.git*" -not -path "*/ignore/*" -not -name "*README.md" -not -name "*install" -not -name "*Brewfile" -exec printf "%s\0" {} +)
 
 # create empty file for secrets/tokens and local aliases
 touch $HOME/.private
@@ -56,7 +46,3 @@ fi
 
 # install tpm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-# symlink vim stuff
-cd $CWD/vim
-[[ -f install ]] && ./install
