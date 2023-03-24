@@ -5,13 +5,13 @@
 const s:session_dir = '~/.vim/sessions'
 
 function! workspaces#completion(lead, cmd, cursor)
-  let valid_args = ['ls', 'save', 'pick', 'rm']
+  let valid_args = ['ls', 'write', 'pick', 'rm']
   return join(valid_args, "\n")
 endfunction
 
 function! workspaces#run(...)
   if a:0
-    if a:1 == 'save'
+    if a:1 == 'write'
       call s:save_session()
     elseif a:1 == 'pick' || a:1 == 'rm'
       call s:pick_session(a:1)
@@ -21,7 +21,7 @@ function! workspaces#run(...)
       echo 'invalid arg "' . a:1 . '"'
     endif
   else
-    call s:list_sessions()
+    call s:pick_sessions('pick')
   endif
 endfunction
 
@@ -78,6 +78,7 @@ function! s:restore_session(session)
 endfunction
 
 function! s:delete_session(session)
-  silent exec '!rm ' . s:path(a:session)
+  exec 'silent !rm ' . s:path(a:session)
+  exec 'redraw!'
   echo 'deleted workspace ' . a:session
 endfunction
