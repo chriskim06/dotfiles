@@ -19,12 +19,8 @@ if ! command -v brew &> /dev/null; then
 fi
 
 # symlink stuff
-CWD=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-
 mkdir -p "$HOME/.vim/after/ftplugin" "$HOME/.vim/autoload" "$HOME/.vim/config" "$HOME/.config/alacritty" "$HOME/.config/spotify-tui" "$HOME/bin/completion"
-for f in $(git ls-files -- ':!:README.md' ':!:Brewfile' ':!:install'); do
-  ln -sf "$CWD/$f" "$HOME/$f"
-done
+git ls-files -- ':!:README.md' ':!:Brewfile' ':!:install' | xargs -I % ln -sf "$PWD/%" "$HOME/%"
 
 # install tpm
 [[ ! -d ~/.tmux/plugins/tpm ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
