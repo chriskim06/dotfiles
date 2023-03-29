@@ -19,7 +19,7 @@ if ! command -v brew &> /dev/null; then
 fi
 
 # symlink stuff
-mkdir -p "$HOME/.vim/after/ftplugin" "$HOME/.vim/autoload" "$HOME/.vim/config" "$HOME/.config/alacritty" "$HOME/.config/spotify-tui" "$HOME/bin/completion"
+find . -mindepth 1 -type d -not -path "*/.git*" -not -path "./ignore*" | sed "s|^.|$HOME|g" | xargs mkdir -p
 git ls-files -- ':!:README.md' ':!:Brewfile' ':!:install' | xargs -I % ln -sf "$PWD/%" "$HOME/%"
 
 # install tpm
