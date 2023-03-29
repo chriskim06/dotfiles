@@ -1,5 +1,5 @@
 "
-" Author:       Chris Kim
+" Author:       chriskim06
 " Description:  Filetype specific settings for go
 "
 

@@ -21,7 +21,7 @@ function! workspaces#run(...)
       echo 'invalid arg "' . a:1 . '"'
     endif
   else
-    call s:pick_sessions('pick')
+    call s:pick_session('pick')
   endif
 endfunction
 
