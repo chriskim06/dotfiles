@@ -9,7 +9,7 @@
 tmux new-session -A -s main 2>/dev/null
 
 # custom prompt
-source ~/.prompt.sh
+source ~/.stuff/.prompt.sh
 
 # miscellaneous
 complete -d cd
@@ -28,10 +28,10 @@ bind '"\C-d": backward-kill-word'
 
 # other stuff
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-[[ -f ~/.aliases.sh ]] && source ~/.aliases.sh
-[[ -f ~/.git-stuff.sh ]] && source ~/.git-stuff.sh
-[[ -f ~/.functions.sh ]] && source ~/.functions.sh
-[[ -f ~/.fzf-stuff.sh ]] && source ~/.fzf-stuff.sh
+[[ -f ~/.stuff/.aliases.sh ]] && source ~/.stuff/.aliases.sh
+[[ -f ~/.stuff/.git-stuff.sh ]] && source ~/.stuff/.git-stuff.sh
+[[ -f ~/.stuff/.functions.sh ]] && source ~/.stuff/.functions.sh
+[[ -f ~/.stuff/.fzf-stuff.sh ]] && source ~/.stuff/.fzf-stuff.sh
 [[ -f ~/.private ]] && source ~/.private
 
 # kubectl stuff
