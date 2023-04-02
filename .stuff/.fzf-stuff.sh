@@ -7,7 +7,7 @@
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
 # command for listing path candidates.
 _fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" --exclude "node_modules" . "$1"
+  fd --type f --hidden --follow --exclude ".git" --exclude "node_modules" . "$1"
 }
 
 # Use fd to generate the list for directory completion
