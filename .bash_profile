@@ -40,6 +40,7 @@ export FZF_COMPLETION_TRIGGER='jj'
 export THEFUCK_WAIT_COMMAND=3
 export THEFUCK_HISTORY_LIMIT='200'
 export BASH_SILENCE_DEPRECATION_WARNING=1
+export LS_COLORS=$(vivid generate catppuccin-latte)
 
 # Load .bashrc
-[[ -f $HOME/.bashrc ]] && source $HOME/.bashrc
+[[ -f $HOME/.bashrc ]] && source "$HOME/.bashrc"
