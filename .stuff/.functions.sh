@@ -78,6 +78,25 @@ b64() {
   printf "%s" "$@" | base64 -w 0
 }
 
+# function to show symlink target for which
+is() {
+  if [[ $# -ne 1 ]]; then
+    echo "must provide binary name"
+    return 1
+  fi
+  p=$(which "$1")
+  if [[ -z "$p" ]]; then
+    return 1
+  fi
+  printf "\e[38;5;2m%s\e[0m" "$p"
+  if [[ -L "$p" ]]; then
+    r=$(realpath "$p")
+    printf " -> \e[38;5;135m%s\e[0m\n" "$r"
+    return 0
+  fi
+  echo
+}
+
 # simple workspace manager
 wm() {
   local config_dir="$HOME/.config/workspaces"

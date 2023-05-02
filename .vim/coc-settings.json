@@ -5,19 +5,33 @@
   "languageserver": {
     "dockerfile": {
       "command": "docker-langserver",
-      "filetypes": ["dockerfile"],
-      "args": ["--stdio"]
+      "filetypes": [
+        "dockerfile"
+      ],
+      "args": [
+        "--stdio"
+      ]
     },
     "terraform": {
       "command": "terraform-ls",
-      "args": ["serve"],
-      "filetypes": ["terraform", "tf"],
+      "args": [
+        "serve"
+      ],
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
       "initializationOptions": {}
     },
     "golang": {
       "command": "gopls",
-      "rootPatterns": ["go.mod", ".git/"],
-      "filetypes": ["go"],
+      "rootPatterns": [
+        "go.mod",
+        ".git/"
+      ],
+      "filetypes": [
+        "go"
+      ],
       "initializationOptions": {
         "usePlaceholders": false
       }
@@ -33,5 +47,6 @@
     "no-bare-urls": false,
     "fenced-code-language": false,
     "blanks-around-fences": false
-  }
+  },
+  "yaml.format.singleQuote": true
 }
