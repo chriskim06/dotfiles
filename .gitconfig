@@ -44,6 +44,7 @@
   drb = delete-remote-branch
 [push]
   default = simple
+  autoSetupRemote = true
 [color]
   ui = auto
 [color "branch"]
