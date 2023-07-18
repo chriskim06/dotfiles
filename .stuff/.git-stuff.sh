@@ -2,18 +2,20 @@
 
 # Git stuff
 
+# setup scmpuff
+eval "$(scmpuff init --shell=bash --aliases=false)"
+
 # aliases
+alias ga='git add'
 alias gb='git branch'
 alias gd='git branch -D'
 alias gk='git checkout'
 alias gc='git commit'
 alias gl='fshow'
-alias gs='git number -uall | sed "/^$/d"'
-alias gu='git unstage'
+alias gs='scmpuff_status'
 alias push='git push'
 alias pull='git pull --prune'
 alias delete='git delete'
-alias discard='git discard'
 alias staged='git staged'
 alias branches='git branches'
 
@@ -25,9 +27,31 @@ stash() {
     fstash
   elif [[ $# -eq 1 && "$1" == "pop" ]]; then
     git stash pop > /dev/null
-    git number -uall | sed "/^$/d"
+    scmpuff_status
   else
-    git stash $*
+    git stash "$@"
+  fi
+}
+
+discard() {
+  if [[ $# -eq 0 ]]; then
+    printf "Usage: git discard <file>...\n"
+  else
+    git checkout -- "$@"
+    scmpuff_status
+  fi
+}
+
+gu() {
+  if [[ $# -eq 0 ]]; then
+    printf "Usage: git unstage <file>...\n"
+  else
+    if [[ -n "$(git show-ref --head)" ]]; then
+      git reset HEAD "$@" > /dev/null
+    else
+      git rm -r --cached  "$@" > /dev/null
+    fi
+    scmpuff_status
   fi
 }
 
@@ -36,15 +60,6 @@ gf() {
     git fetch --all --prune
   else
     git fetch --prune "$@"
-  fi
-}
-
-ga() {
-  if [[ $# -eq 0 ]]; then
-    printf "Choose files to stage for commit\n"
-  else
-    git add $(git list "$@" | sed "s/"$'\E\[1;31m'"//g")
-    git number | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
   fi
 }
 
@@ -57,7 +72,7 @@ gconf() {
 }
 
 vn() {
-  [[ $# -eq 1 ]] && vim $(git list "$@" | sed "s/"$'\E\[1;31m'"//g")
+  [[ $# -eq 1 ]] && vim "$(scmpuff expand "$@")"
 }
 
 # completion
@@ -67,7 +82,7 @@ vn() {
 if command -v __git_complete > /dev/null; then
   __git_complete ga _git_add
   __git_complete gb _git_branch
-#   __git_complete gd _git_branch
+  #   __git_complete gd _git_branch
   __git_complete gf _git_fetch
   __git_complete gc _git_commit
   __git_complete gk _git_checkout

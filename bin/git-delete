@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 #
 # git-delete
 #
@@ -9,42 +11,24 @@ if [[ $# -eq 0 ]]; then
 elif [[ $# -eq 1 && "$1" == "." ]]; then
   printf "Not allowed to delete all files at once\n"
 else
-  root="$(git rev-parse --show-toplevel)"
-  declare -A staged workingcopy
-  for f in $(git diff --name-only --cached); do
-    staged[$root/$f]="$root/$f"
-  done
-  for f in $(git status -uall --porcelain | cut -c4-); do
-    workingcopy[$root/$f]="$root/$f"
-  done
-  files=()
-  for i in "$@"; do
-    if [[ $i == *"-"* ]]; then
-      IFS='-' read -ra range <<< "$i"
-      re='^[0-9]+$'
-      if [[ ${#range[@]} -eq 2 && ${range[0]} =~ $re && ${range[1]} =~ $re ]]; then
-        for j in $(seq ${range[0]} ${range[1]}); do
-          fname=$(git list $j | sed "s/"$'\E\[1;31m'"//g")
-          files+=("$(printf "$(cd "$(dirname "$fname")"; pwd)/$(basename "$fname")")")
-        done
-        continue
-      fi
-    fi
-    fname=$(git list $i | sed "s/"$'\E\[1;31m'"//g")
-    files+=("$(printf "$(cd "$(dirname "$fname")"; pwd)/$(basename "$fname")")")
-  done
-  printf "Confirm deleting:\n$(printf "${files[*]}" | tr ' ' '\n' | sed 's/^/  /g')\n"
+  files=($(scmpuff expand "$@"))
+  printf "Confirm deleting:\n%s\n" "$(echo "${files[*]}" | tr ' ' '\n')"
   read -e -r -p "  [y/n]: " choice && printf "\n"
   if [[ "$choice" == "y" ]]; then
+    skipped=()
     for i in "${files[@]}"; do
-      if [[ ${staged[$i]} ]]; then
-        git reset HEAD "$i" > /dev/null
-        git number -c rm "$i" > /dev/null
-      elif [[ ${workingcopy[$i]} ]]; then
-        git number -c rm "$i" > /dev/null
+      name=$(scmpuff expand "$i")
+      stat=$(git status -uall --porcelain "$name")
+      if [[ "${stat:0:2}" != "??" ]]; then
+        skipped+=("$name")
+        continue
       fi
+      rm "$name"
     done
+    if [[ ${#skipped[@]} -gt 1 ]]; then
+      printf "unstage in order to delete the following files:\n%s\n" "$(echo "${skipped[*]}" | tr ' ' '\n')"
+    fi
   fi
-  git number -uall | sed '/(use "git /d' | sed '/^$/d' | sed 1,2d
+  scmpuff status
 fi
 
