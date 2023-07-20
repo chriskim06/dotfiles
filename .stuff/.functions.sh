@@ -67,7 +67,7 @@ color() {
   printf "%s\n" '\e[1m is bold and \e[0m ends a sequence'
   local val
   for code in {0..255}; do
-    val="$(printf '%03d' $code)"
+    val="$(printf '%03d' "$code")"
     printf "\e[48;5;${code}m  \e[38;5;0m$val  \e[0m|  \e[38;5;${code}m$val\e[0m  |"
     [[ $((($code + 1) % 8)) -eq 0 ]] && printf "\n"
   done
@@ -167,17 +167,14 @@ krew_random() {
 }
 
 __krew_random_helper() {
-  local plugins=($(krew search | tail -n +2 | sed 's/ .*//g'))
-  local random_plugin="${plugins[$((RANDOM % ${#plugins[@]}))]}"
-  local index="default"
-  local plugin="$random_plugin"
-  if [[ "$random_plugin" == *"/"* ]]; then
-    index="${random_plugin%%/*}"
-    plugin="${random_plugin##*/}"
-  fi
-  local info
-  info="$(cat ~/.krew/index/${index}/plugins/${plugin}.yaml | yq -r '.spec.shortDescription')"
-  [[ $? -eq 0 ]] && cowsay "${random_plugin}: ${info}" > ~/.random_krew_plugin
+  local index_dir plugins random_plugin name info
+
+  index_dir="${HOME}/.krew/index/default/plugins"
+  mapfile -t plugins < <(find "$index_dir" -type f)
+  random_plugin="${plugins[$((RANDOM % ${#plugins[@]}))]}"
+  name="$(yq -r '.metadata.name' "$random_plugin")"
+  info="$(yq -r '.spec.shortDescription' "$random_plugin")"
+  [[ "$name" != "" && "$info" != "" ]] && cowsay "${name}: ${info}" > ~/.random_krew_plugin
 }
 
 krew_random

@@ -21,10 +21,10 @@ bind '"\C-h": backward-word'
 bind '"\C-j": end-of-line'
 bind '"\C-k": beginning-of-line'
 bind '"\C-d": backward-kill-word'
-# bind '"\e[1;3C": forward-word'
-# bind '"\e[1;3D": backward-word'
-# bind '"\e[1;3A": beginning-of-line'
-# bind '"\e[1;3B": end-of-line'
+bind '"\e[1;3C": forward-word'
+bind '"\e[1;3D": backward-word'
+bind '"\e[1;3A": beginning-of-line'
+bind '"\e[1;3B": end-of-line'
 
 # other stuff
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
@@ -35,9 +35,7 @@ bind '"\C-d": backward-kill-word'
 [[ -f ~/.private ]] && source ~/.private
 
 # kubectl stuff
-mkdir -p "$HOME/.local/share/bash_completion"
-[[ ! -f "$HOME/.local/share/bash_completion/kubectl" ]] && kubectl completion bash > "$HOME/.local/share/bash_completion/kubectl"
-source ~/.local/share/bash_completion/kubectl
+source <(kubectl completion bash)
 complete -o default -F __start_kubectl k
 [[ -f "$HOME/bin/completion/kubectl-custom-completion" ]] && source "$HOME/bin/completion/kubectl-custom-completion"
 
