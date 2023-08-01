@@ -104,7 +104,7 @@ nnoremap <silent> gd :call CocAction('jumpDefinition')<cr>
 nnoremap <silent> gi <plug>(coc-implementation)
 nnoremap <silent> gr :call CocAction('jumpReferences')<cr>
 nnoremap <silent> C :CocConfig<cr>
-nnoremap <silent> P :Files<cr>
+nnoremap <silent> P :call RunFZF()<cr>
 nnoremap <silent> O :Buffers<cr>
 nnoremap <silent> K :call CocActionAsync('doHover')<cr>
 command Gblame Git blame

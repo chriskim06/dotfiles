@@ -24,3 +24,12 @@ function! FindAndReplace(find, replace)
   endif
 endfunction
 command! -nargs=* FR call FindAndReplace(<f-args>)
+
+function RunFZF()
+  let ignored = system('git check-ignore ' .. shellescape(expand('%:p')))
+  if ignored != ""
+    call fzf#run({'source': 'fd -I', 'sink': 'e', 'window': { 'width': 0.9, 'height': 0.6 }})
+  else
+    exec 'Files'
+  endif
+endfunction

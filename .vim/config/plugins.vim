@@ -25,7 +25,7 @@ let g:tagbar_show_tag_linenumbers = 1
 " }}}
 
 " FZF {{{
-let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 let g:fzf_colors = { 'fg': ['fg', 'Comment'] }
 let g:fzf_buffers_jump = 1
 au FileType fzf set laststatus=0 cmdheight=1 noshowmode noruler

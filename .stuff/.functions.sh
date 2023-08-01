@@ -2,14 +2,6 @@
 
 # Functions
 
-if command -v bat >/dev/null; then
-  BAT_PATH=$(which bat)
-  function bat() {
-    $BAT_PATH --color always --theme=TwoDark --paging always "$@"
-  }
-fi
-complete -o default -F _fzf_path_completion bat
-
 bs() {
   cat << EOF > "$1"
 #!/usr/bin/env bash
