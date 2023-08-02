@@ -6,6 +6,7 @@
 " Useful and Random mappings {{{
 map ; :
 noremap <cr> G
+nnoremap <leader>v :source ~/.vimrc<cr>
 nnoremap <silent> Q :call CloseBuffer()<cr>
 nnoremap <silent> W :%s/\s\+$//ge<cr>:w<cr>
 nnoremap r <c-r>
