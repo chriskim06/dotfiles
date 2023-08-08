@@ -37,6 +37,7 @@
       }
     }
   },
+  "bashIde.backgroundAnalysisMaxFiles": 0,
   "bashIde.shellcheckArguments": "--exclude=SC1090,SC1091,SC2155",
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
