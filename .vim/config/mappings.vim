@@ -103,7 +103,7 @@ nnoremap <silent> <leader>p :GitGutterPreviewHunk<cr>
 nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 nnoremap <silent> gd :call CocAction('jumpDefinition')<cr>
 nnoremap <silent> gi <plug>(coc-implementation)
-nnoremap <silent> gr :call CocAction('jumpReferences')<cr>
+nnoremap <silent> gr :Rg <c-r><c-w><cr>
 nnoremap <silent> C :CocConfig<cr>
 nnoremap <silent> P :call RunFZF()<cr>
 nnoremap <silent> O :Buffers<cr>
