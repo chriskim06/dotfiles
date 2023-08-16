@@ -39,8 +39,8 @@ command Json %!jq .
 " }}}
 
 " Buffer, tab, split mappings {{{
-nnoremap <tab> :bn<cr>
-nnoremap <s-tab> :bp<cr>
+nnoremap <silent> <tab> :bn<cr>
+nnoremap <silent> <s-tab> :bp<cr>
 nnoremap <silent> <expr> <leader>[ (tabpagenr() == 1) ? ":tabm\<cr>" : ":-tabm\<cr>"
 nnoremap <silent> <expr> <leader>] (tabpagenr() == tabpagenr('$')) ? ":0tabm\<cr>" : ":+tabm\<cr>"
 nnoremap <c-j> <c-w>j
@@ -78,10 +78,6 @@ nnoremap <leader>wr :Workspaces rm<cr>
 " }}}
 
 " Plugin mappings {{{
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 inoremap <silent><expr> <tab>
       \ coc#pum#visible() ? coc#pum#next(1):
       \ CheckBackspace() ? "\<tab>" :
@@ -89,8 +85,6 @@ inoremap <silent><expr> <tab>
 inoremap <silent><expr> <s-tab> coc#pum#visible() ? coc#pum#prev(1) : "\<c-h>"
 inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm()
       \ : "\<c-g>u\<cr>\<c-r>=coc#on_enter()\<cr>"
-let g:coc_snippet_next = '<tab>'
-
 noremap ? :normal \c<space><cr>
 nnoremap <leader>i :source %<cr>:PlugInstall<cr>
 nnoremap <leader>d :source %<cr>:PlugClean<cr>

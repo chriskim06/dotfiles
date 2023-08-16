@@ -3,6 +3,11 @@
 " Description: Custom functions
 "
 
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 function CloseBuffer()
   if &ft == "help"
     execute 'bd'
