@@ -42,7 +42,7 @@ export FZF_DEFAULT_OPTS="
   --color 'marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#9bebc7'"
 export FZF_COMPLETION_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {} 2>/dev/null"'
 export FZF_COMPLETION_TRIGGER='jj'
-export FZF_TMUX_OPTS='-p80%,80%'
+export FZF_TMUX_OPTS='-p 80%'
 export THEFUCK_WAIT_COMMAND=3
 export THEFUCK_HISTORY_LIMIT='200'
 export BASH_SILENCE_DEPRECATION_WARNING=1

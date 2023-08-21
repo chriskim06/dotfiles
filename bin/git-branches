@@ -12,31 +12,31 @@ if [[ $# -gt 0 ]]; then
     branch_list=''
     count=0
     for i in "${branch_array[@]}"; do
-      branch_list+="$count $(printf ' %.0s' $(seq 1 $((4 - ${#count})))) $i \e[38;5;255m$(git config branch.$i.description)\e[0m\n"
+      branch_list+="$count $(printf ' %.0s' $(seq 1 $((4 - ${#count})))) $i $(printf '%b' "\033[1m$(git config branch."$i".description)\033[0m")\n"
       count=$((count + 1))
     done
     count=$((count - 1))
-    printf "$branch_list"
+    printf '%b' "$branch_list"
     printf "\n# Enter the numbers of branches you want to delete separated by spaces. You may also add an"
     printf "\n# exclamation mark after a number if you want to delete it at origin too (e.g., 0 3! 6 7 9!).\n\n"
     read -er -a choices -p "    > " && printf "\n"
-    [[ "${choices[@]}" =~ [:alpha:] ]] && printf "Letters are not allowed\n" && exit 0
+    [[ "${choices[*]}" =~ [:alpha:] ]] && printf "Letters are not allowed\n" && exit 0
     invalid=''
     choice_names=()
     for i in "${choices[@]}"; do
       if [[ "$i" =~ ^[0-9]+\!$ ]]; then
         index="${i::-1}"
         [[ $index -gt $count ]] && invalid+="$i " && continue
-        choice_names+=("$(printf "$branch_list" | grep "^$index ") [!]")
+        choice_names+=("$(printf '%b' "$branch_list" | grep "^$index ") [!]")
       elif [[ "$i" =~ ^[0-9]+$ ]]; then
         [[ $i -gt $count ]] && invalid+="$i " && continue
-        choice_names+=("$(printf "$branch_list" | grep "^$i ")")
+        choice_names+=("$(printf '%b' "$branch_list" | grep "^$i ")")
       else
         invalid+="$i "
       fi
     done
-    [[ -z "${choice_names[@]}" ]] && printf "Invalid branch choices\n" && exit 0
-    [[ -n "$invalid" ]] && printf "# Skipping invalid branch choices: $invalid"
+    [[ -z "${choice_names[*]}" ]] && printf "Invalid branch choices\n" && exit 0
+    [[ -n "$invalid" ]] && printf "# Skipping invalid branch choices: %s" "$invalid"
     printf "\n# Are you sure you want to delete the following branches?\n"
     printf "\t%s\n" "${choice_names[@]}"
     read -erp "  Confirm [y/n]: " confirm && printf "\n"
@@ -66,26 +66,20 @@ if [[ $# -gt 0 ]]; then
   fi
 else
   current=$'\u276f'
-  if [[ "$(uname)" == "Darwin" ]]; then
-    current="$(echo -e '\u276f')"
-  fi
   while read -r branch; do
     clean_branch_name="${branch//\*\ /}"
-    description=$(git config branch.$clean_branch_name.description || echo "")
+    description=$(git config branch."$clean_branch_name".description || echo "")
     branch_len=${#clean_branch_name}
     description_len=${#description}
     remaining_len=$((80 - branch_len - 4)) # max line width - branch name length - 3 (for the padding around branch) - 1 (for ellipses)
     if [[ $description_len -gt $remaining_len ]]; then
       ellipses=$'\u2026'
-      if [[ "$(uname)" == "Darwin" ]]; then
-        ellipses="$(echo -e '\u2026')"
-      fi
       description="${description:0:$remaining_len}${ellipses}"
     fi
     if [[ "${branch::1}" == "*" ]]; then
-      printf "$current \e[38;5;10m$clean_branch_name\e[0m \e[38;5;255m$description\e[0m\n"
+      printf '%s %b\n' "$current" "\033[38;5;10m$clean_branch_name\033[0m \033[1m$description\033[0m"
     else
-      printf "  $branch \e[38;5;255m$description\e[0m\n"
+      printf '  %s %b\n' "$branch" "\033[1m$description\033[0m"
     fi
-  done <<< "$(git branch --list)"
+  done <<< "$(git branch --list --sort=refname:short)"
 fi

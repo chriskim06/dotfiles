@@ -26,9 +26,9 @@ _section() {
 _arrow() {
   local arrow=''
   if [[ $# -eq 1 ]]; then
-    printf '%s%s%s%s' "$(_ansi_reset)" "$(_ansi_fg $1)" "$arrow" "$(_ansi_reset)"
+    printf '%s%s%s%s' "$(_ansi_reset)" "$(_ansi_fg "$1")" "$arrow" "$(_ansi_reset)"
   else
-    printf '%s%s%s' "$(_ansi_fg $1)" "$(_ansi_bg $2)" "$arrow"
+    printf '%s%s%s' "$(_ansi_fg "$1")" "$(_ansi_bg "$2")" "$arrow"
   fi
 }
 

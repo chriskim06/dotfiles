@@ -3,18 +3,28 @@
 set -euo pipefail
 
 git fetch --all --prune --quiet
-branches=$(git branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }')
+branches=$(git for-each-ref \
+  --format '%(if:equals=gone)%(upstream:track,nobracket)%(then)%(refname:short)%(end)' \
+  --omit-empty \
+  --sort=refname:short refs/heads)
 
 if [[ -z "$branches" ]]; then
   echo "no local branches without a remote"
 fi
 
-if [[ $# -eq 1 && "$1" == "-d" ]]; then
-  printf "Delete the following branches:\n%s\n\n" "$branches"
-  read -erp "Confirm [y/n]: " confirm && printf "\n"
-  [[ ! "$confirm" =~ ^y|Y ]] && printf "Not deleting branches\n" && exit 0
-  echo "$branches" | xargs git branch -D
-  exit 0
+if [[ $# -eq 1 ]]; then
+  formatted_branches="$(echo "$branches" | awk '{ print "  - " $0; }')"
+  if [[ "$1" == "-d" ]]; then
+    printf "Delete the following branches:\n%s\n\n" "$formatted_branches"
+    read -erp "Confirm [y/n]: " confirm && printf "\n"
+    [[ ! "$confirm" =~ ^y|Y ]] && printf "Not deleting branches\n" && exit 0
+    echo "$branches" | xargs git branch -D
+    exit 0
+  elif [[ "$1" == "-D" ]]; then
+    printf "Deleting the following branches:\n%s\n" "$formatted_branches"
+    echo "$branches" | xargs git branch -D
+    exit 0
+  fi
 fi
 
 echo "$branches" | while read -r branch; do
@@ -31,5 +41,5 @@ echo "$branches" | while read -r branch; do
       description="${description:0:$remaining_len}${ellipses}"
     fi
   fi
-  echo "$branch $description"
+  printf '%s %b\n' "$branch" "\033[1m$description\033[0m"
 done
