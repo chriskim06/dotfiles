@@ -9,6 +9,10 @@ let g:airline_exclude_filetypes = ['help', 'fzf']
 let g:airline_powerline_fonts = 1
 let g:airline_extensions = ['branch', 'hunks', 'coc']
 let g:airline_section_z = '%l/%L : %c'
+let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ [ 'x', 'z', 'error', 'warning' ]
+      \ ]
 let g:airline_skip_empty_sections = 1
 " }}}
 
