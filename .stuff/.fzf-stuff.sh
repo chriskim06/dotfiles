@@ -40,3 +40,18 @@ fshow() {
 }
 
 complete -F _fzf_path_completion -o default -o bashdefault vim
+
+# easy function for opening a file in vim chosen in an fzf tmux popup
+p() {
+  local a=$(fzf-tmux -p 80% -- --preview "bat --style=numbers --color=always --line-range :500 {} 2>/dev/null")
+  if [[ -n "$a" ]]; then
+    # these escape sequences allow rewriting the command printed to the terminal after
+    # running this function
+    # - move cursor up one line
+    # - move cursor forward 10 columns (fixed width based on length of PS1)
+    # - delete from current cursor position to end of line
+    # - print the vim command being run followed by a newline
+    printf '\e[F\e[10C\e[K%s\n' "vim $a"
+    vim "$a"
+  fi
+}
