@@ -25,6 +25,7 @@ export CLICOLOR=1
 export HISTSIZE=500
 export HISTFILESIZE=500
 export HISTCONTROL=ignoreboth:erasedups
+export HISTIGNORE="p:p[ \t]*"
 export LESS_TERMCAP_mb=$(printf "\e[1;31m")
 export LESS_TERMCAP_md=$(printf "\e[1;38;5;49m")
 export LESS_TERMCAP_me=$(printf "\e[0m")

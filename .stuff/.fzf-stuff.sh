@@ -53,5 +53,9 @@ p() {
     # - print the vim command being run followed by a newline
     printf '\e[F\e[10C\e[K%s\n' "vim $a"
     vim "$a"
+
+    # add the vim command being run to the history file
+    # p is not added to history via $HISTIGNORE
+    history -s "vim $a"
   fi
 }
