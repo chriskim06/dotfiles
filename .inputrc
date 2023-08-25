@@ -21,3 +21,14 @@ set colored-stats on
 # Shift up/down to menu complete forward/backward
 "\e[1;2B": menu-complete-backward
 "\e[1;2A": menu-complete
+
+"\C-x\C-r": re-read-init-file
+"\C-l": forward-word
+"\C-h": backward-word
+"\C-j": end-of-line
+"\C-k": beginning-of-line
+"\C-d": backward-kill-word
+# "\e[1;3C": forward-word
+# "\e[1;3D": backward-word
+# "\e[1;3A": beginning-of-line
+# "\e[1;3B": end-of-line

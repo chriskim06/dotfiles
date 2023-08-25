@@ -67,5 +67,6 @@ bash_prompt() {
   PS1="\n${line1}\n${line2}"
 }
 
+shopt -s histappend
 export PROMPT_DIRTRIM=3
-export PROMPT_COMMAND="history -a; history -c; history -r; bash_prompt"
+export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prompt"

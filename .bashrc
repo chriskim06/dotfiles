@@ -14,17 +14,6 @@ source ~/.stuff/.prompt.sh
 # miscellaneous
 complete -d cd
 eval "$(thefuck --alias)"
-shopt -s histappend
-
-bind '"\C-l": forward-word'
-bind '"\C-h": backward-word'
-bind '"\C-j": end-of-line'
-bind '"\C-k": beginning-of-line'
-bind '"\C-d": backward-kill-word'
-bind '"\e[1;3C": forward-word'
-bind '"\e[1;3D": backward-word'
-bind '"\e[1;3A": beginning-of-line'
-bind '"\e[1;3B": end-of-line'
 
 # other stuff
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
