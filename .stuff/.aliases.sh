@@ -35,4 +35,5 @@ alias tkrew='go clean -testcache && hack/make-binary.sh && hack/run-integration-
 alias ns='kubectl ns'
 alias ctx='kubectl ctx'
 alias av='aws-vault'
+alias tf='terraform'
 alias notes="vim +'source ~/.vim/sessions/notes'"
