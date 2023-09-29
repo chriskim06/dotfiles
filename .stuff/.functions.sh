@@ -2,6 +2,14 @@
 
 # Functions
 
+man() {
+  if [[ $# -eq 1 && -n "$1" && "$(type -t "$1")" == "builtin" ]]; then
+    help "$1"
+  else
+    command man "$@"
+  fi
+}
+
 bs() {
   cat << EOF > "$1"
 #!/usr/bin/env bash
