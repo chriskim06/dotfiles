@@ -37,3 +37,4 @@ alias ctx='kubectl ctx'
 alias av='aws-vault'
 alias tf='terraform'
 alias notes="vim +'source ~/.vim/sessions/notes'"
+alias sessions="vim +'Workspaces'"
