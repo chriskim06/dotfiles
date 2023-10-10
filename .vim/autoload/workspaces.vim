@@ -47,7 +47,9 @@ function! s:pick_session(arg)
   call fzf#run({
         \ 'source': 'ls ' . s:session_dir,
         \ 'sink': function(l:cmd),
-        \ 'down': '30%'
+        \ 'tmux': '-p 50%',
+        \ 'header': 'workspaces',
+        \ 'options': ['--bind', 'alt-bs:execute(rm ' . s:session_dir . '/{})', '--bind', 'alt-bs:+reload-sync(ls ' . s:session_dir . ')'],
         \ })
 endfunction
 
@@ -64,12 +66,16 @@ function! s:list_sessions()
   call fzf#run({
         \ 'source': 'ls ' . s:session_dir,
         \ 'sink': function('<sid>null'),
-        \ 'down': '30%'
+        \ 'tmux': '-p 50%',
+        \ 'header': 'workspaces',
         \ })
 endfunction
 
 function! s:save_session()
   let l:root_dir = s:root_dir()
+  if argc() > 0
+    exec 'argd'
+  endif
   exec 'mks! ' . s:path(l:root_dir)
   echo 'saved workspace ' . l:root_dir
 endfunction
