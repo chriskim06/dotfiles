@@ -27,6 +27,9 @@ endfunction
 
 function! s:root_dir()
   let l:full_path = finddir('.git/..', expand('%:p:h') . ';')
+  if l:full_path == ''
+    let l:full_path = getcwd()
+  endif
   let l:root_dir = substitute(l:full_path, '.*/', '', '')
   return l:root_dir
 endfunction

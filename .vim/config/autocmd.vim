@@ -9,6 +9,9 @@ if has('autocmd')
     au FileType yaml set foldmethod=indent
     au BufWritePre *.go :silent! call CocAction('organizeImport')
   augroup END
+  augroup Notes
+    au VimLeave ~/src/chriskim06/notes/** :mks! ~/.vim/sessions/notes
+  augroup END
   augroup Buffer
     au BufWritePost,BufWinLeave,BufLeave,WinLeave ?* if &ft != 'help' && &ft != 'fzf' | mkview! | endif
     au BufWinEnter,BufEnter ?* if &ft != 'help' && &ft != 'fzf' | silent! loadview | execute "AirlineRefresh" | endif
