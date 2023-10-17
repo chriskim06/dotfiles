@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ $# -gt 1 ]]; then
+  echo "Usage: pass a cert file as the only arg or pipe cert"
+  exit 1
+elif [[ $# -eq 1 ]]; then
+  openssl x509 -in "$1" -noout -text -certopt no_sigdump -certopt no_pubkey
+else
+  echo
+  openssl x509 -noout -text -certopt no_sigdump -certopt no_pubkey
+fi
