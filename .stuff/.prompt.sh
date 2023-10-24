@@ -69,4 +69,4 @@ bash_prompt() {
 
 shopt -s histappend
 export PROMPT_DIRTRIM=3
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r; bash_prompt"
+export PROMPT_COMMAND="history -a; history -c; history -r; bash_prompt"
