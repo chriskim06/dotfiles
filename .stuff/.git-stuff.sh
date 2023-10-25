@@ -79,11 +79,26 @@ vn() {
 # completion
 [[ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ]] && . "$(brew --prefix)/etc/bash_completion.d/git-completion.bash"
 [[ -f "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh" ]] && . "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
-[[ -f ~/bin/completion/git-custom-completion ]] && source ~/bin/completion/git-custom-completion
+complete -W "$(git branch --format='%(refname:short)')" gd
+
+_git_view () {
+  local cur prev
+  cur=${COMP_WORDS[COMP_CWORD]}
+  prev=${COMP_WORDS[COMP_CWORD - 1]}
+  COMPREPLY=()
+  case "$prev" in
+    view)
+      mapfile -t COMPREPLY < <(compgen -W "$(git branch -a | sed 's/remotes\///')" -- "$cur")
+      ;;
+    *)
+      mapfile -t COMPREPLY < <(compgen -W "$(git ls-files | sed 's/.*\///' | sort -u)" -- "$cur")
+      ;;
+  esac
+}
+
 if command -v __git_complete > /dev/null; then
   __git_complete ga _git_add
   __git_complete gb _git_branch
-  #   __git_complete gd _git_branch
   __git_complete gf _git_fetch
   __git_complete gc _git_commit
   __git_complete gk _git_checkout
