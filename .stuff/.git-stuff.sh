@@ -96,6 +96,22 @@ _git_view () {
   esac
 }
 
+_git_number () {
+  __gitcomp "$(__git_aliases)"
+}
+
+_git_unstage () {
+  __gitcomp "$(git diff --name-only --cached)"
+}
+
+_git_delete () {
+  __gitcomp "$(git diff --name-only)"
+}
+
+_git_discard () {
+  __gitcomp "$(git status --porcelain | cut -c4-)"
+}
+
 if command -v __git_complete > /dev/null; then
   __git_complete ga _git_add
   __git_complete gb _git_branch
