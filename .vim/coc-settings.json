@@ -53,7 +53,9 @@
     "line-length": false,
     "no-bare-urls": false,
     "fenced-code-language": false,
-    "blanks-around-fences": false
+    "blanks-around-fences": false,
+    "blanks-around-headers": false,
+    "blanks-around-lists": false,
   },
   "yaml.format.singleQuote": true
 }
