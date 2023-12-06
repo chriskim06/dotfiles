@@ -102,5 +102,7 @@ nnoremap <silent> gr :Rg <c-r><c-w><cr>
 nnoremap <silent> C :CocConfig<cr>
 nnoremap <silent> P :call RunFZF()<cr>
 nnoremap <silent> O :Buffers<cr>
+vnoremap <up> <Plug>(expand_region_expand)
+vnoremap <down> <Plug>(expand_region_shrink)
 command Gblame Git blame
 " }}}
