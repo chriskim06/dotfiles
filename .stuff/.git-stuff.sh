@@ -115,6 +115,7 @@ _git_discard () {
 if command -v __git_complete > /dev/null; then
   __git_complete ga _git_add
   __git_complete gb _git_branch
+  __git_complete gd _git_branch
   __git_complete gf _git_fetch
   __git_complete gc _git_commit
   __git_complete gk _git_checkout
