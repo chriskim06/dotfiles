@@ -33,8 +33,9 @@ fshow() {
   _viewGitLogLine="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show --color=always % | delta'"
   git log --color=always --format="%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)" "$@" |
     fzf --no-sort --reverse --ansi --disabled --tiebreak=index --preview="$_viewGitLogLine" \
+    --bind "change:clear-query" \
     --bind "enter:execute:$_viewGitLogLine | less -R" \
-    --bind "j:down,k:up,J:preview-down,K:preview-up"
+    --bind "q:abort,j:down,k:up,J:preview-down,K:preview-up"
 }
 
 complete -F _fzf_path_completion -o default -o bashdefault vim

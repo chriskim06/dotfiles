@@ -79,7 +79,6 @@ vn() {
 # completion
 [[ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ]] && . "$(brew --prefix)/etc/bash_completion.d/git-completion.bash"
 [[ -f "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh" ]] && . "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
-complete -W "$(git branch --format='%(refname:short)')" gd
 
 _git_view () {
   local cur prev
