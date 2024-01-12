@@ -11,6 +11,10 @@ man() {
 }
 
 bs() {
+  if [[ -e "$1" ]]; then
+    echo "$1 already exists"
+    return 1
+  fi
   cat << EOF > "$1"
 #!/usr/bin/env bash
 
