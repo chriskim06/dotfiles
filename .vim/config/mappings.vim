@@ -47,7 +47,6 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-nnoremap N :e %:h/
 " }}}
 
 " Command line and some insert mappings {{{
@@ -94,6 +93,7 @@ nnoremap <leader>r :GitGutterUndoHunk<cr>
 nnoremap <leader>g :Magit<cr>
 nnoremap <leader>\ :TagbarToggle<cr>
 nnoremap <leader>/ :Rg <c-r><c-w><cr>
+nnoremap <leader>b :GitBlame
 nnoremap <silent> <leader>p :GitGutterPreviewHunk<cr>
 nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 nnoremap <silent> gd <plug>(coc-definition)
@@ -105,5 +105,5 @@ nnoremap <silent> P :call RunFZF()<cr>
 nnoremap <silent> O :Buffers<cr>
 vnoremap <up> <Plug>(expand_region_expand)
 vnoremap <down> <Plug>(expand_region_shrink)
-command Gblame Git blame
+command -nargs=1 NewFile execute 'e %:h/'.<f-args>
 " }}}
