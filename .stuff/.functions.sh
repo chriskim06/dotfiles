@@ -10,6 +10,17 @@ man() {
   fi
 }
 
+ctx() {
+  if [[ $# -eq 1 && "$1" == "-d" ]]; then
+    local rmctx="$(kubectl config get-contexts -o name | gum choose)"
+    if [[ "$rmctx" != "" ]]; then
+      gum confirm "delete context $rmctx?" && kubectl config delete-context "$rmctx"
+    fi
+    return
+  fi
+  kubectl ctx "$@"
+}
+
 bs() {
   if [[ -e "$1" ]]; then
     echo "$1 already exists"
