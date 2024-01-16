@@ -1,0 +1,147 @@
+[colors.bright]
+black = "0x6f6b67"
+blue = "0x278ad6"
+cyan = "0x27dede"
+green = "0x16c98d"
+magenta = "0xd34590"
+red = "0xfa5e5b"
+white = "0xffffff"
+yellow = "0xfeef6d"
+
+[colors.cursor]
+cursor = "0xb4b1b1"
+text = "CellBackground"
+
+[colors.normal]
+black = "0x080200"
+blue = "0x288ad6"
+cyan = "0x28ddde"
+green = "0x16c98d"
+magenta = "0xd34590"
+red = "0xfa5e5b"
+white = "0xe7e7e7"
+yellow = "0xffc83f"
+
+[colors.primary]
+background = "0x282828"
+foreground = "0xeeeeee"
+
+[font]
+size = 16
+
+[font.bold]
+family = "Hack Nerd Font Mono"
+
+[font.glyph_offset]
+x = 0
+y = 2
+
+[font.italic]
+family = "Hack Nerd Font Mono"
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+
+[font.offset]
+x = 0
+y = 3
+
+[[keyboard.bindings]]
+action = "None"
+key = "W"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "None"
+key = "Equals"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "None"
+key = "Plus"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "None"
+key = "Minus"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "None"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "None"
+key = "Plus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "None"
+key = "Minus"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u0000q"
+key = "W"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0000p"
+key = "Tab"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0000n"
+key = "Tab"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00001"
+key = "Key1"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00002"
+key = "Key2"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00003"
+key = "Key3"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00004"
+key = "Key4"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00005"
+key = "Key5"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00006"
+key = "Key6"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00007"
+key = "Key7"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00008"
+key = "Key8"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00009"
+key = "Key9"
+mods = "Control"
+
+[window]
+decorations = "full"
+startup_mode = "Maximized"
+title = ""
