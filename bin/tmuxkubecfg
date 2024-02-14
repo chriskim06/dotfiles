@@ -4,24 +4,20 @@
 # add kubeconfig info to tmux status line
 #
 
-kube_tmux() {
-  local ctx=$(kubectl config current-context 2>/dev/null)
-  local ns=$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)
-  local out="⎈"
-  if [[ -n "$ctx" ]]; then
-    ctx="${ctx#arn:aws:eks:}"
-    region="${ctx%%:*}"
-    name="${ctx##*/}"
-    if [[ "$region" == "$name" ]]; then
-      out="$out $name"
-    else
-      out="$out $region/$name"
-    fi
+ctx=$(kubectl config current-context 2>/dev/null)
+ns=$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)
+out="⎈"
+if [[ -n "$ctx" ]]; then
+  ctx="${ctx#arn:aws:eks:}"
+  region="${ctx%%:*}"
+  name="${ctx##*/}"
+  if [[ "$region" == "us-west-2" ]]; then
+    out="$out $region/$name"
+  else
+    out="$out $name"
   fi
-  if [[ -n "$ns" ]]; then
-    out="$out:$ns"
-  fi
-  echo "| $out |"
-}
-
-kube_tmux
+fi
+if [[ -n "$ns" ]]; then
+  out="$out:$ns"
+fi
+echo "| $out |"

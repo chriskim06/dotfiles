@@ -72,9 +72,7 @@ vnoremap <silent> H <esc>:h <c-r><c-w><cr>
 
 " Workspaces {{{
 command -nargs=? -complete=custom,workspaces#completion Workspaces call workspaces#run(<f-args>)
-nnoremap <leader>ww :Workspaces<cr>
-nnoremap <leader>ws :Workspaces write<cr>
-nnoremap <leader>wr :Workspaces rm<cr>
+nnoremap <leader>ww :Workspaces write<cr>
 " }}}
 
 " Plugin mappings {{{

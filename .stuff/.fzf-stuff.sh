@@ -30,7 +30,7 @@ fstash() {
 }
 
 fshow() {
-  _viewGitLogLine="echo {} | grep -o '[a-f0-9]\{8\}' | head -1 | xargs -I % sh -c 'git show --color=always % | delta'"
+  _viewGitLogLine="echo {} | grep -o '[a-f0-9]\{7\}[a-f0-9]\?' | head -1 | xargs -I % sh -c 'git show --color=always % | delta'"
   git log --color=always --format="%C(bold red)%h%C(reset) %C(bold cyan)<%ar> %C(green)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset)" "$@" |
     fzf --no-sort --reverse --ansi --disabled --tiebreak=index --preview="$_viewGitLogLine" \
     --bind "change:clear-query" \
