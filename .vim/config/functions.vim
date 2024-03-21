@@ -28,7 +28,13 @@ command! -nargs=* FR call FindAndReplace(<f-args>)
 function RunFZF()
   let l:ignored = system('git check-ignore ' .. shellescape(expand('%:p')))
   if l:ignored != ""
-    call fzf#run({'source': 'fd -I', 'sink': 'e', 'window': { 'width': 0.7, 'height': 0.4 }})
+    call fzf#run({
+          \ 'source': 'fd -I',
+          \ 'sink': 'e',
+          \ 'dir': expand('%:p:h'),
+          \ 'options': '--preview "bat --style=numbers --color=always --line-range :500 {} 2>/dev/null"',
+          \ 'window': { 'width': 0.8, 'height': 0.8 }
+          \ })
   else
     execute 'Files'
   endif
