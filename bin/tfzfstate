@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+  echo 'Usage: tfzfstate <state.json>'
+  exit 1
+fi
+if [[ ! -f "$1" ]]; then
+  echo "state file at '${1}' not found"
+  exit 1
+fi
+
+_res_json() {
+  arr=(${1//\./ })
+  i=0
+  while [[ $i -lt ${#arr[@]} ]]; do
+    if [[ "${arr[i]}" == "module" ]]; then
+      i=$((i+1))
+      if [[ -z "$mod" ]]; then
+        mod="module.${arr[i]}"
+      else
+        mod="${mod}.module.${arr[i]}"
+      fi
+    elif [[ -z "$m" ]]; then
+      m="${arr[i]}"
+    elif [[ -z "$t" ]]; then
+      t="${arr[i]}"
+    elif [[ -z "$n" ]]; then
+      n="${arr[i]}"
+    fi
+    i=$((i+1))
+  done
+  if [[ -z "$mod" ]]; then
+    mod='null'
+  else
+    mod="\"${mod}\""
+  fi
+  jq -C ".resources[] | select(.module==${mod} and .mode==\"${m}\" and .type==\"${t}\" and .name==\"${n}\")" "${2}"
+}
+export -f _res_json
+
+res_names_query='.resources[] | "\(if .module then "\(.module)." else "" end)\(.mode).\(.type).\(.name)"'
+jq -r "$res_names_query" "$1" | fzf --bind 'start:unbind(enter)' --border --no-scrollbar --preview-window 'wrap,border-left' --preview "_res_json {} $1"
