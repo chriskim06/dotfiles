@@ -96,8 +96,9 @@ nnoremap <silent> <leader>p :GitGutterPreviewHunk<cr>
 nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 nnoremap <silent> gd <plug>(coc-definition)
 nnoremap <silent> gi <plug>(coc-implementation)
+nnoremap <silent> gr <plug>(coc-references)
 nnoremap <silent> K :call CocActionAsync('doHover')<cr>
-nnoremap <silent> gr :Rg <c-r><c-w><cr>
+nnoremap <silent> g/ :Rg <c-r><c-w><cr>
 nnoremap <silent> C :CocConfig<cr>
 nnoremap <silent> P :call RunFZF()<cr>
 nnoremap <silent> O :Buffers<cr>
