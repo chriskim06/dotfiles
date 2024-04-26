@@ -8,7 +8,6 @@
 
 [flags]
 rate = "2s"
-left_legend = true
 group_processes = true
 color = "nord"
 
