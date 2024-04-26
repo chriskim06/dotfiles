@@ -1,0 +1,25 @@
+# This is a default config file for bottom.  All of the settings are commented
+# out by default; if you wish to change them uncomment and modify as you see
+# fit.
+
+# This group of options represents a command-line option.  Flags explicitly
+# added when running (ie: btm -a) will override this config file if an option
+# is also set here.
+
+[flags]
+rate = "2s"
+left_legend = true
+group_processes = true
+color = "nord"
+
+[processes]
+columns = ["PID", "Name", "CPU%", "Mem%", "User", "State"]
+
+[[row]]
+  [[row.child]]
+    type="proc"
+  [[row.child]]
+    [[row.child.child]]
+      type="cpu"
+    [[row.child.child]]
+      type="mem"
