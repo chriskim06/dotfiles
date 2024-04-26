@@ -50,6 +50,11 @@ bash_prompt() {
       color="179" # orange
     fi
     local branch=''
+    local gitdir="$(git rev-parse --git-dir)"
+    gitdir="${gitdir##*/}"
+    if [[ "$gitdir" != ".git" ]]; then
+      prompt=" (${gitdir})${prompt}"
+    fi
     last="$(_arrow 23 $color)  $(_ansi_reset)$(_section $color)${branch}$(_ansi_bold)${prompt} $(_arrow $color)"
   fi
 
