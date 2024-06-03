@@ -3,5 +3,5 @@
 set -euo pipefail
 
 brew update
-[[ -n $(brew outdated) ]] && brew upgrade --ignore-pinned && brew cleanup -s
+[[ -n $(brew outdated) ]] && brew upgrade && brew cleanup -s
 exit 0
