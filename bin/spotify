@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+trap 'pkill -P $$' EXIT
+
 if [[ -z "$(command -v librespot)" || -z "$(command -v spt)" ]]; then
   echo "must have librespot and spotify-tui installed"
   exit 1
@@ -15,6 +17,4 @@ LIBRESPOT_USERNAME="$u" LIBRESPOT_PASSWORD="$p" librespot \
   --cache-size-limit "1G" \
   --quiet &>/dev/null &
 
-pid=$!
 spt
-kill -9 $pid
