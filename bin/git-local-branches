@@ -3,10 +3,7 @@
 set -euo pipefail
 
 git fetch --all --prune --quiet
-branches=$(git for-each-ref \
-  --format '%(if:equals=gone)%(upstream:track,nobracket)%(then)%(refname:short)%(end)' \
-  --omit-empty \
-  --sort=refname:short refs/heads)
+branches=$(git branch --format "%(refname:short) %(upstream:short)" | awk '{if (!$2) print $1;}')
 
 if [[ -z "$branches" ]]; then
   echo "no local branches without a remote"
