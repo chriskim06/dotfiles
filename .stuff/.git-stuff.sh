@@ -27,7 +27,7 @@ stash() {
   elif [[ $# -eq 1 && "$1" == "list" ]]; then
     fstash
   elif [[ $# -eq 1 && "$1" == "pop" ]]; then
-    git stash pop > /dev/null
+    git stash pop >/dev/null
     scmpuff_status
   else
     git stash "$@"
@@ -48,9 +48,9 @@ gu() {
     printf "Usage: git unstage <file>...\n"
   else
     if [[ -n "$(git show-ref --head)" ]]; then
-      git reset HEAD "$@" > /dev/null
+      git reset HEAD "$@" >/dev/null
     else
-      git rm -r --cached  "$@" > /dev/null
+      git rm -r --cached "$@" >/dev/null
     fi
     scmpuff_status
   fi
@@ -77,41 +77,42 @@ vn() {
 }
 
 # completion
-[[ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ]] && . "$(brew --prefix)/etc/bash_completion.d/git-completion.bash"
-[[ -f "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh" ]] && . "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
+prefix="$(brew --prefix)"
+[[ -f "${prefix}/etc/bash_completion.d/git-completion.bash" ]] && . "${prefix}/etc/bash_completion.d/git-completion.bash"
+[[ -f "${prefix}/etc/bash_completion.d/git-prompt.sh" ]] && . "${prefix}/etc/bash_completion.d/git-prompt.sh"
 
-_git_view () {
+_git_view() {
   local cur prev
   cur=${COMP_WORDS[COMP_CWORD]}
   prev=${COMP_WORDS[COMP_CWORD - 1]}
   COMPREPLY=()
   case "$prev" in
-    view)
-      mapfile -t COMPREPLY < <(compgen -W "$(git branch -a | sed 's/remotes\///')" -- "$cur")
-      ;;
-    *)
-      mapfile -t COMPREPLY < <(compgen -W "$(git ls-files | sed 's/.*\///' | sort -u)" -- "$cur")
-      ;;
+  view)
+    mapfile -t COMPREPLY < <(compgen -W "$(git branch -a | sed 's/remotes\///')" -- "$cur")
+    ;;
+  *)
+    mapfile -t COMPREPLY < <(compgen -W "$(git ls-files | sed 's/.*\///' | sort -u)" -- "$cur")
+    ;;
   esac
 }
 
-_git_number () {
+_git_number() {
   __gitcomp "$(__git_aliases)"
 }
 
-_git_unstage () {
+_git_unstage() {
   __gitcomp "$(git diff --name-only --cached)"
 }
 
-_git_delete () {
+_git_delete() {
   __gitcomp "$(git diff --name-only)"
 }
 
-_git_discard () {
+_git_discard() {
   __gitcomp "$(git status --porcelain | cut -c4-)"
 }
 
-if command -v __git_complete > /dev/null; then
+if command -v __git_complete >/dev/null; then
   __git_complete ga _git_add
   __git_complete gb _git_branch
   __git_complete gd _git_branch

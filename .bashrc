@@ -16,7 +16,8 @@ complete -d cd
 eval "$(thefuck --alias)"
 
 # other stuff
-[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+prefix="$(brew --prefix)"
+[[ -r "${prefix}/etc/profile.d/bash_completion.sh" ]] && source "${prefix}/etc/profile.d/bash_completion.sh"
 [[ -f ~/.stuff/.aliases.sh ]] && source ~/.stuff/.aliases.sh
 [[ -f ~/.stuff/.git-stuff.sh ]] && source ~/.stuff/.git-stuff.sh
 [[ -f ~/.stuff/.functions.sh ]] && source ~/.stuff/.functions.sh
