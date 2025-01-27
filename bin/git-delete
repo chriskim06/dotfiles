@@ -23,6 +23,10 @@ else
         skipped+=("$name")
         continue
       fi
+      if [[ -d "$name" ]]; then
+        rm -r "$name"
+        continue
+      fi
       rm "$name"
     done
     if [[ ${#skipped[@]} -gt 1 ]]; then
@@ -31,4 +35,3 @@ else
   fi
   scmpuff status
 fi
-
