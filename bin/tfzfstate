@@ -16,7 +16,7 @@ _res_json() {
   i=0
   while [[ $i -lt ${#arr[@]} ]]; do
     if [[ "${arr[i]}" == "module" ]]; then
-      i=$((i+1))
+      i=$((i + 1))
       if [[ -z "$mod" ]]; then
         mod="module.${arr[i]}"
       else
@@ -29,12 +29,12 @@ _res_json() {
     elif [[ -z "$n" ]]; then
       n="${arr[i]}"
     fi
-    i=$((i+1))
+    i=$((i + 1))
   done
   if [[ -z "$mod" ]]; then
     mod='null'
   else
-    mod="\"${mod}\""
+    mod="\"${mod//\"/\\\"}\""
   fi
   jq -C ".resources[] | select(.module==${mod} and .mode==\"${m}\" and .type==\"${t}\" and .name==\"${n}\")" "${2}"
 }
