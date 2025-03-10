@@ -7,7 +7,7 @@ set -euo pipefail
 #
 
 # get Homebrew
-if ! command -v brew &> /dev/null; then
+if ! command -v brew &>/dev/null; then
   if [[ "$(uname)" == 'Linux' ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
     /home/linuxbrew/.linuxbrew/bin/brew bundle install
@@ -19,8 +19,9 @@ if ! command -v brew &> /dev/null; then
 fi
 
 # symlink stuff
-find . -mindepth 1 -type d -not -path "*/.git*" -not -path "./ignore*" | sed "s|^.|$HOME|g" | xargs mkdir -p
-git ls-files -- ':!:README.md' ':!:Brewfile' ':!:install' | xargs -I % ln -sf "$PWD/%" "$HOME/%"
+cd config
+find . -mindepth 1 -type d | sed "s|^.|$HOME|g" | xargs mkdir -p
+git ls-files | xargs -I % ln -sf "$PWD/%" "$HOME/%"
 
 # install tpm
 [[ ! -d ~/.tmux/plugins/tpm ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

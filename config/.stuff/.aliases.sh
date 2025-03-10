@@ -4,9 +4,9 @@
 
 alias rg='rg --smart-case --hidden'
 alias fd='fd --hidden --exclude ".git/*"'
-alias vv='vim ~/src/dotfiles/.vimrc'
-alias vimfiles='cd ~/src/dotfiles/.vim; pwd; ll'
-alias vbashrc='vim ~/src/dotfiles/.bashrc'
+alias vv='vim ~/src/dotfiles/config/.vimrc'
+alias vimfiles='cd ~/src/dotfiles/config/.vim; pwd; ll'
+alias vbashrc='vim ~/src/dotfiles/config/.bashrc'
 alias config='cd ~/src/dotfiles; pwd; ll'
 alias dotfiles='cd ~/src/dotfiles; pwd; ll'
 alias chriskim06='cd ~/src/chriskim06; pwd; ll'
