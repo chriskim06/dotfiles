@@ -19,7 +19,7 @@ if ! command -v brew &>/dev/null; then
 fi
 
 # symlink stuff
-stow --no-folding config -t "$HOME"
+stow --no-folding --restow config -t "$HOME"
 
 # install tpm
 [[ ! -d ~/.tmux/plugins/tpm ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

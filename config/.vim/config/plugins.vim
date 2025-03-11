@@ -16,6 +16,10 @@ let g:airline#extensions#default#layout = [
 let g:airline_skip_empty_sections = 1
 " }}}
 
+" Rooter {{{
+let g:rooter_patterns = ['>dotfiles', '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json']
+" }}}
+
 " coc-nvim {{{
 let g:coc_global_extensions = ['coc-json', 'coc-vimlsp', 'coc-yaml', 'coc-tsserver', 'coc-sh', 'coc-markdownlint', 'coc-pairs']
 let g:coc_snippet_next = '<tab>'
