@@ -185,7 +185,7 @@ __krew_random_helper() {
   local index_dir plugins random_plugin name info
 
   index_dir="${HOME}/.krew/index/default/plugins"
-  mapfile -t plugins < <(find "$index_dir" -type f)
+  IFS=$'\n' read -r -d '' -a plugins < <(find "$index_dir" -type f)
   random_plugin="${plugins[$((RANDOM % ${#plugins[@]}))]}"
   name="$(yq -r '.metadata.name' "$random_plugin")"
   info="$(yq -r '.spec.shortDescription' "$random_plugin")"

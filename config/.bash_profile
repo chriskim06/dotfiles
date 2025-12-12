@@ -6,11 +6,12 @@
 PATH=$(getconf PATH)
 PATH="/usr/local/bin:$HOME/bin:${GOPATH//://bin:}/bin:$HOME/.krew/bin:$PATH"
 if [[ "$(uname)" == "Darwin" ]]; then
-  PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/opt/grep/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+  PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:/usr/local/bin:/opt/homebrew/opt/grep/libexec/gnubin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 fi
 if [[ "$(uname)" == Linux ]]; then
   PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
 fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="$PATH"
 export GOPATH="$HOME/go"
 export MANPAGER="less"
@@ -38,7 +39,7 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude ".
 export FZF_DEFAULT_OPTS="
   --reverse
   --bind 'tab:down,btab:up'
-  --color 'bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#60cc9a'
+  --color 'bg+:#4B4B4B,bg:#313131,spinner:#f4dbd6,hl:#60cc9a'
   --color 'fg:#d2d4d9,header:#ed8796,info:#9dcaf5,pointer:#f4dbd6'
   --color 'marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#9bebc7'"
 export FZF_COMPLETION_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {} 2>/dev/null"'

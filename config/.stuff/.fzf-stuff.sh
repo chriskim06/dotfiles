@@ -2,7 +2,7 @@
 
 # fzf stuff
 
-[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+eval "$(fzf --bash)"
 
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
 # command for listing path candidates.
