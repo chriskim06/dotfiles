@@ -7,11 +7,12 @@ PATH=$(getconf PATH)
 PATH="/usr/local/bin:$HOME/bin:${GOPATH//://bin:}/bin:$HOME/.krew/bin:$PATH"
 if [[ "$(uname)" == "Darwin" ]]; then
   PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:/usr/local/bin:/opt/homebrew/opt/grep/libexec/gnubin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 if [[ "$(uname)" == Linux ]]; then
   PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
-eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="$PATH"
 export GOPATH="$HOME/go"
 export MANPAGER="less"
