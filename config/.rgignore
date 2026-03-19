@@ -1,6 +1,6 @@
-.git/**
-vendor/**
-node_modules/**
-package-lock.json
-.yarn/**
-*.cjs
+**/.git/**
+**/vendor/**
+**/node_modules/**
+**/package-lock.json
+**/.yarn/**
+**/*.cjs
