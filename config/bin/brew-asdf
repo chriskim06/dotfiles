@@ -3,5 +3,5 @@
 set -euo pipefail
 
 brew update
-[[ -n $(brew outdated) ]] && brew upgrade && brew cleanup -s
+[[ -n $(brew outdated) ]] && brew upgrade -y && brew cleanup -s
 exit 0
