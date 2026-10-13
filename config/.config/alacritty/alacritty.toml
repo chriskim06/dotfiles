@@ -45,6 +45,7 @@ bindings = [
   { key = "Equals", mods = "Command", action = "None" },
   { key = "Plus", mods = "Command", action = "None" },
   { key = "Minus", mods = "Command", action = "None" },
+  { key = "T", mods = "Command", action = "None" },
   { key = "W", mods = "Command", action = "None" },
   { key = "W", mods = "Control|Shift", chars = "\u0000q" },
   { key = "Tab", mods = "Control|Shift", chars = "\u0000p" },
